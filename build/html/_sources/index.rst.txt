@@ -6,4 +6,5 @@ Algorithm Spices
    :maxdepth: 2
    :glob:
 
-   leetcode/index
+   leetcode_tags/index
+   leetcode_template/index
