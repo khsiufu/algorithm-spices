@@ -1,13 +1,13 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>7. Sliding Window &mdash; Algorithm Spices  documentation</title>
+  <title>8. Sliding Window &mdash; Algorithm Spices  documentation</title>
   
 
   
@@ -26,18 +26,18 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7.1. Easy" href="sliding_window/easy.html" />
-    <link rel="prev" title="6.3. Hard" href="search/hard.html" /> 
+    <link rel="next" title="8.1. Easy" href="sliding_window/easy.html" />
+    <link rel="prev" title="7.3. Hard" href="search/hard.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,22 +83,24 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../preface.html">Preface</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">LeetCode Tags</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="array.html">1. Array</a></li>
-<li class="toctree-l2"><a class="reference internal" href="binary_search.html">2. Binary Search</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bst.html">3. BST</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dp.html">4. DP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="list.html">5. List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="search.html">6. Search</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">7. Sliding Window</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="sliding_window/easy.html">7.1. Easy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sliding_window/medium.html">7.2. Medium</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sliding_window/hard.html">7.3. Hard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html">1. Advanced</a></li>
+<li class="toctree-l2"><a class="reference internal" href="array.html">2. Array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary_search.html">3. Binary Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bst.html">4. BST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dp.html">5. DP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="list.html">6. List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search.html">7. Search</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8. Sliding Window</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/easy.html">8.1. Easy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/medium.html">8.2. Medium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/hard.html">8.3. Hard</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="sort.html">8. Sort</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tree.html">9. Tree</a></li>
-<li class="toctree-l2"><a class="reference internal" href="two_pointers.html">10. Two Pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sort.html">9. Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree.html">10. Tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_pointers.html">11. Two Pointers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../leetcode_template/index.html">LeetCode Template</a></li>
@@ -150,7 +152,7 @@
         
           <li><a href="index.html">LeetCode Tags</a> &raquo;</li>
         
-      <li>7. Sliding Window</li>
+      <li><span class="section-number">8. </span>Sliding Window</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -170,13 +172,13 @@
            <div itemprop="articleBody">
             
   <div class="section" id="sliding-window">
-<h1>7. Sliding Window<a class="headerlink" href="#sliding-window" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8. </span>Sliding Window<a class="headerlink" href="#sliding-window" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="sliding_window/easy.html">7.1. Easy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sliding_window/medium.html">7.2. Medium</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sliding_window/hard.html">7.3. Hard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/easy.html">8.1. Easy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/medium.html">8.2. Medium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/hard.html">8.3. Hard</a></li>
 </ul>
 </div>
 </div>
@@ -189,10 +191,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sliding_window/easy.html" class="btn btn-neutral float-right" title="7.1. Easy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sliding_window/easy.html" class="btn btn-neutral float-right" title="8.1. Easy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="search/hard.html" class="btn btn-neutral float-left" title="6.3. Hard" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="search/hard.html" class="btn btn-neutral float-left" title="7.3. Hard" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

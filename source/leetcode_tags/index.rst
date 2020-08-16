@@ -8,6 +8,7 @@ Contents:
    :maxdepth: 2
    :numbered: 2
 
+   advanced 
    array
    binary_search
    bst

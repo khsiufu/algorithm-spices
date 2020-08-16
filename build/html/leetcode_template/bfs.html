@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -26,10 +26,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -83,6 +83,7 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../preface.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../leetcode_tags/index.html">LeetCode Tags</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">LeetCode Template</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. BFS</a></li>
@@ -144,7 +145,7 @@
         
           <li><a href="index.html">LeetCode Template</a> &raquo;</li>
         
-      <li>1. BFS</li>
+      <li><span class="section-number">1. </span>BFS</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -164,10 +165,10 @@
            <div itemprop="articleBody">
             
   <div class="section" id="bfs">
-<h1>1. BFS<a class="headerlink" href="#bfs" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">1. </span>BFS<a class="headerlink" href="#bfs" title="Permalink to this headline">¶</a></h1>
 <p>Find the shortest path from |start| to |target| in a unweighted graph G.</p>
 <p>neighbor(x) returns the neighbors of x in G.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
 <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
 <span class="n">steps</span> <span class="o">=</span> <span class="mi">0</span>
 

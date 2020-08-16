@@ -19,18 +19,6 @@ Easy
            return p.val == q.val and self.isSameTree(p.left, q.left) and \
                self.isSameTree(p.right, q.right)
 
-.. code:: go
-
-   func isSameTree(p *TreeNode, q *TreeNode) bool {
-       if p == nil && q == nil {
-           return true
-       }
-       if p == nil || q == nil {
-           return false
-       }
-       return p.Val == q.Val && isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
-   }
-
 .. _100. Same Tree: https://leetcode.com/problems/same-tree/
 
 
@@ -55,25 +43,6 @@ Easy
            if left.val != right.val:
                return False
            return self.helper(left.left, right.right) and self.helper(left.right, right.left)
-
-.. code:: go
-
-   func isSymmetric(root *TreeNode) bool {
-       if root == nil {
-           return true
-       }
-       return helper(root.Left, root.Right)
-   }
-
-   func helper(left *TreeNode, right *TreeNode) bool {
-       if left == nil && right == nil {
-           return true
-       }
-       if left == nil || right == nil {
-           return false
-       }
-       return left.Val == right.Val && helper(left.Left, right.Right) && helper(left.Right, right.Left)
-   }
 
 .. _101. Symmetric Tree: https://leetcode.com/problems/symmetric-tree/
 
@@ -173,3 +142,41 @@ Easy
                return root
 
 .. _108. Convert Sorted Array to Binary Search Tree: https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+
+
+111. Minimum Depth of Binary Tree
+-----------------------------------------------------------------
+
+`111. Minimum Depth of Binary Tree`_
+
+.. code:: python
+
+   class Solution:
+       def minDepth(self, root: TreeNode) -> int:
+           if not root:
+               return 0
+           if None in [root.left, root.right]:
+               return max(self.minDepth(root.left), self.minDepth(root.right)) + 1
+           else:
+               return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
+
+.. _111. Minimum Depth of Binary Tree: https://leetcode.com/problems/minimum-depth-of-binary-tree/
+
+
+112. Path Sum
+-----------------------------------------------------------------
+
+`112. Path Sum`_
+
+.. code:: python
+
+   class Solution:
+       def hasPathSum(self, root: TreeNode, sum: int) -> bool:
+           if not root:
+               return False
+           if not root.left and not root.right:
+               return sum == root.val
+           return self.hasPathSum(root.left, sum - root.val) or \
+               self.hasPathSum(root.right, sum - root.val)
+
+.. _112. Path Sum: https://leetcode.com/problems/path-sum/

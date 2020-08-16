@@ -195,6 +195,34 @@ Medium
 .. _113. Path Sum II: https://leetcode.com/problems/path-sum-ii/
 
 
+114. Flatten Binary Tree to Linked List
+------------------------------------------------------
+
+`114. Flatten Binary Tree to Linked List`_
+
+.. code:: python
+
+   class Solution:
+       def flatten(self, root: TreeNode) -> None:
+           if not root:
+               return None
+           self.flatten(root.left)
+           self.flatten(root.right)
+
+           if not root.left:
+               return None
+
+           node = root.left
+           while node.right:
+               node = node.right
+
+           node.right = root.right
+           root.right = root.left
+           root.left = None
+
+.. _114. Flatten Binary Tree to Linked List: https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
+
+
 144. Binary Tree Preorder Traversal
 -----------------------------------------------------------------
 
@@ -216,3 +244,28 @@ Medium
            self.dfs(root.right, res)
 
 .. _144. Binary Tree Preorder Traversal: https://leetcode.com/problems/binary-tree-preorder-traversal/
+
+
+199. Binary Tree Right Side View
+-----------------------------------------------------------------
+
+`199. Binary Tree Right Side View`_
+
+.. code:: python
+
+   class Solution:
+       def rightSideView(self, root: TreeNode) -> List[int]:
+           res = []
+           self.dfs(root, 0, res)
+           return [x[0] for x in res]
+
+       def dfs(self, root, level, res):
+           if not root:
+               return
+           if len(res) <= level:
+               res.append([])
+           res[level].append(root.val)
+           self.dfs(root.right, level + 1, res)
+           self.dfs(root.left, level + 1, res)
+
+.. _199. Binary Tree Right Side View: https://leetcode.com/problems/binary-tree-right-side-view/
