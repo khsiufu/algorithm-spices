@@ -10,6 +10,8 @@ Medium
 
 .. code:: python
 
+   # Time: O(3^N * 4^M), Space: O(n)
+   # N: (2, 3, 4, 5, 6, 8), M: (7, 9)
    class Solution:
        def letterCombinations(self, digits: str) -> List[str]:
            if not digits:
@@ -92,6 +94,7 @@ Medium
 
 .. code:: python
 
+   # Time: O(n!), Space: O(n)
    class Solution:
        def permute(self, nums: List[int]) -> List[List[int]]:
            if not nums:
@@ -142,6 +145,7 @@ Medium
 
 .. code:: python
 
+   # Time: O(C(n, k)), Space: O(k)
    class Solution:
        def combine(self, n: int, k: int) -> List[List[int]]:
            res = []
