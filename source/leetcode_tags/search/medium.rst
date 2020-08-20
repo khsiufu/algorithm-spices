@@ -33,6 +33,33 @@ Medium
 .. _17. Letter Combinations of a Phone Number: https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 
 
+22. Generate Parentheses
+------------------------------------------------------------
+
+`22. Generate Parentheses`_
+
+.. code:: python
+
+   class Solution:
+       def generateParenthesis(self, n: int) -> List[str]:
+           res = []
+           self.helper(n, n, [], res)
+           return res
+
+       def helper(self, left_count, right_count, path, res):
+           if left_count < 0 or right_count < 0:
+               return
+           if left_count > right_count:
+               return
+           if left_count == 0 and right_count == 0:
+               res.append(''.join(path))
+               return
+           self.helper(left_count - 1, right_count, path + ['('], res)
+           self.helper(left_count, right_count - 1, path + [')'], res)
+
+.. _22. Generate Parentheses: https://leetcode.com/problems/generate-parentheses/
+
+
 39. Combination Sum
 ------------------------------------------------------------
 
