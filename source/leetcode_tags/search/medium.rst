@@ -116,7 +116,6 @@ Medium
                path.pop()
                used[i] = False
 
-
    """
    # use python characteristic
    class Solution:
@@ -136,6 +135,57 @@ Medium
    """
 
 .. _46. Permutations: https://leetcode.com/problems/permutations/
+
+
+47. Permutations II
+------------------------------------------------------------
+
+`47. Permutations II`_
+
+.. code:: python
+
+   class Solution:
+       def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+           if not nums:
+               return
+           nums.sort()
+           res, used = [], [False] * len(nums)
+           self.dfs(nums, [], res, used)
+           return res
+
+       def dfs(self, nums, path, res, used):
+           if len(path) == len(nums):
+               res.append(path[:])
+               return
+           for i in range(len(nums)):
+               if used[i]:
+                   continue
+               if i > 0 and nums[i] == nums[i - 1] and not used[i - 1]:
+                   continue
+               used[i] = True
+               path.append(nums[i])
+               self.dfs(nums, path, res, used)
+               path.pop()
+               used[i] = False
+
+   """
+   class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        nums.sort()
+        self.dfs(nums, [], res)
+        return res
+
+    def dfs(self, nums, path, res):
+        if not nums:
+            res.append(path)
+        for i in range(len(nums)):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            self.dfs(nums[:i] + nums[i+1:], path + [nums[i]], res)
+   """
+
+.. _47. Permutations II: https://leetcode.com/problems/permutations-ii/
 
 
 77. Combinations
