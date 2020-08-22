@@ -242,6 +242,27 @@ Medium
 .. _77. Combinations: https://leetcode.com/problems/combinations/
 
 
+78. Subsets
+------------------------------------------------------------
+
+`78. Subsets`_
+
+.. code:: python
+
+   class Solution:
+       def subsets(self, nums: List[int]) -> List[List[int]]:
+           res = []
+           self.dfs(nums, 0, [], res)
+           return res
+
+       def dfs(self, nums, idx, path, res):
+           res.append(path)
+           for i in range(idx, len(nums)):
+               self.dfs(nums, i + 1, path + [nums[i]], res)
+
+.. _78. Subsets: https://leetcode.com/problems/subsets/
+
+
 79. Word Search
 ------------------------------------------------------------
 
@@ -274,6 +295,64 @@ Medium
            return res
 
 .. _79. Word Search: https://leetcode.com/problems/word-search/
+
+
+90. Subsets II
+------------------------------------------------------------
+
+`90. Subsets II`_
+
+.. code:: python
+
+   class Solution:
+       def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+           res = []
+           nums.sort()
+           self.dfs(nums, 0, [], res)
+           return res
+
+       def dfs(self, nums, index, path, res):
+           res.append(path)
+           for i in range(index, len(nums)):
+               if i > index and nums[i] == nums[i - 1]:
+                   continue
+               self.dfs(nums, i + 1, path + [nums[i]], res)
+
+.. _90. Subsets II: https://leetcode.com/problems/subsets-ii/
+
+
+93. Restore IP Addresses
+------------------------------------------------------------
+
+`93. Restore IP Addresses`_
+
+.. code:: python
+
+   class Solution:
+       def restoreIpAddresses(self, s: str) -> List[str]:
+           res = []
+           self.dfs(s, 0, "", res)
+           return res
+
+       def dfs(self, s, index, path, res):
+           if index == 4:
+               if not s:
+                   res.append(path[:-1])
+               return  # backtracking
+           for i in range(1, 4):
+               # the digits we choose should no more than the length of s
+               if i <= len(s):
+                   # choose one digit
+                   if i == 1:
+                       self.dfs(s[i:], index + 1, path + s[:i] + ".", res)
+                   # choose two digits, the first one should not be "0"
+                   elif i == 2 and s[0] != "0":
+                       self.dfs(s[i:], index + 1, path + s[:i] + ".", res)
+                   # choose three digits, the first one should not be "0", and should less than 256
+                   elif i == 3 and s[0] != "0" and int(s[:3]) <= 255:
+                       self.dfs(s[i:], index + 1, path + s[:i] + ".", res)
+
+.. _93. Restore IP Addresses: https://leetcode.com/problems/restore-ip-addresses/
 
 
 200. Number of Islands
