@@ -25,6 +25,7 @@ Hard
                if self.valid(nums, idx):
                    tmp = "." * len(nums)
                    self.dfs(nums, idx + 1, path + [tmp[:i] + "Q" + tmp[i+1:]], res)
+
        def valid(self, nums, n):
            for i in range(n):
                if abs(nums[i] - nums[n]) == n - i or nums[i] == nums[n]:
