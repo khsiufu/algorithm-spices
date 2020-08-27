@@ -83,7 +83,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Learning Materials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">LeetCode Tags</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../advanced.html">1. Advanced</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../array.html">2. Array</a></li>
@@ -95,7 +95,9 @@
 <li class="toctree-l3"><a class="reference internal" href="easy.html">7.1. Easy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="medium.html">7.2. Medium</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">7.3. Hard</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#n-queens">51. N-Queens</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#word-search-ii">212. Word Search II</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remove-invalid-parentheses">301. Remove Invalid Parentheses</a></li>
 </ul>
 </li>
 </ul>
@@ -178,6 +180,33 @@
             
   <div class="section" id="hard">
 <h1><span class="section-number">7.3. </span>Hard<a class="headerlink" href="#hard" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="n-queens">
+<h2>51. N-Queens<a class="headerlink" href="#n-queens" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://leetcode.com/problems/n-queens/">51. N-Queens</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">solveNQueens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[],</span> <span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="p">[</span><span class="n">tmp</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;Q&quot;</span> <span class="o">+</span> <span class="n">tmp</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]],</span> <span class="n">res</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span><span class="p">])</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="n">i</span> <span class="ow">or</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="word-search-ii">
 <h2>212. Word Search II<a class="headerlink" href="#word-search-ii" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://leetcode.com/problems/word-search-ii/">212. Word Search II</a></p>
@@ -232,6 +261,34 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">path</span><span class="o">+</span><span class="n">tmp</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">path</span><span class="o">+</span><span class="n">tmp</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
         <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-invalid-parentheses">
+<h2>301. Remove Invalid Parentheses<a class="headerlink" href="#remove-invalid-parentheses" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://leetcode.com/problems/remove-invalid-parentheses/">301. Remove Invalid Parentheses</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">removeInvalidParentheses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">def</span> <span class="nf">isValid</span><span class="p">(</span><span class="n">s</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">bool</span><span class="p">:</span>
+            <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;(&quot;</span><span class="p">:</span> <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;)&quot;</span><span class="p">:</span> <span class="n">cnt</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">cnt</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># 只用中途cnt出现了负值，你就要终止循环，已经出现非法字符了</span>
+            <span class="k">return</span> <span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span>
+
+        <span class="c1"># BFS</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">}</span>  <span class="c1"># 用set避免重复</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">valid</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">isValid</span><span class="p">,</span> <span class="n">level</span><span class="p">))</span>  <span class="c1"># 所有合法字符都筛选出来</span>
+            <span class="k">if</span> <span class="n">valid</span><span class="p">:</span> <span class="k">return</span> <span class="n">valid</span>  <span class="c1"># 如果当前valid是非空的，说明已经有合法的产生了</span>
+            <span class="c1"># 下一层level</span>
+            <span class="n">next_level</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">level</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="s2">&quot;()&quot;</span><span class="p">:</span>  <span class="c1"># 如果item[i]这个char是个括号就删了，如果不是括号就留着</span>
+                        <span class="n">next_level</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">item</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">item</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="n">next_level</span>
 </pre></div>
 </div>
 </div>

@@ -10,6 +10,8 @@ Medium
 
 .. code:: python
 
+   # Time: O(3^N * 4^M), Space: O(n)
+   # N: (2, 3, 4, 5, 6, 8), M: (7, 9)
    class Solution:
        def letterCombinations(self, digits: str) -> List[str]:
            if not digits:
@@ -29,6 +31,33 @@ Medium
                    self.dfs(digits, dct, i + 1, path + j, res)
 
 .. _17. Letter Combinations of a Phone Number: https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+
+
+22. Generate Parentheses
+------------------------------------------------------------
+
+`22. Generate Parentheses`_
+
+.. code:: python
+
+   class Solution:
+       def generateParenthesis(self, n: int) -> List[str]:
+           res = []
+           self.helper(n, n, [], res)
+           return res
+
+       def helper(self, left_count, right_count, path, res):
+           if left_count < 0 or right_count < 0:
+               return
+           if left_count > right_count:
+               return
+           if left_count == 0 and right_count == 0:
+               res.append(''.join(path))
+               return
+           self.helper(left_count - 1, right_count, path + ['('], res)
+           self.helper(left_count, right_count - 1, path + [')'], res)
+
+.. _22. Generate Parentheses: https://leetcode.com/problems/generate-parentheses/
 
 
 39. Combination Sum
@@ -92,6 +121,7 @@ Medium
 
 .. code:: python
 
+   # Time: O(n!), Space: O(n)
    class Solution:
        def permute(self, nums: List[int]) -> List[List[int]]:
            if not nums:
@@ -112,7 +142,6 @@ Medium
                self.dfs(nums, path, res, used)
                path.pop()
                used[i] = False
-
 
    """
    # use python characteristic
@@ -135,6 +164,57 @@ Medium
 .. _46. Permutations: https://leetcode.com/problems/permutations/
 
 
+47. Permutations II
+------------------------------------------------------------
+
+`47. Permutations II`_
+
+.. code:: python
+
+   class Solution:
+       def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+           if not nums:
+               return
+           nums.sort()
+           res, used = [], [False] * len(nums)
+           self.dfs(nums, [], res, used)
+           return res
+
+       def dfs(self, nums, path, res, used):
+           if len(path) == len(nums):
+               res.append(path[:])
+               return
+           for i in range(len(nums)):
+               if used[i]:
+                   continue
+               if i > 0 and nums[i] == nums[i - 1] and not used[i - 1]:
+                   continue
+               used[i] = True
+               path.append(nums[i])
+               self.dfs(nums, path, res, used)
+               path.pop()
+               used[i] = False
+
+   """
+   class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        nums.sort()
+        self.dfs(nums, [], res)
+        return res
+
+    def dfs(self, nums, path, res):
+        if not nums:
+            res.append(path)
+        for i in range(len(nums)):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            self.dfs(nums[:i] + nums[i+1:], path + [nums[i]], res)
+   """
+
+.. _47. Permutations II: https://leetcode.com/problems/permutations-ii/
+
+
 77. Combinations
 ------------------------------------------------------------
 
@@ -142,6 +222,7 @@ Medium
 
 .. code:: python
 
+   # Time: O(C(n, k)), Space: O(k)
    class Solution:
        def combine(self, n: int, k: int) -> List[List[int]]:
            res = []
@@ -159,6 +240,27 @@ Medium
                path.pop()
 
 .. _77. Combinations: https://leetcode.com/problems/combinations/
+
+
+78. Subsets
+------------------------------------------------------------
+
+`78. Subsets`_
+
+.. code:: python
+
+   class Solution:
+       def subsets(self, nums: List[int]) -> List[List[int]]:
+           res = []
+           self.dfs(nums, 0, [], res)
+           return res
+
+       def dfs(self, nums, idx, path, res):
+           res.append(path)
+           for i in range(idx, len(nums)):
+               self.dfs(nums, i + 1, path + [nums[i]], res)
+
+.. _78. Subsets: https://leetcode.com/problems/subsets/
 
 
 79. Word Search
@@ -193,6 +295,64 @@ Medium
            return res
 
 .. _79. Word Search: https://leetcode.com/problems/word-search/
+
+
+90. Subsets II
+------------------------------------------------------------
+
+`90. Subsets II`_
+
+.. code:: python
+
+   class Solution:
+       def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+           res = []
+           nums.sort()
+           self.dfs(nums, 0, [], res)
+           return res
+
+       def dfs(self, nums, index, path, res):
+           res.append(path)
+           for i in range(index, len(nums)):
+               if i > index and nums[i] == nums[i - 1]:
+                   continue
+               self.dfs(nums, i + 1, path + [nums[i]], res)
+
+.. _90. Subsets II: https://leetcode.com/problems/subsets-ii/
+
+
+93. Restore IP Addresses
+------------------------------------------------------------
+
+`93. Restore IP Addresses`_
+
+.. code:: python
+
+   class Solution:
+       def restoreIpAddresses(self, s: str) -> List[str]:
+           res = []
+           self.dfs(s, 0, "", res)
+           return res
+
+       def dfs(self, s, index, path, res):
+           if index == 4:
+               if not s:
+                   res.append(path[:-1])
+               return  # backtracking
+           for i in range(1, 4):
+               # the digits we choose should no more than the length of s
+               if i <= len(s):
+                   # choose one digit
+                   if i == 1:
+                       self.dfs(s[i:], index + 1, path + s[:i] + ".", res)
+                   # choose two digits, the first one should not be "0"
+                   elif i == 2 and s[0] != "0":
+                       self.dfs(s[i:], index + 1, path + s[:i] + ".", res)
+                   # choose three digits, the first one should not be "0", and should less than 256
+                   elif i == 3 and s[0] != "0" and int(s[:3]) <= 255:
+                       self.dfs(s[i:], index + 1, path + s[:i] + ".", res)
+
+.. _93. Restore IP Addresses: https://leetcode.com/problems/restore-ip-addresses/
 
 
 200. Number of Islands

@@ -53,6 +53,29 @@ Medium
 .. _109. Convert Sorted List to Binary Search Tree: https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/
 
 
+230. Kth Smallest Element in a BST
+------------------------------------------------------------
+
+`230. Kth Smallest Element in a BST`_
+
+.. code:: python
+
+   class Solution:
+       def kthSmallest(self, root: TreeNode, k: int) -> int:
+           res = []
+           self.helper(root, res)
+           return res[k-1]
+
+       def helper(self, root, res):
+           if not root:
+               return
+           self.helper(root.left, res)
+           res.append(root.val)
+           self.helper(root.right, res)
+
+.. _230. Kth Smallest Element in a BST: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+
+
 1038. Binary Search Tree to Greater Sum Tree
 ------------------------------------------------------------
 
