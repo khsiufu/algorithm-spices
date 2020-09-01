@@ -127,6 +127,73 @@ Medium
 .. _59. Spiral Matrix II: https://leetcode.com/problems/spiral-matrix-ii/
 
 
+73. Set Matrix Zeroes
+------------------------------------------------------
+
+`73. Set Matrix Zeroes`_
+
+.. code:: python
+
+   class Solution:
+       def setZeroes(self, matrix: List[List[int]]) -> None:
+           row, col = len(matrix), len(matrix[0])
+           firstRowFlag, firstColFlag = False, False
+
+           # 找第一行是否有0
+           for j in range(col):
+               if matrix[0][j] == 0:
+                   firstRowFlag = True
+                   break
+
+           # 第一列是否有0
+           for i in range(row):
+               if matrix[i][0] == 0:
+                   firstColFlag = True
+                   break
+
+           # 把第一行或者第一列作为 标志位
+           for i in range(1, row):
+               for j in range(1, col):
+                   if matrix[i][j] == 0:
+                       matrix[i][0] = matrix[0][j] = 0
+
+           # set zero
+           for i in range(1, row):
+               for j in range(1, col):
+                   if matrix[i][0] == 0 or matrix[0][j] == 0:
+                       matrix[i][j] = 0
+
+           if firstRowFlag:
+               for j in range(col):
+                   matrix[0][j] = 0
+           if firstColFlag:
+               for i in range(row):
+                   matrix[i][0] = 0
+
+.. _73. Set Matrix Zeroes: https://leetcode.com/problems/set-matrix-zeroes/
+
+
+80. Remove Duplicates from Sorted Array II
+------------------------------------------------------
+
+`80. Remove Duplicates from Sorted Array II`_
+
+.. code:: python
+
+   class Solution(object):
+       def removeDuplicates(self, nums):
+           if len(nums) <= 2:
+               return len(nums)
+           count = 2
+           for i in range(2, len(nums)):
+               if nums[i] != nums[count-2]:
+                   nums[count] = nums[i]
+                   count += 1
+           return count
+
+.. _80. Remove Duplicates from Sorted Array II: https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
+
+
 442. Find All Duplicates in an Array
 ------------------------------------------------------
 

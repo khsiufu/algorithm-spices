@@ -202,6 +202,29 @@ Medium
 .. _120. Triangle: https://leetcode.com/problems/triangle/
 
 
+152. Maximum Product Subarray
+------------------------------------------------------------
+
+`152. Maximum Product Subarray`_
+
+.. code:: python
+
+   class Solution:
+       # O(1) space
+       def maxProduct(self, nums):
+           if not nums:
+               return
+           locMin = locMax = gloMax = nums[0]
+           for i in range(1, len(nums)):
+               tmp = locMin
+               locMin = min(locMin * nums[i], nums[i], locMax * nums[i])
+               locMax = max(tmp * nums[i], nums[i], locMax * nums[i])
+               gloMax = max(gloMax, locMax)
+           return gloMax
+
+.. _152. Maximum Product Subarray: https://leetcode.com/problems/maximum-product-subarray/
+
+
 213. House Robber II
 ------------------------------------------------------------
 
