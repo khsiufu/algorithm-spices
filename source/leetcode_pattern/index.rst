@@ -24,4 +24,5 @@ Contents:
    k-way_merge
    0_1_knapsack_dynamic_programming
    topological_sort_graph
+   miscellaneous
 
