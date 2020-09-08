@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="LeetCode Tags" href="../../leetcode_tags/index.html" />
+    <link rel="next" title="17. Miscellaneous" href="../miscellaneous.html" />
     <link rel="prev" title="16. Topological Sort (Graph)" href="../topological_sort_graph.html" /> 
 </head>
 
@@ -106,8 +106,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#tasks-scheduling-order-medium">16.3. Tasks Scheduling Order (medium)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#all-tasks-scheduling-orders-hard">16.4. All Tasks Scheduling Orders (hard)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#alien-dictionary-hard">16.5. Alien Dictionary (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-1-reconstructing-a-sequence-hard">16.6. Problem Challenge 1 - Reconstructing a Sequence (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-2-minimum-height-trees-hard">16.7. Problem Challenge 2 - Minimum Height Trees (hard)</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellaneous.html">17. Miscellaneous</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../leetcode_tags/index.html">LeetCode Tags</a></li>
@@ -183,18 +186,1073 @@
             
   <div class="section" id="topological-sort-medium">
 <h1><span class="section-number">16.1. </span>Topological Sort (medium)<a class="headerlink" href="#topological-sort-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Topological Sort of a directed graph (a graph with unidirectional edges) is a linear ordering of its vertices such that for every directed edge (U, V) from vertex U to vertex V, U comes before V in the ordering.</span>
+<span class="sd">Given a directed graph, find the topological ordering of its vertices.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: Vertices=4, Edges=[3, 2], [3, 0], [2, 0], [2, 1]</span>
+<span class="sd">Output: Following are the two valid topological sorts for the given graph:</span>
+<span class="sd">1) 3, 2, 0, 1</span>
+<span class="sd">2) 3, 2, 1, 0</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: Vertices=5, Edges=[4, 2], [4, 3], [2, 0], [2, 1], [3, 1]</span>
+<span class="sd">Output: Following are all valid topological sorts for the given graph:</span>
+<span class="sd">1) 4, 2, 3, 0, 1</span>
+<span class="sd">2) 4, 3, 2, 0, 1</span>
+<span class="sd">3) 4, 3, 2, 1, 0</span>
+<span class="sd">4) 4, 2, 3, 1, 0</span>
+<span class="sd">5) 4, 2, 0, 3, 1</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: Vertices=7, Edges=[6, 4], [6, 2], [5, 3], [5, 4], [3, 0], [3, 1], [3, 2], [4, 1]</span>
+<span class="sd">Output: Following are all valid topological sorts for the given graph:</span>
+<span class="sd">1) 5, 6, 3, 4, 0, 1, 2</span>
+<span class="sd">2) 6, 5, 3, 4, 0, 1, 2</span>
+<span class="sd">3) 5, 6, 4, 3, 0, 2, 1</span>
+<span class="sd">4) 6, 5, 4, 3, 0, 1, 2</span>
+<span class="sd">5) 5, 6, 3, 4, 0, 2, 1</span>
+<span class="sd">6) 5, 6, 3, 4, 1, 2, 0</span>
+
+<span class="sd">There are other valid topological ordering of the graph too.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">topological_sort</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)}</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)}</span>
+
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+        <span class="n">in_node</span><span class="p">,</span> <span class="n">out_node</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">in_node</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out_node</span><span class="p">)</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">out_node</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">in_node</span> <span class="o">=</span> <span class="n">sources</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">in_node</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">in_node</span><span class="p">]:</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span> <span class="o">!=</span> <span class="n">vertices</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">return</span> <span class="n">sortedOrder</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topological sort: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">topological_sort</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topological sort: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">topological_sort</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topological sort: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+        <span class="n">topological_sort</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="p">[[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">topological_sort</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">vertices</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sortedOrder</span>
+
+    <span class="c1"># a. Initialize the graph</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)}</span>  <span class="c1"># count of incoming edges</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)}</span>  <span class="c1"># adjacency list graph</span>
+
+    <span class="c1"># b. Build the graph</span>
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+        <span class="n">parent</span><span class="p">,</span> <span class="n">child</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>  <span class="c1"># put the child into it&#39;s parent&#39;s list</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment child&#39;s inDegree</span>
+
+    <span class="c1"># c. Find all sources i.e., all vertices with 0 in-degrees</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># d. For each source, add it to the sortedOrder and subtract one from all of its children&#39;s in-degrees</span>
+    <span class="c1"># if a child&#39;s in-degree becomes zero, add it to the sources queue</span>
+    <span class="k">while</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">vertex</span> <span class="o">=</span> <span class="n">sources</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span>
+                <span class="n">vertex</span><span class="p">]:</span>  <span class="c1"># get the node&#39;s children to decrement their in-degrees</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+    <span class="c1"># topological sort is not possible as the graph has a cycle</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span> <span class="o">!=</span> <span class="n">vertices</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">return</span> <span class="n">sortedOrder</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topological sort: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">topological_sort</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topological sort: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">topological_sort</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topological sort: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+        <span class="n">topological_sort</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="p">[[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">In step ‘d’, each vertex will become a source only once and each edge will be accessed and removed once.</span>
+<span class="sd">Therefore, the time complexity of the above algorithm will be O(V+E),</span>
+<span class="sd">where ‘V’ is the total number of vertices and ‘E’ is the total number of edges in the graph.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The space complexity will be O(V+E), since we are storing all of the edges for each vertex in an adjacency list.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Similar Problems</span>
+<span class="sd">Problem 1: Find if a given Directed Graph has a cycle in it or not.</span>
+<span class="sd">Solution: If we can’t determine the topological ordering of all the vertices of a directed graph, the graph has a cycle in it. This was also referred to in the above code:</span>
+<span class="sd">    if (sortedOrder.size() != vertices) // topological sort is not possible as the graph has a cycle</span>
+<span class="sd">      return new ArrayList&lt;&gt;();</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="tasks-scheduling-medium">
 <h1><span class="section-number">16.2. </span>Tasks Scheduling (medium)<a class="headerlink" href="#tasks-scheduling-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">There are ‘N’ tasks, labeled from ‘0’ to ‘N-1’. Each task can have some prerequisite tasks which need to be completed before it can be scheduled. Given the number of tasks and a list of prerequisite pairs, find out if it is possible to schedule all the tasks.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: Tasks=3, Prerequisites=[0, 1], [1, 2]</span>
+<span class="sd">Output: true</span>
+<span class="sd">Explanation: To execute task &#39;1&#39;, task &#39;0&#39; needs to finish first. Similarly, task &#39;1&#39; needs to finish</span>
+<span class="sd">before &#39;2&#39; can be scheduled. A possible sceduling of tasks is: [0, 1, 2]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: Tasks=3, Prerequisites=[0, 1], [1, 2], [2, 0]</span>
+<span class="sd">Output: false</span>
+<span class="sd">Explanation: The tasks have cyclic dependency, therefore they cannot be scheduled.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: Tasks=6, Prerequisites=[2, 5], [0, 5], [0, 4], [1, 4], [3, 2], [1, 3]</span>
+<span class="sd">Output: true</span>
+<span class="sd">Explanation: A possible scHeduling of tasks is: [0 1 4 3 2 5]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">is_scheduling_possible</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">prerequisites</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prerequisites</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">sources</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span> <span class="o">==</span> <span class="n">tasks</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">is_scheduling_possible</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">is_scheduling_possible</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">is_scheduling_possible</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">is_scheduling_possible</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">prerequisites</span><span class="p">):</span>
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">tasks</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># a. Initialize the graph</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>  <span class="c1"># count of incoming edges</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>  <span class="c1"># adjacency list graph</span>
+
+    <span class="c1"># b. Build the graph</span>
+    <span class="k">for</span> <span class="n">prerequisite</span> <span class="ow">in</span> <span class="n">prerequisites</span><span class="p">:</span>
+        <span class="n">parent</span><span class="p">,</span> <span class="n">child</span> <span class="o">=</span> <span class="n">prerequisite</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">prerequisite</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>  <span class="c1"># put the child into it&#39;s parent&#39;s list</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment child&#39;s inDegree</span>
+
+    <span class="c1"># c. Find all sources i.e., all vertices with 0 in-degrees</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># d. For each source, add it to the sortedOrder and subtract one from all of its children&#39;s in-degrees</span>
+    <span class="c1"># if a child&#39;s in-degree becomes zero, add it to the sources queue</span>
+    <span class="k">while</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">vertex</span> <span class="o">=</span> <span class="n">sources</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span>
+                <span class="n">vertex</span><span class="p">]:</span>  <span class="c1"># get the node&#39;s children to decrement their in-degrees</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+    <span class="c1"># if sortedOrder doesn&#39;t contain all tasks, there is a cyclic dependency between tasks, therefore, we</span>
+    <span class="c1"># will not be able to schedule all tasks</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span> <span class="o">==</span> <span class="n">tasks</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">is_scheduling_possible</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">is_scheduling_possible</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">is_scheduling_possible</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">In step ‘d’, each task can become a source only once and each edge (prerequisite) will be accessed and removed once.</span>
+<span class="sd">Therefore, the time complexity of the above algorithm will be O(V+E),</span>
+<span class="sd">where ‘V’ is the total number of tasks and ‘E’ is the total number of prerequisites.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(V+E),</span>
+<span class="sd">since we are storing all of the prerequisites for each task in an adjacency list.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Similar Problems</span>
+<span class="sd">Course Schedule: There are ‘N’ courses, labeled from ‘0’ to ‘N-1’.</span>
+<span class="sd">Each course can have some prerequisite courses which need to be completed before it can be taken.</span>
+<span class="sd">Given the number of courses and a list of prerequisite pairs,</span>
+<span class="sd">find if it is possible for a student to take all the courses.</span>
+<span class="sd">Solution: This problem is exactly similar to our parent problem.</span>
+<span class="sd">In this problem, we have courses instead of tasks.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="tasks-scheduling-order-medium">
 <h1><span class="section-number">16.3. </span>Tasks Scheduling Order (medium)<a class="headerlink" href="#tasks-scheduling-order-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">There are ‘N’ tasks, labeled from ‘0’ to ‘N-1’. Each task can have some prerequisite tasks which need to be completed before it can be scheduled. Given the number of tasks and a list of prerequisite pairs, write a method to find the ordering of tasks we should pick to finish all tasks.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: Tasks=3, Prerequisites=[0, 1], [1, 2]</span>
+<span class="sd">Output: [0, 1, 2]</span>
+<span class="sd">Explanation: To execute task &#39;1&#39;, task &#39;0&#39; needs to finish first. Similarly, task &#39;1&#39; needs to finish</span>
+<span class="sd">before &#39;2&#39; can be scheduled. A possible scheduling of tasks is: [0, 1, 2]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: Tasks=3, Prerequisites=[0, 1], [1, 2], [2, 0]</span>
+<span class="sd">Output: []</span>
+<span class="sd">Explanation: The tasks have cyclic dependency, therefore they cannot be scheduled.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: Tasks=6, Prerequisites=[2, 5], [0, 5], [0, 4], [1, 4], [3, 2], [1, 3]</span>
+<span class="sd">Output: [0 1 4 3 2 5]</span>
+<span class="sd">Explanation: A possible scheduling of tasks is: [0 1 4 3 2 5]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">find_order</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">prerequisites</span><span class="p">):</span>
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>
+
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">prerequisites</span><span class="p">:</span>
+        <span class="n">in_node</span><span class="p">,</span> <span class="n">out_node</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">in_node</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out_node</span><span class="p">)</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">out_node</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">in_node</span> <span class="o">=</span> <span class="n">sources</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">in_node</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">in_node</span><span class="p">]:</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span> <span class="o">!=</span> <span class="n">tasks</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">return</span> <span class="n">sortedOrder</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_order</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_order</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_order</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">find_order</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">prerequisites</span><span class="p">):</span>
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">tasks</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sortedOrder</span>
+
+    <span class="c1"># a. Initialize the graph</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>  <span class="c1"># count of incoming edges</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>  <span class="c1"># adjacency list graph</span>
+
+    <span class="c1"># b. Build the graph</span>
+    <span class="k">for</span> <span class="n">prerequisite</span> <span class="ow">in</span> <span class="n">prerequisites</span><span class="p">:</span>
+        <span class="n">parent</span><span class="p">,</span> <span class="n">child</span> <span class="o">=</span> <span class="n">prerequisite</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">prerequisite</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>  <span class="c1"># put the child into it&#39;s parent&#39;s list</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment child&#39;s inDegree</span>
+
+    <span class="c1"># c. Find all sources i.e., all vertices with 0 in-degrees</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># d. For each source, add it to the sortedOrder and subtract one from all of its children&#39;s in-degrees</span>
+    <span class="c1"># if a child&#39;s in-degree becomes zero, add it to the sources queue</span>
+    <span class="k">while</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">vertex</span> <span class="o">=</span> <span class="n">sources</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span>
+                <span class="n">vertex</span><span class="p">]:</span>  <span class="c1"># get the node&#39;s children to decrement their in-degrees</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+    <span class="c1"># if sortedOrder doesn&#39;t contain all tasks, there is a cyclic dependency between tasks, therefore, we</span>
+    <span class="c1"># will not be able to schedule all tasks</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span> <span class="o">!=</span> <span class="n">tasks</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">return</span> <span class="n">sortedOrder</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_order</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_order</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is scheduling possible: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_order</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">In step ‘d’, each task can become a source only once and each edge (prerequisite) will be accessed and removed once.</span>
+<span class="sd">Therefore, the time complexity of the above algorithm will be O(V+E),</span>
+<span class="sd">where ‘V’ is the total number of tasks and ‘E’ is the total number of prerequisites.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(V+E), since we are storing all of the prerequisites for each task in an adjacency list.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Similar Problems</span>
+<span class="sd">Course Schedule: There are ‘N’ courses, labeled from ‘0’ to ‘N-1’.</span>
+<span class="sd">Each course has some prerequisite courses which need to be completed before it can be taken.</span>
+<span class="sd">Given the number of courses and a list of prerequisite pairs,</span>
+<span class="sd">write a method to find the best ordering of the courses that a student can take in order to finish all courses.</span>
+<span class="sd">Solution: This problem is exactly similar to our parent problem. In this problem, we have courses instead of tasks.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="all-tasks-scheduling-orders-hard">
 <h1><span class="section-number">16.4. </span>All Tasks Scheduling Orders (hard)<a class="headerlink" href="#all-tasks-scheduling-orders-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">There are ‘N’ tasks, labeled from ‘0’ to ‘N-1’.</span>
+<span class="sd">Each task can have some prerequisite tasks which need to be completed before it can be scheduled.</span>
+<span class="sd">Given the number of tasks and a list of prerequisite pairs,</span>
+<span class="sd">write a method to print all possible ordering of tasks meeting all prerequisites.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: Tasks=3, Prerequisites=[0, 1], [1, 2]</span>
+<span class="sd">Output: [0, 1, 2]</span>
+<span class="sd">Explanation: There is only possible ordering of the tasks.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: Tasks=4, Prerequisites=[3, 2], [3, 0], [2, 0], [2, 1]</span>
+<span class="sd">Output:</span>
+<span class="sd">1) [3, 2, 0, 1]</span>
+<span class="sd">2) [3, 2, 1, 0]</span>
+<span class="sd">Explanation: There are two possible orderings of the tasks meeting all prerequisites.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: Tasks=6, Prerequisites=[2, 5], [0, 5], [0, 4], [1, 4], [3, 2], [1, 3]</span>
+<span class="sd">Output:</span>
+<span class="sd">1) [0, 1, 4, 3, 2, 5]</span>
+<span class="sd">2) [0, 1, 3, 4, 2, 5]</span>
+<span class="sd">3) [0, 1, 3, 2, 4, 5]</span>
+<span class="sd">4) [0, 1, 3, 2, 5, 4]</span>
+<span class="sd">5) [1, 0, 3, 4, 2, 5]</span>
+<span class="sd">6) [1, 0, 3, 2, 4, 5]</span>
+<span class="sd">7) [1, 0, 3, 2, 5, 4]</span>
+<span class="sd">8) [1, 0, 4, 3, 2, 5]</span>
+<span class="sd">9) [1, 3, 0, 2, 4, 5]</span>
+<span class="sd">10) [1, 3, 0, 2, 5, 4]</span>
+<span class="sd">11) [1, 3, 0, 4, 2, 5]</span>
+<span class="sd">12) [1, 3, 2, 0, 5, 4]</span>
+<span class="sd">13) [1, 3, 2, 0, 4, 5]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">print_orders</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">prerequisites</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>
+
+    <span class="k">for</span> <span class="n">prerequisite</span> <span class="ow">in</span> <span class="n">prerequisites</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">prerequisite</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">prerequisite</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="n">print_all_topological_sorts</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">inDegree</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">sortedOrder</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">print_all_topological_sorts</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">inDegree</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">sortedOrder</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+            <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+            <span class="n">next_sources</span> <span class="o">=</span> <span class="n">sources</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">next_sources</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
+                <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">next_sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+            <span class="n">print_all_topological_sorts</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">inDegree</span><span class="p">,</span> <span class="n">next_sources</span><span class="p">,</span>
+                                        <span class="n">sortedOrder</span><span class="p">)</span>
+
+            <span class="n">sortedOrder</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
+                <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">inDegree</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task Orders: &quot;</span><span class="p">)</span>
+    <span class="n">print_orders</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task Orders: &quot;</span><span class="p">)</span>
+    <span class="n">print_orders</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task Orders: &quot;</span><span class="p">)</span>
+    <span class="n">print_orders</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">print_orders</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">prerequisites</span><span class="p">):</span>
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">tasks</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># a. Initialize the graph</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>  <span class="c1"># count of incoming edges</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tasks</span><span class="p">)}</span>  <span class="c1"># adjacency list graph</span>
+
+    <span class="c1"># b. Build the graph</span>
+    <span class="k">for</span> <span class="n">prerequisite</span> <span class="ow">in</span> <span class="n">prerequisites</span><span class="p">:</span>
+        <span class="n">parent</span><span class="p">,</span> <span class="n">child</span> <span class="o">=</span> <span class="n">prerequisite</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">prerequisite</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>  <span class="c1"># put the child into it&#39;s parent&#39;s list</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment child&#39;s inDegree</span>
+
+    <span class="c1"># c. Find all sources i.e., all vertices with 0 in-degrees</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="n">print_all_topological_sorts</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">inDegree</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">sortedOrder</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">print_all_topological_sorts</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">inDegree</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">sortedOrder</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+            <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+            <span class="n">sourcesForNextCall</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>  <span class="c1"># make a copy of sources</span>
+            <span class="c1"># only remove the current source, all other sources should remain in the queue for the next call</span>
+            <span class="n">sourcesForNextCall</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+            <span class="c1"># get the node&#39;s children to decrement their in-degrees</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
+                <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">sourcesForNextCall</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+            <span class="c1"># recursive call to print other orderings from the remaining (and new) sources</span>
+            <span class="n">print_all_topological_sorts</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">inDegree</span><span class="p">,</span> <span class="n">sourcesForNextCall</span><span class="p">,</span>
+                                        <span class="n">sortedOrder</span><span class="p">)</span>
+
+            <span class="c1"># backtrack, remove the vertex from the sorted order and put all of its children back to consider</span>
+            <span class="c1"># the next source instead of the current vertex</span>
+            <span class="n">sortedOrder</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
+                <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># if sortedOrder doesn&#39;t contain all tasks, either we&#39;ve a cyclic dependency between tasks, or</span>
+    <span class="c1"># we have not processed all the tasks in this recursive call</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">inDegree</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task Orders: &quot;</span><span class="p">)</span>
+    <span class="n">print_orders</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task Orders: &quot;</span><span class="p">)</span>
+    <span class="n">print_orders</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task Orders: &quot;</span><span class="p">)</span>
+    <span class="n">print_orders</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time and Space Complexity</span>
+<span class="sd">If we don’t have any prerequisites, all combinations of the tasks can represent a topological ordering.</span>
+<span class="sd">As we know, that there can be N! combinations for ‘N’ numbers,</span>
+<span class="sd">therefore the time and space complexity of our algorithm will be O(V! * E)</span>
+<span class="sd">where ‘V’ is the total number of tasks and ‘E’ is the total prerequisites.</span>
+<span class="sd">We need the ‘E’ part because in each recursive call, at max, we remove (and add back) all the edges.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="alien-dictionary-hard">
 <h1><span class="section-number">16.5. </span>Alien Dictionary (hard)<a class="headerlink" href="#alien-dictionary-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">There is a dictionary containing words from an alien language for which we don’t know the ordering of the characters. Write a method to find the correct order of characters in the alien language.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: Words: [&quot;ba&quot;, &quot;bc&quot;, &quot;ac&quot;, &quot;cab&quot;]</span>
+<span class="sd">Output: bac</span>
+<span class="sd">Explanation: Given that the words are sorted lexicographically by the rules of the alien language, so</span>
+<span class="sd">from the given words we can conclude the following ordering among its characters:</span>
+
+<span class="sd">1. From &quot;ba&quot; and &quot;bc&quot;, we can conclude that &#39;a&#39; comes before &#39;c&#39;.</span>
+<span class="sd">2. From &quot;bc&quot; and &quot;ac&quot;, we can conclude that &#39;b&#39; comes before &#39;a&#39;</span>
+
+<span class="sd">From the above two points, we can conclude that the correct character order is: &quot;bac&quot;</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: Words: [&quot;cab&quot;, &quot;aaa&quot;, &quot;aab&quot;]</span>
+<span class="sd">Output: cab</span>
+<span class="sd">Explanation: From the given words we can conclude the following ordering among its characters:</span>
+
+<span class="sd">1. From &quot;cab&quot; and &quot;aaa&quot;, we can conclude that &#39;c&#39; comes before &#39;a&#39;.</span>
+<span class="sd">2. From &quot;aaa&quot; and &quot;aab&quot;, we can conclude that &#39;a&#39; comes before &#39;b&#39;</span>
+
+<span class="sd">From the above two points, we can conclude that the correct character order is: &quot;cab&quot;</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: Words: [&quot;ywx&quot;, &quot;wz&quot;, &quot;xww&quot;, &quot;xz&quot;, &quot;zyy&quot;, &quot;zwz&quot;]</span>
+<span class="sd">Output: ywxz</span>
+<span class="sd">Explanation: From the given words we can conclude the following ordering among its characters:</span>
+
+<span class="sd">1. From &quot;ywx&quot; and &quot;wz&quot;, we can conclude that &#39;y&#39; comes before &#39;w&#39;.</span>
+<span class="sd">2. From &quot;wz&quot; and &quot;xww&quot;, we can conclude that &#39;w&#39; comes before &#39;x&#39;.</span>
+<span class="sd">3. From &quot;xww&quot; and &quot;xz&quot;, we can conclude that &#39;w&#39; comes before &#39;z&#39;</span>
+<span class="sd">4. From &quot;xz&quot; and &quot;zyy&quot;, we can conclude that &#39;x&#39; comes before &#39;z&#39;</span>
+<span class="sd">5. From &quot;zyy&quot; and &quot;zwz&quot;, we can conclude that &#39;y&#39; comes before &#39;w&#39;</span>
+
+<span class="sd">From the above five points, we can conclude that the correct character order is: &quot;ywxz&quot;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">find_order</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">word1</span><span class="p">,</span> <span class="n">word2</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">word2</span><span class="p">))):</span>
+            <span class="k">if</span> <span class="n">word1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">word2</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">inDegree</span><span class="p">[</span><span class="n">word2</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">graph</span><span class="p">[</span><span class="n">word1</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word2</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="k">break</span>
+
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">vertex</span> <span class="o">=</span> <span class="n">sources</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Character order: &quot;</span> <span class="o">+</span> <span class="n">find_order</span><span class="p">([</span><span class="s2">&quot;ba&quot;</span><span class="p">,</span> <span class="s2">&quot;bc&quot;</span><span class="p">,</span> <span class="s2">&quot;ac&quot;</span><span class="p">,</span> <span class="s2">&quot;cab&quot;</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Character order: &quot;</span> <span class="o">+</span> <span class="n">find_order</span><span class="p">([</span><span class="s2">&quot;cab&quot;</span><span class="p">,</span> <span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="s2">&quot;aab&quot;</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Character order: &quot;</span> <span class="o">+</span>
+          <span class="n">find_order</span><span class="p">([</span><span class="s2">&quot;ywx&quot;</span><span class="p">,</span> <span class="s2">&quot;wz&quot;</span><span class="p">,</span> <span class="s2">&quot;xww&quot;</span><span class="p">,</span> <span class="s2">&quot;xz&quot;</span><span class="p">,</span> <span class="s2">&quot;zyy&quot;</span><span class="p">,</span> <span class="s2">&quot;zwz&quot;</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">find_order</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="c1"># a. Initialize the graph</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># count of incoming edges</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># adjacency list graph</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">character</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">character</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># b. Build the graph</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># find ordering of characters from adjacent words</span>
+        <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">w2</span><span class="p">))):</span>
+            <span class="n">parent</span><span class="p">,</span> <span class="n">child</span> <span class="o">=</span> <span class="n">w1</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">w2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">parent</span> <span class="o">!=</span> <span class="n">child</span><span class="p">:</span>  <span class="c1"># if the two characters are different</span>
+                <span class="c1"># put the child into it&#39;s parent&#39;s list</span>
+                <span class="n">graph</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+                <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment child&#39;s inDegree</span>
+                <span class="k">break</span>  <span class="c1"># only the first different character between the two words will help us find the order</span>
+
+    <span class="c1"># c. Find all sources i.e., all vertices with 0 in-degrees</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># d. For each source, add it to the sortedOrder and subtract one from all of its children&#39;s in-degrees</span>
+    <span class="c1"># if a child&#39;s in-degree becomes zero, add it to the sources queue</span>
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">vertex</span> <span class="o">=</span> <span class="n">sources</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span>
+                <span class="n">vertex</span><span class="p">]:</span>  <span class="c1"># get the node&#39;s children to decrement their in-degrees</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+    <span class="c1"># if sortedOrder doesn&#39;t contain all characters, there is a cyclic dependency between characters, therefore, we</span>
+    <span class="c1"># will not be able to find the correct ordering of the characters</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inDegree</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Character order: &quot;</span> <span class="o">+</span> <span class="n">find_order</span><span class="p">([</span><span class="s2">&quot;ba&quot;</span><span class="p">,</span> <span class="s2">&quot;bc&quot;</span><span class="p">,</span> <span class="s2">&quot;ac&quot;</span><span class="p">,</span> <span class="s2">&quot;cab&quot;</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Character order: &quot;</span> <span class="o">+</span> <span class="n">find_order</span><span class="p">([</span><span class="s2">&quot;cab&quot;</span><span class="p">,</span> <span class="s2">&quot;aaa&quot;</span><span class="p">,</span> <span class="s2">&quot;aab&quot;</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Character order: &quot;</span> <span class="o">+</span>
+          <span class="n">find_order</span><span class="p">([</span><span class="s2">&quot;ywx&quot;</span><span class="p">,</span> <span class="s2">&quot;wz&quot;</span><span class="p">,</span> <span class="s2">&quot;xww&quot;</span><span class="p">,</span> <span class="s2">&quot;xz&quot;</span><span class="p">,</span> <span class="s2">&quot;zyy&quot;</span><span class="p">,</span> <span class="s2">&quot;zwz&quot;</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">In step ‘d’, each task can become a source only once and each edge (a rule) will be accessed and removed once.</span>
+<span class="sd">Therefore, the time complexity of the above algorithm will be O(V+E),</span>
+<span class="sd">where ‘V’ is the total number of different characters and ‘E’ is the total number of the rules in the alien language.</span>
+<span class="sd">Since, at most, each pair of words can give us one rule, therefore,</span>
+<span class="sd">we can conclude that the upper bound for the rules is O(N) where ‘N’ is the number of words in the input.</span>
+<span class="sd">So, we can say that the time complexity of our algorithm is O(V+N).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(V+N), since we are storing all of the rules for each character in an adjacency list.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-1-reconstructing-a-sequence-hard">
+<h1><span class="section-number">16.6. </span>Problem Challenge 1 - Reconstructing a Sequence (hard)<a class="headerlink" href="#problem-challenge-1-reconstructing-a-sequence-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 1</span>
+<span class="sd">Reconstructing a Sequence (hard)</span>
+<span class="sd">Given a sequence originalSeq and an array of sequences,</span>
+<span class="sd">write a method to find if originalSeq can be uniquely reconstructed from the array of sequences.</span>
+<span class="sd">Unique reconstruction means that we need to find if originalSeq is the only sequence</span>
+<span class="sd">such that all sequences in the array are subsequences of it.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: originalSeq: [1, 2, 3, 4], seqs: [[1, 2], [2, 3], [3, 4]]</span>
+<span class="sd">Output: true</span>
+<span class="sd">Explanation: The sequences [1, 2], [2, 3], and [3, 4] can uniquely reconstruct</span>
+<span class="sd">[1, 2, 3, 4], in other words, all the given sequences uniquely define the order of numbers</span>
+<span class="sd">in the &#39;originalSeq&#39;.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: originalSeq: [1, 2, 3, 4], seqs: [[1, 2], [2, 3], [2, 4]]</span>
+<span class="sd">Output: false</span>
+<span class="sd">Explanation: The sequences [1, 2], [2, 3], and [2, 4] cannot uniquely reconstruct</span>
+<span class="sd">[1, 2, 3, 4]. There are two possible sequences we can construct from the given sequences:</span>
+<span class="sd">1) [1, 2, 3, 4]</span>
+<span class="sd">2) [1, 2, 4, 3]</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: originalSeq: [3, 1, 4, 2, 5], seqs: [[3, 1, 5], [1, 4, 2, 5]]</span>
+<span class="sd">Output: true</span>
+<span class="sd">Explanation: The sequences [3, 1, 5] and [1, 4, 2, 5] can uniquely reconstruct</span>
+<span class="sd">[3, 1, 4, 2, 5].</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">can_construct</span><span class="p">(</span><span class="n">originalSeq</span><span class="p">,</span> <span class="n">sequences</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">sequences</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">sequences</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)):</span>
+            <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">inDegree</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">originalSeq</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">originalSeq</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)]</span> <span class="o">!=</span> <span class="n">sources</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">vertex</span> <span class="o">=</span> <span class="n">sources</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">originalSeq</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can construct: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_construct</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can construct: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_construct</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can construct: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_construct</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">can_construct</span><span class="p">(</span><span class="n">originalSeq</span><span class="p">,</span> <span class="n">sequences</span><span class="p">):</span>
+    <span class="n">sortedOrder</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">originalSeq</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># a. Initialize the graph</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># count of incoming edges</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># adjacency list graph</span>
+    <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">sequences</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># b. Build the graph</span>
+    <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">sequences</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)):</span>
+            <span class="n">parent</span><span class="p">,</span> <span class="n">child</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># if we don&#39;t have ordering rules for all the numbers we&#39;ll not able to uniquely construct the sequence</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">inDegree</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">originalSeq</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># c. Find all sources i.e., all vertices with 0 in-degrees</span>
+    <span class="n">sources</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># d. For each source, add it to the sortedOrder and subtract one from all of its children&#39;s in-degrees</span>
+    <span class="c1"># if a child&#39;s in-degree becomes zero, add it to the sources queue</span>
+    <span class="k">while</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># more than one sources mean, there is more than one way to reconstruct the sequence</span>
+        <span class="k">if</span> <span class="n">originalSeq</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)]</span> <span class="o">!=</span> <span class="n">sources</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="c1"># the next source(or number) is different from the original sequence</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">vertex</span> <span class="o">=</span> <span class="n">sources</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">sortedOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span>
+                <span class="n">vertex</span><span class="p">]:</span>  <span class="c1"># get the node&#39;s children to decrement their in-degrees</span>
+            <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+    <span class="c1"># if sortedOrder&#39;s size is not equal to original sequence&#39;s size, there is no unique way to construct</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">sortedOrder</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">originalSeq</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can construct: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_construct</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can construct: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_construct</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can construct: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_construct</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">In step ‘d’, each number can become a source only once and each edge (a rule) will be accessed and removed once.</span>
+<span class="sd">Therefore, the time complexity of the above algorithm will be O(V+E),</span>
+<span class="sd">where ‘V’ is the count of distinct numbers and ‘E’ is the total number of the rules. Since, at most,</span>
+<span class="sd">each pair of numbers can give us one rule, we can conclude that the upper bound for the rules is O(N) where ‘N’ is the count of numbers in all sequences.</span>
+<span class="sd">So, we can say that the time complexity of our algorithm is O(V+N).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(V+N), since we are storing all of the rules for each number in an adjacency list.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-2-minimum-height-trees-hard">
+<h1><span class="section-number">16.7. </span>Problem Challenge 2 - Minimum Height Trees (hard)<a class="headerlink" href="#problem-challenge-2-minimum-height-trees-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 2</span>
+<span class="sd">Minimum Height Trees (hard)</span>
+<span class="sd">We are given an undirected graph that has characteristics of a k-ary tree. In such a graph, we can choose any node as the root to make a k-ary tree. The root (or the tree) with the minimum height will be called Minimum Height Tree (MHT). There can be multiple MHTs for a graph. In this problem, we need to find all those roots which give us MHTs. Write a method to find all MHTs of the given graph and return a list of their roots.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: vertices: 5, Edges: [[0, 1], [1, 2], [1, 3], [2, 4]]</span>
+<span class="sd">Output:[1, 2]</span>
+<span class="sd">Explanation: Choosing &#39;1&#39; or &#39;2&#39; as roots give us MHTs. In the below diagram, we can see that the</span>
+<span class="sd">height of the trees with roots &#39;1&#39; or &#39;2&#39; is three which is minimum.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">find_trees</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nodes</span><span class="p">)}</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nodes</span><span class="p">)}</span>
+
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="n">leaves</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">leaves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="n">totalSize</span> <span class="o">=</span> <span class="n">nodes</span>
+    <span class="k">while</span> <span class="n">totalSize</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">leafSize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaves</span><span class="p">)</span>
+        <span class="n">totalSize</span> <span class="o">-=</span> <span class="n">leafSize</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">leafSize</span><span class="p">):</span>
+            <span class="n">vertex</span> <span class="o">=</span> <span class="n">leaves</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
+                <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">leaves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">leaves</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roots of MHTs: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_trees</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roots of MHTs: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_trees</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roots of MHTs: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_trees</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">find_trees</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">nodes</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="c1"># with only one node, since its in-degrees will be 0, therefore, we need to handle it separately</span>
+    <span class="k">if</span> <span class="n">nodes</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># a. Initialize the graph</span>
+    <span class="n">inDegree</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nodes</span><span class="p">)}</span>  <span class="c1"># count of incoming edges</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nodes</span><span class="p">)}</span>  <span class="c1"># adjacency list graph</span>
+
+    <span class="c1"># b. Build the graph</span>
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+        <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># since this is an undirected graph, therefore, add a link for both the nodes</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">n1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">n2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+        <span class="c1"># increment the in-degrees of both the nodes</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">n1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">inDegree</span><span class="p">[</span><span class="n">n2</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># c. Find all leaves i.e., all nodes with 0 in-degrees</span>
+    <span class="n">leaves</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inDegree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">leaves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># d. Remove leaves level by level and subtract each leave&#39;s children&#39;s in-degrees.</span>
+    <span class="c1"># Repeat this until we are left with 1 or 2 nodes, which will be our answer.</span>
+    <span class="c1"># Any node that has already been a leaf cannot be the root of a minimum height tree, because</span>
+    <span class="c1"># its adjacent non-leaf node will always be a better candidate.</span>
+    <span class="n">totalNodes</span> <span class="o">=</span> <span class="n">nodes</span>
+    <span class="k">while</span> <span class="n">totalNodes</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">leavesSize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaves</span><span class="p">)</span>
+        <span class="n">totalNodes</span> <span class="o">-=</span> <span class="n">leavesSize</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">leavesSize</span><span class="p">):</span>
+            <span class="n">vertex</span> <span class="o">=</span> <span class="n">leaves</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="c1"># get the node&#39;s children to decrement their in-degrees</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
+                <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">inDegree</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">leaves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">leaves</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roots of MHTs: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_trees</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roots of MHTs: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_trees</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Roots of MHTs: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_trees</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">In step ‘d’, each node can become a source only once and each edge will be accessed and removed once.</span>
+<span class="sd">Therefore, the time complexity of the above algorithm will be O(V+E),</span>
+<span class="sd">where ‘V’ is the total nodes and ‘E’ is the total number of the edges.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(V+E), since we are storing all of the edges for each node in an adjacency list.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 
 
@@ -205,7 +1263,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../leetcode_tags/index.html" class="btn btn-neutral float-right" title="LeetCode Tags" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../miscellaneous.html" class="btn btn-neutral float-right" title="17. Miscellaneous" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../topological_sort_graph.html" class="btn btn-neutral float-left" title="16. Topological Sort (Graph)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
