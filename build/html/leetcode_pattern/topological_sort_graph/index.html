@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>15.1. Topological Sort (medium) &mdash; Algorithm Spices  documentation</title>
+  <title>16.1. Topological Sort (medium) &mdash; Algorithm Spices  documentation</title>
   
 
   
@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="LeetCode Tags" href="../../leetcode_tags/index.html" />
-    <link rel="prev" title="15. Topological Sort (Graph)" href="../topological_sort_graph.html" /> 
+    <link rel="prev" title="16. Topological Sort (Graph)" href="../topological_sort_graph.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,7 +85,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface.html">Learning Data</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">LeetCode Pattern</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding Window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../two_points.html">2. Two Points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../merge_intervals.html">4. Merge Intervals</a></li>
@@ -96,15 +96,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../two_heaps.html">9. Two Heaps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../subsets.html">10. Subsets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../modified_binary_search.html">11. Modified Binary Search</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../top_k_elements.html">12. Top ‘K’ Elements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">13. K-way merge</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">14. 0/1 Knapsack (Dynamic Programming)</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../topological_sort_graph.html">15. Topological Sort (Graph)</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">15.1. Topological Sort (medium)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tasks-scheduling-medium">15.2. Tasks Scheduling (medium)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tasks-scheduling-order-medium">15.3. Tasks Scheduling Order (medium)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#all-tasks-scheduling-orders-hard">15.4. All Tasks Scheduling Orders (hard)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#alien-dictionary-hard">15.5. Alien Dictionary (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bitwise_xor.html">12. Bitwise XOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../top_k_elements.html">13. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">14. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../topological_sort_graph.html">16. Topological Sort (Graph)</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">16.1. Topological Sort (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tasks-scheduling-medium">16.2. Tasks Scheduling (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tasks-scheduling-order-medium">16.3. Tasks Scheduling Order (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#all-tasks-scheduling-orders-hard">16.4. All Tasks Scheduling Orders (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alien-dictionary-hard">16.5. Alien Dictionary (hard)</a></li>
 </ul>
 </li>
 </ul>
@@ -159,9 +160,9 @@
         
           <li><a href="../index.html">LeetCode Pattern</a> &raquo;</li>
         
-          <li><a href="../topological_sort_graph.html"><span class="section-number">15. </span>Topological Sort (Graph)</a> &raquo;</li>
+          <li><a href="../topological_sort_graph.html"><span class="section-number">16. </span>Topological Sort (Graph)</a> &raquo;</li>
         
-      <li><span class="section-number">15.1. </span>Topological Sort (medium)</li>
+      <li><span class="section-number">16.1. </span>Topological Sort (medium)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -181,19 +182,19 @@
            <div itemprop="articleBody">
             
   <div class="section" id="topological-sort-medium">
-<h1><span class="section-number">15.1. </span>Topological Sort (medium)<a class="headerlink" href="#topological-sort-medium" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">16.1. </span>Topological Sort (medium)<a class="headerlink" href="#topological-sort-medium" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="tasks-scheduling-medium">
-<h1><span class="section-number">15.2. </span>Tasks Scheduling (medium)<a class="headerlink" href="#tasks-scheduling-medium" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">16.2. </span>Tasks Scheduling (medium)<a class="headerlink" href="#tasks-scheduling-medium" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="tasks-scheduling-order-medium">
-<h1><span class="section-number">15.3. </span>Tasks Scheduling Order (medium)<a class="headerlink" href="#tasks-scheduling-order-medium" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">16.3. </span>Tasks Scheduling Order (medium)<a class="headerlink" href="#tasks-scheduling-order-medium" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="all-tasks-scheduling-orders-hard">
-<h1><span class="section-number">15.4. </span>All Tasks Scheduling Orders (hard)<a class="headerlink" href="#all-tasks-scheduling-orders-hard" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">16.4. </span>All Tasks Scheduling Orders (hard)<a class="headerlink" href="#all-tasks-scheduling-orders-hard" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="alien-dictionary-hard">
-<h1><span class="section-number">15.5. </span>Alien Dictionary (hard)<a class="headerlink" href="#alien-dictionary-hard" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">16.5. </span>Alien Dictionary (hard)<a class="headerlink" href="#alien-dictionary-hard" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -207,7 +208,7 @@
         <a href="../../leetcode_tags/index.html" class="btn btn-neutral float-right" title="LeetCode Tags" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../topological_sort_graph.html" class="btn btn-neutral float-left" title="15. Topological Sort (Graph)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../topological_sort_graph.html" class="btn btn-neutral float-left" title="16. Topological Sort (Graph)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

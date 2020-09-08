@@ -85,7 +85,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface.html">Learning Data</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">LeetCode Pattern</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding Window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../two_points.html">2. Two Points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../merge_intervals.html">4. Merge Intervals</a></li>
@@ -97,14 +97,16 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">9.1. Find the Median of a Number Stream (medium)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sliding-window-median-hard">9.2. Sliding Window Median (hard)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#maximize-capital-hard">9.3. Maximize Capital (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-1-next-interval-hard">9.4. Problem Challenge 1 - Next Interval (hard)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../subsets.html">10. Subsets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../modified_binary_search.html">11. Modified Binary Search</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../top_k_elements.html">12. Top ‘K’ Elements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">13. K-way merge</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">14. 0/1 Knapsack (Dynamic Programming)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topological_sort_graph.html">15. Topological Sort (Graph)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bitwise_xor.html">12. Bitwise XOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../top_k_elements.html">13. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">14. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topological_sort_graph.html">16. Topological Sort (Graph)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../leetcode_tags/index.html">LeetCode Tags</a></li>
@@ -180,12 +182,541 @@
             
   <div class="section" id="find-the-median-of-a-number-stream-medium">
 <h1><span class="section-number">9.1. </span>Find the Median of a Number Stream (medium)<a class="headerlink" href="#find-the-median-of-a-number-stream-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Design a class to calculate the median of a number stream. The class should have the following two methods:</span>
+<span class="sd">insertNum(int num): stores the number in the class</span>
+<span class="sd">findMedian(): returns the median of all numbers inserted in the class</span>
+<span class="sd">If the count of numbers inserted in the class is even, the median will be the average of the middle two numbers.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">1. insertNum(3)</span>
+<span class="sd">2. insertNum(1)</span>
+<span class="sd">3. findMedian() -&gt; output: 2</span>
+<span class="sd">4. insertNum(5)</span>
+<span class="sd">5. findMedian() -&gt; output: 3</span>
+<span class="sd">6. insertNum(4)</span>
+<span class="sd">7. findMedian() -&gt; output: 3.5</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">MedianOfAStream</span><span class="p">:</span>
+
+    <span class="n">minHeap</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">maxHeap</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">insert_num</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+        <span class="c1"># TODO: Write your code here</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span> <span class="ow">or</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">num</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">heappop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">):</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">heappop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">find_median</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO: Write your code here</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">medianOfAStream</span> <span class="o">=</span> <span class="n">MedianOfAStream</span><span class="p">()</span>
+    <span class="n">medianOfAStream</span><span class="o">.</span><span class="n">insert_num</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">medianOfAStream</span><span class="o">.</span><span class="n">insert_num</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The median is: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">medianOfAStream</span><span class="o">.</span><span class="n">find_median</span><span class="p">()))</span>
+    <span class="n">medianOfAStream</span><span class="o">.</span><span class="n">insert_num</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The median is: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">medianOfAStream</span><span class="o">.</span><span class="n">find_median</span><span class="p">()))</span>
+    <span class="n">medianOfAStream</span><span class="o">.</span><span class="n">insert_num</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The median is: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">medianOfAStream</span><span class="o">.</span><span class="n">find_median</span><span class="p">()))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">MedianOfAStream</span><span class="p">:</span>
+
+    <span class="n">maxHeap</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># containing first half of numbers</span>
+    <span class="n">minHeap</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># containing second half of numbers</span>
+
+    <span class="k">def</span> <span class="nf">insert_num</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span> <span class="ow">or</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">num</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">num</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+
+        <span class="c1"># either both the heaps will have equal number of elements or max-heap will have one</span>
+        <span class="c1"># more element than the min-heap</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">heappop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">):</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">heappop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">find_median</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">):</span>
+            <span class="c1"># we have even number of elements, take the average of middle two elements</span>
+            <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+        <span class="c1"># because max-heap will have one more element than the min-heap</span>
+        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1.0</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">medianOfAStream</span> <span class="o">=</span> <span class="n">MedianOfAStream</span><span class="p">()</span>
+    <span class="n">medianOfAStream</span><span class="o">.</span><span class="n">insert_num</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">medianOfAStream</span><span class="o">.</span><span class="n">insert_num</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The median is: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">medianOfAStream</span><span class="o">.</span><span class="n">find_median</span><span class="p">()))</span>
+    <span class="n">medianOfAStream</span><span class="o">.</span><span class="n">insert_num</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The median is: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">medianOfAStream</span><span class="o">.</span><span class="n">find_median</span><span class="p">()))</span>
+    <span class="n">medianOfAStream</span><span class="o">.</span><span class="n">insert_num</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The median is: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">medianOfAStream</span><span class="o">.</span><span class="n">find_median</span><span class="p">()))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the insertNum() will be O(logN) due to the insertion in the heap.</span>
+<span class="sd">The time complexity of the findMedian() will be O(1) as we can find the median from the top elements of the heaps.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(N) because, as at any time, we will be storing all the numbers.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="sliding-window-median-hard">
 <h1><span class="section-number">9.2. </span>Sliding Window Median (hard)<a class="headerlink" href="#sliding-window-median-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array of numbers and a number ‘k’, find the median of all the ‘k’ sized sub-arrays (or windows) of the array.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: nums=[1, 2, -1, 3, 5], k = 2</span>
+<span class="sd">Output: [1.5, 0.5, 1.0, 4.0]</span>
+<span class="sd">Explanation: Lets consider all windows of size ‘2’:</span>
+<span class="sd">[1, 2, -1, 3, 5] -&gt; median is 1.5</span>
+<span class="sd">[1, 2, -1, 3, 5] -&gt; median is 0.5</span>
+<span class="sd">[1, 2, -1, 3, 5] -&gt; median is 1.0</span>
+<span class="sd">[1, 2, -1, 3, 5] -&gt; median is 4.0</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: nums=[1, 2, -1, 3, 5], k = 3</span>
+<span class="sd">Output: [1.0, 2.0, 3.0]</span>
+<span class="sd">Explanation: Lets consider all windows of size ‘3’:</span>
+<span class="sd">[1, 2, -1, 3, 5] -&gt; median is 1.0</span>
+<span class="sd">[1, 2, -1, 3, 5] -&gt; median is 2.0</span>
+<span class="sd">[1, 2, -1, 3, 5] -&gt; median is 3.0</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">SlidingWindowMedian</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">find_sliding_window_median</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">rebalance</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="n">maxHeap</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">maxHeap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">heappop</span><span class="p">(</span><span class="n">maxHeap</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">maxHeap</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">minHeap</span><span class="p">):</span>
+                <span class="n">heappush</span><span class="p">(</span><span class="n">maxHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">heappop</span><span class="p">(</span><span class="n">minHeap</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">heap</span><span class="p">):</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">heap</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">elif</span> <span class="n">index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">heap</span> <span class="o">=</span> <span class="n">heap</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">heap</span> <span class="o">=</span> <span class="n">heap</span><span class="p">[:</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">heap</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+            <span class="k">return</span> <span class="n">heap</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># TODO: Write your code here</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">minHeap</span><span class="p">,</span> <span class="n">maxHeap</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">maxHeap</span> <span class="ow">or</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">heappush</span><span class="p">(</span><span class="n">maxHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+            <span class="n">rebalance</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="n">maxHeap</span><span class="p">)</span>
+
+            <span class="c1"># print(minHeap, maxHeap)</span>
+
+            <span class="k">if</span> <span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">maxHeap</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">minHeap</span><span class="p">):</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">minHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="n">removeElement</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">removeElement</span> <span class="o">&gt;=</span> <span class="n">minHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">minHeap</span> <span class="o">=</span> <span class="n">remove</span><span class="p">(</span><span class="n">removeElement</span><span class="p">,</span> <span class="n">minHeap</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">maxHeap</span> <span class="o">=</span> <span class="n">remove</span><span class="p">(</span><span class="o">-</span><span class="n">removeElement</span><span class="p">,</span> <span class="n">maxHeap</span><span class="p">)</span>
+
+            <span class="n">rebalance</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="n">maxHeap</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="n">slidingWindowMedian</span> <span class="o">=</span> <span class="n">SlidingWindowMedian</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">slidingWindowMedian</span><span class="o">.</span><span class="n">find_sliding_window_median</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                                                            <span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sliding window medians are: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+    <span class="n">slidingWindowMedian</span> <span class="o">=</span> <span class="n">SlidingWindowMedian</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">slidingWindowMedian</span><span class="o">.</span><span class="n">find_sliding_window_median</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                                                            <span class="mi">3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sliding window medians are: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">heapq</span>
+
+
+<span class="k">class</span> <span class="nc">SlidingWindowMedian</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">find_sliding_window_median</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span> <span class="ow">or</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">,</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">rebalance_heaps</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># if we have at least &#39;k&#39; elements in the sliding window</span>
+                <span class="c1"># add the median to the the result array</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">):</span>
+                    <span class="c1"># we have even number of elements, take the average of middle two elements</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> \
+                                        <span class="mf">2.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span>
+                <span class="k">else</span><span class="p">:</span>  <span class="c1"># because max-heap will have one more element than the min-heap</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1.0</span>
+
+                <span class="c1"># remove the the element going out of the sliding window</span>
+                <span class="n">elementToBeRemoved</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">elementToBeRemoved</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">elementToBeRemoved</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">,</span> <span class="n">elementToBeRemoved</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">rebalance_heaps</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="c1"># removes an element from the heap keeping the heap property</span>
+    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">heap</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">heap</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>  <span class="c1"># find the element</span>
+        <span class="c1"># move the element to the end and delete it</span>
+        <span class="n">heap</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">heap</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">heap</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># we can use heapify to readjust the elements but that would be O(N),</span>
+        <span class="c1"># instead, we will adjust only one element which will O(logN)</span>
+        <span class="k">if</span> <span class="n">ind</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">):</span>
+            <span class="n">heapq</span><span class="o">.</span><span class="n">_siftup</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
+            <span class="n">heapq</span><span class="o">.</span><span class="n">_siftdown</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">rebalance_heaps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># either both the heaps will have equal number of elements or max-heap will have</span>
+        <span class="c1"># one more element than the min-heap</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">heappop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">):</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">heappop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minHeap</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="n">slidingWindowMedian</span> <span class="o">=</span> <span class="n">SlidingWindowMedian</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">slidingWindowMedian</span><span class="o">.</span><span class="n">find_sliding_window_median</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                                                            <span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sliding window medians are: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+    <span class="n">slidingWindowMedian</span> <span class="o">=</span> <span class="n">SlidingWindowMedian</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">slidingWindowMedian</span><span class="o">.</span><span class="n">find_sliding_window_median</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                                                            <span class="mi">3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sliding window medians are: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of our algorithm is O(N*K) where ‘N’ is the total number of elements in the input array and ‘K’ is the size of the sliding window.</span>
+<span class="sd">This is due to the fact that we are going through all the ‘N’ numbers and, while doing so, we are doing two things:</span>
+<span class="sd">1. Inserting/removing numbers from heaps of size ‘K’. This will take O(logK)</span>
+<span class="sd">2. Removing the element going out of the sliding window. This will take O(K) as we will be searching this element in an array of size ‘K’ (i.e., a heap).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">Ignoring the space needed for the output array, the space complexity will be O(K) because, at any time, we will be storing all the numbers within the sliding window.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="maximize-capital-hard">
 <h1><span class="section-number">9.3. </span>Maximize Capital (hard)<a class="headerlink" href="#maximize-capital-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given a set of investment projects with their respective profits, we need to find the most profitable projects. We are given an initial capital and are allowed to invest only in a fixed number of projects. Our goal is to choose projects that give us the maximum profit.</span>
+<span class="sd">We can start an investment project only when we have the required capital. Once a project is selected, we can assume that its profit has become our capital.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: Project Capitals=[0,1,2], Project Profits=[1,2,3], Initial Capital=1, Number of Projects=2</span>
+<span class="sd">Output: 6</span>
+<span class="sd">Explanation:</span>
+<span class="sd">With initial capital of ‘1’, we will start the second project which will give us profit of ‘2’. Once we selected our first project, our total capital will become 3 (profit + initial capital).</span>
+<span class="sd">With ‘3’ capital, we will select the third project, which will give us ‘3’ profit.</span>
+<span class="sd">After the completion of the two projects, our total capital will be 6 (1+2+3).</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: Project Capitals=[0,1,2,3], Project Profits=[1,2,3,5], Initial Capital=0, Number of Projects=3</span>
+<span class="sd">Output: 8</span>
+<span class="sd">Explanation:</span>
+<span class="sd">With ‘0’ capital, we can only select the first project, bringing out capital to 1.</span>
+<span class="sd">Next, we will select the second project, which will bring our capital to 3.</span>
+<span class="sd">Next, we will select the fourth project, giving us a profit of 5.</span>
+<span class="sd">After selecting the three projects, our total capital will be 8 (1+2+5).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">find_maximum_capital</span><span class="p">(</span><span class="n">capital</span><span class="p">,</span> <span class="n">profits</span><span class="p">,</span> <span class="n">numberOfProjects</span><span class="p">,</span> <span class="n">initialCapital</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">capitalList</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">profitList</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">capital</span><span class="p">)):</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">capitalList</span><span class="p">,</span> <span class="p">(</span><span class="n">capital</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">))</span>
+
+    <span class="n">availableCapital</span> <span class="o">=</span> <span class="n">initialCapital</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numberOfProjects</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">capitalList</span> <span class="ow">and</span> <span class="n">capitalList</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">availableCapital</span><span class="p">:</span>
+            <span class="n">capital</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">capitalList</span><span class="p">)</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">profitList</span><span class="p">,</span> <span class="o">-</span><span class="n">profits</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">profitList</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">availableCapital</span> <span class="o">-=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">profitList</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">availableCapital</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum capital: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_maximum_capital</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum capital: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_maximum_capital</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">find_maximum_capital</span><span class="p">(</span><span class="n">capital</span><span class="p">,</span> <span class="n">profits</span><span class="p">,</span> <span class="n">numberOfProjects</span><span class="p">,</span> <span class="n">initialCapital</span><span class="p">):</span>
+    <span class="n">minCapitalHeap</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">maxProfitHeap</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># insert all project capitals to a min-heap</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">profits</span><span class="p">)):</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">minCapitalHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">capital</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">))</span>
+
+    <span class="c1"># let&#39;s try to find a total of &#39;numberOfProjects&#39; best projects</span>
+    <span class="n">availableCapital</span> <span class="o">=</span> <span class="n">initialCapital</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numberOfProjects</span><span class="p">):</span>
+        <span class="c1"># find all projects that can be selected within the available capital and insert them in a max-heap</span>
+        <span class="k">while</span> <span class="n">minCapitalHeap</span> <span class="ow">and</span> <span class="n">minCapitalHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">availableCapital</span><span class="p">:</span>
+            <span class="n">capital</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">minCapitalHeap</span><span class="p">)</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">maxProfitHeap</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">profits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">))</span>
+
+        <span class="c1"># terminate if we are not able to find any project that can be completed within the available capital</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">maxProfitHeap</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1"># select the project with the maximum profit</span>
+        <span class="n">availableCapital</span> <span class="o">+=</span> <span class="o">-</span><span class="n">heappop</span><span class="p">(</span><span class="n">maxProfitHeap</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">availableCapital</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum capital: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_maximum_capital</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum capital: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_maximum_capital</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Since, at the most, all the projects will be pushed to both the heaps once,</span>
+<span class="sd">the time complexity of our algorithm is O(NlogN + KlogN),</span>
+<span class="sd">where ‘N’ is the total number of projects and ‘K’ is the number of projects we are selecting.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(N) because we will be storing all the projects in the heaps.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-1-next-interval-hard">
+<h1><span class="section-number">9.4. </span>Problem Challenge 1 - Next Interval (hard)<a class="headerlink" href="#problem-challenge-1-next-interval-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 1</span>
+<span class="sd">Next Interval (hard)</span>
+<span class="sd">Given an array of intervals, find the next interval of each interval. In a list of intervals,</span>
+<span class="sd">for an interval ‘i’ its next interval ‘j’ will have the smallest ‘start’ greater than or equal to the ‘end’ of ‘i’.</span>
+<span class="sd">Write a function to return an array containing indices of the next interval of each input interval.</span>
+<span class="sd">If there is no next interval of a given interval, return -1.</span>
+<span class="sd">It is given that none of the intervals have the same start point.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: Intervals [[2,3], [3,4], [5,6]]</span>
+<span class="sd">Output: [1, 2, -1]</span>
+<span class="sd">Explanation: The next interval of [2,3] is [3,4] having index ‘1’. Similarly, the next interval of [3,4] is [5,6] having index ‘2’. There is no next interval for [5,6] hence we have ‘-1’.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: Intervals [[3,4], [1,5], [4,6]]</span>
+<span class="sd">Output: [2, -1, -1]</span>
+<span class="sd">Explanation: The next interval of [3,4] is [4,6] which has index ‘2’. There is no next interval for [1,5] and [4,6].</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">Interval</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+
+
+<span class="k">def</span> <span class="nf">find_next_interval</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
+    <span class="n">startList</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">endList</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)):</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">startList</span><span class="p">,</span> <span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">endList</span><span class="p">,</span> <span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+
+    <span class="k">while</span> <span class="n">endList</span><span class="p">:</span>
+        <span class="n">endValue</span><span class="p">,</span> <span class="n">endIndex</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">endList</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">startList</span> <span class="ow">and</span> <span class="n">startList</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">endValue</span><span class="p">:</span>
+            <span class="n">heappop</span><span class="p">(</span><span class="n">startList</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">startList</span><span class="p">:</span>
+            <span class="n">startValue</span><span class="p">,</span> <span class="n">startIndex</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">startList</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">endIndex</span><span class="p">]</span> <span class="o">=</span> <span class="n">startIndex</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">startList</span><span class="p">,</span> <span class="p">(</span><span class="n">startValue</span><span class="p">,</span> <span class="n">startIndex</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">find_next_interval</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+         <span class="n">Interval</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Next interval indices are: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">find_next_interval</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+         <span class="n">Interval</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Next interval indices are: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">Interval</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+
+
+<span class="k">def</span> <span class="nf">find_next_interval</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span>
+
+    <span class="c1"># heaps for finding the maximum start and end</span>
+    <span class="n">maxStartHeap</span><span class="p">,</span> <span class="n">maxEndHeap</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">endIndex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">maxStartHeap</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">intervals</span><span class="p">[</span><span class="n">endIndex</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">endIndex</span><span class="p">))</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">maxEndHeap</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">intervals</span><span class="p">[</span><span class="n">endIndex</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">endIndex</span><span class="p">))</span>
+
+    <span class="c1"># go through all the intervals to find each interval&#39;s next interval</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="c1"># let&#39;s find the next interval of the interval which has the highest &#39;end&#39;</span>
+        <span class="n">topEnd</span><span class="p">,</span> <span class="n">endIndex</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">maxEndHeap</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">endIndex</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># defaults to - 1</span>
+        <span class="k">if</span> <span class="o">-</span><span class="n">maxStartHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">topEnd</span><span class="p">:</span>
+            <span class="n">topStart</span><span class="p">,</span> <span class="n">startIndex</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">maxStartHeap</span><span class="p">)</span>
+            <span class="c1"># find the the interval that has the closest &#39;start&#39;</span>
+            <span class="k">while</span> <span class="n">maxStartHeap</span> <span class="ow">and</span> <span class="o">-</span><span class="n">maxStartHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">topEnd</span><span class="p">:</span>
+                <span class="n">topStart</span><span class="p">,</span> <span class="n">startIndex</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">maxStartHeap</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">endIndex</span><span class="p">]</span> <span class="o">=</span> <span class="n">startIndex</span>
+            <span class="c1"># put the interval back as it could be the next interval of other intervals</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">maxStartHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">topStart</span><span class="p">,</span> <span class="n">startIndex</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">find_next_interval</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+         <span class="n">Interval</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Next interval indices are: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">find_next_interval</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+         <span class="n">Interval</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Next interval indices are: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of our algorithm will be O(NlogN), where ‘N’ is the total number of intervals.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(N) because we will be storing all the intervals in the heaps.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 
 

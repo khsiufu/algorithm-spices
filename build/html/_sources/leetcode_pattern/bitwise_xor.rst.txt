@@ -1,5 +1,5 @@
 ===================================
-Sliding Window
+Bitwise XOR
 ===================================
 
 Contents:
@@ -8,4 +8,4 @@ Contents:
    :maxdepth: 1
    :glob:
 
-   sliding_window/index
+   bitwise_xor/index

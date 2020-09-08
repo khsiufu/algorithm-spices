@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>12.1. Top ‘K’ Numbers (easy) &mdash; Algorithm Spices  documentation</title>
+  <title>13.1. Top ‘K’ Numbers (easy) &mdash; Algorithm Spices  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="13. K-way merge" href="../k-way_merge.html" />
-    <link rel="prev" title="12. Top ‘K’ Elements" href="../top_k_elements.html" /> 
+    <link rel="next" title="14. K-way merge" href="../k-way_merge.html" />
+    <link rel="prev" title="13. Top ‘K’ Elements" href="../top_k_elements.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,7 +85,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface.html">Learning Data</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">LeetCode Pattern</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding Window</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../two_points.html">2. Two Points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../merge_intervals.html">4. Merge Intervals</a></li>
@@ -96,23 +96,24 @@
 <li class="toctree-l2"><a class="reference internal" href="../two_heaps.html">9. Two Heaps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../subsets.html">10. Subsets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../modified_binary_search.html">11. Modified Binary Search</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../top_k_elements.html">12. Top ‘K’ Elements</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">12.1. Top ‘K’ Numbers (easy)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#kth-smallest-number-easy">12.2. Kth Smallest Number (easy)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#k-closest-points-to-the-origin-easy">12.3. ‘K’ Closest Points to the Origin (easy)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#connect-ropes-easy">12.4. Connect Ropes (easy)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#top-k-frequent-numbers-medium">12.5. Top ‘K’ Frequent Numbers (medium)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#frequency-sort-medium">12.6. Frequency Sort (medium)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#kth-largest-number-in-a-stream-medium">12.7. Kth Largest Number in a Stream (medium)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#k-closest-numbers-medium">12.8. ‘K’ Closest Numbers (medium)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#maximum-distinct-elements-medium">12.9. Maximum Distinct Elements (medium)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sum-of-elements-medium">12.10. Sum of Elements (medium)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rearrange-string-hard">12.11. Rearrange String (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bitwise_xor.html">12. Bitwise XOR</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../top_k_elements.html">13. Top ‘K’ Elements</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">13.1. Top ‘K’ Numbers (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kth-smallest-number-easy">13.2. Kth Smallest Number (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#k-closest-points-to-the-origin-easy">13.3. ‘K’ Closest Points to the Origin (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connect-ropes-easy">13.4. Connect Ropes (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#top-k-frequent-numbers-medium">13.5. Top ‘K’ Frequent Numbers (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frequency-sort-medium">13.6. Frequency Sort (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kth-largest-number-in-a-stream-medium">13.7. Kth Largest Number in a Stream (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#k-closest-numbers-medium">13.8. ‘K’ Closest Numbers (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maximum-distinct-elements-medium">13.9. Maximum Distinct Elements (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sum-of-elements-medium">13.10. Sum of Elements (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rearrange-string-hard">13.11. Rearrange String (hard)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">13. K-way merge</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">14. 0/1 Knapsack (Dynamic Programming)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topological_sort_graph.html">15. Topological Sort (Graph)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">14. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topological_sort_graph.html">16. Topological Sort (Graph)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../leetcode_tags/index.html">LeetCode Tags</a></li>
@@ -165,9 +166,9 @@
         
           <li><a href="../index.html">LeetCode Pattern</a> &raquo;</li>
         
-          <li><a href="../top_k_elements.html"><span class="section-number">12. </span>Top ‘K’ Elements</a> &raquo;</li>
+          <li><a href="../top_k_elements.html"><span class="section-number">13. </span>Top ‘K’ Elements</a> &raquo;</li>
         
-      <li><span class="section-number">12.1. </span>Top ‘K’ Numbers (easy)</li>
+      <li><span class="section-number">13.1. </span>Top ‘K’ Numbers (easy)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -187,37 +188,37 @@
            <div itemprop="articleBody">
             
   <div class="section" id="top-k-numbers-easy">
-<h1><span class="section-number">12.1. </span>Top ‘K’ Numbers (easy)<a class="headerlink" href="#top-k-numbers-easy" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">13.1. </span>Top ‘K’ Numbers (easy)<a class="headerlink" href="#top-k-numbers-easy" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="kth-smallest-number-easy">
-<h1><span class="section-number">12.2. </span>Kth Smallest Number (easy)<a class="headerlink" href="#kth-smallest-number-easy" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">13.2. </span>Kth Smallest Number (easy)<a class="headerlink" href="#kth-smallest-number-easy" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="k-closest-points-to-the-origin-easy">
-<h1><span class="section-number">12.3. </span>‘K’ Closest Points to the Origin (easy)<a class="headerlink" href="#k-closest-points-to-the-origin-easy" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">13.3. </span>‘K’ Closest Points to the Origin (easy)<a class="headerlink" href="#k-closest-points-to-the-origin-easy" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="connect-ropes-easy">
-<h1><span class="section-number">12.4. </span>Connect Ropes (easy)<a class="headerlink" href="#connect-ropes-easy" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">13.4. </span>Connect Ropes (easy)<a class="headerlink" href="#connect-ropes-easy" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="top-k-frequent-numbers-medium">
-<h1><span class="section-number">12.5. </span>Top ‘K’ Frequent Numbers (medium)<a class="headerlink" href="#top-k-frequent-numbers-medium" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">13.5. </span>Top ‘K’ Frequent Numbers (medium)<a class="headerlink" href="#top-k-frequent-numbers-medium" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="frequency-sort-medium">
-<h1><span class="section-number">12.6. </span>Frequency Sort (medium)<a class="headerlink" href="#frequency-sort-medium" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">13.6. </span>Frequency Sort (medium)<a class="headerlink" href="#frequency-sort-medium" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="kth-largest-number-in-a-stream-medium">
-<h1><span class="section-number">12.7. </span>Kth Largest Number in a Stream (medium)<a class="headerlink" href="#kth-largest-number-in-a-stream-medium" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">13.7. </span>Kth Largest Number in a Stream (medium)<a class="headerlink" href="#kth-largest-number-in-a-stream-medium" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="k-closest-numbers-medium">
-<h1><span class="section-number">12.8. </span>‘K’ Closest Numbers (medium)<a class="headerlink" href="#k-closest-numbers-medium" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">13.8. </span>‘K’ Closest Numbers (medium)<a class="headerlink" href="#k-closest-numbers-medium" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="maximum-distinct-elements-medium">
-<h1><span class="section-number">12.9. </span>Maximum Distinct Elements (medium)<a class="headerlink" href="#maximum-distinct-elements-medium" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">13.9. </span>Maximum Distinct Elements (medium)<a class="headerlink" href="#maximum-distinct-elements-medium" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="sum-of-elements-medium">
-<h1><span class="section-number">12.10. </span>Sum of Elements (medium)<a class="headerlink" href="#sum-of-elements-medium" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">13.10. </span>Sum of Elements (medium)<a class="headerlink" href="#sum-of-elements-medium" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="section" id="rearrange-string-hard">
-<h1><span class="section-number">12.11. </span>Rearrange String (hard)<a class="headerlink" href="#rearrange-string-hard" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">13.11. </span>Rearrange String (hard)<a class="headerlink" href="#rearrange-string-hard" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -228,10 +229,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../k-way_merge.html" class="btn btn-neutral float-right" title="13. K-way merge" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../k-way_merge.html" class="btn btn-neutral float-right" title="14. K-way merge" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../top_k_elements.html" class="btn btn-neutral float-left" title="12. Top ‘K’ Elements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../top_k_elements.html" class="btn btn-neutral float-left" title="13. Top ‘K’ Elements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
