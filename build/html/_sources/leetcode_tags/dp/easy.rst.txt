@@ -64,6 +64,26 @@ Easy
 .. _121. Best Time to Buy and Sell Stock: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 
 
+122. Best Time to Buy and Sell Stock II
+------------------------------------------------------------
+
+`122. Best Time to Buy and Sell Stock II`_
+
+.. code:: python
+
+   class Solution:
+       def maxProfit(self, prices: List[int]) -> int:
+           if len(prices) <= 1:
+               return 0
+           res = 0
+           for i in range(1, len(prices)):
+               if prices[i] > prices[i - 1]:
+                   res += prices[i] - prices[i - 1]
+           return res
+
+.. _122. Best Time to Buy and Sell Stock II: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
+
+
 198. House Robber
 ------------------------------------------------------------
 

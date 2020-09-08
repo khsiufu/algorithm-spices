@@ -7,5 +7,6 @@ Algorithm Spices
    :glob:
 
    preface
+   leetcode_pattern/index
    leetcode_tags/index
    leetcode_template/index

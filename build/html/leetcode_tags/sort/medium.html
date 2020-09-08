@@ -83,7 +83,8 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Learning Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Learning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_pattern/index.html">LeetCode Pattern</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">LeetCode Tags</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../advanced.html">1. Advanced</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../array.html">2. Array</a></li>
@@ -98,6 +99,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">9.2. Medium</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#merge-intervals">56. Merge Intervals</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#largest-number">179. Largest Number</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#contains-duplicate-iii">220. Contains Duplicate III</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="hard.html">9.3. Hard</a></li>
@@ -229,6 +231,29 @@
 
     <span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">str</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="contains-duplicate-iii">
+<h2>220. Contains Duplicate III<a class="headerlink" href="#contains-duplicate-iii" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://leetcode.com/problems/contains-duplicate-iii/">220. Contains Duplicate III</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">containsNearbyAlmostDuplicate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">bucket</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="n">nth</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">//</span> <span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">nth</span> <span class="ow">in</span> <span class="n">bucket</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">nth</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">bucket</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">bucket</span><span class="p">[</span><span class="n">nth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">t</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">nth</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">bucket</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">bucket</span><span class="p">[</span><span class="n">nth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">t</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="n">bucket</span><span class="p">[</span><span class="n">nth</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">:</span>
+                <span class="n">bucket</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span> <span class="o">//</span> <span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 </div>
 </div>

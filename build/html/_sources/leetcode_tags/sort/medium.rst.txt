@@ -64,3 +64,31 @@ Medium
            return str(n1) + str(n2) > str(n2) + str(n1)
 
 .. _179. Largest Number: https://leetcode.com/problems/largest-number/
+
+
+220. Contains Duplicate III
+------------------------------------------------------------
+
+`220. Contains Duplicate III`_
+
+.. code:: python
+
+   class Solution:
+       def containsNearbyAlmostDuplicate(self, nums: List[int], k: int, t: int) -> bool:
+           if t < 0:
+               return False
+           bucket = dict()
+           for i in range(len(nums)):
+               nth = nums[i] // (t + 1)
+               if nth in bucket:
+                   return True
+               if nth - 1 in bucket and abs(nums[i] - bucket[nth - 1]) <= t:
+                   return True
+               if nth + 1 in bucket and abs(nums[i] - bucket[nth + 1]) <= t:
+                   return True
+               bucket[nth] = nums[i]
+               if i >= k:
+                   bucket.pop(nums[i - k] // (t + 1))
+           return False
+
+.. _220. Contains Duplicate III: https://leetcode.com/problems/contains-duplicate-iii/

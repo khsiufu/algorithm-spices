@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LeetCode Pattern &mdash; Algorithm Spices  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Sliding window" href="sliding_window.html" />
+    <link rel="prev" title="Learning Data" href="../preface.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Algorithm Spices
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../preface.html">Learning Data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">LeetCode Pattern</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window.html">1. Sliding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points.html">2. Two Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge_intervals.html">4. Merge Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_sort.html">5. Cyclic Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="in-place_reversal_of_a_linkedlist.html">6. In-place Reversal of a LinkedList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_breadth_first_search.html">7. Tree Breadth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_depth_first_search.html">8. Tree Depth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_heaps.html">9. Two Heaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsets.html">10. Subsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_binary_search.html">11. Modified Binary Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements.html">12. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k-way_merge.html">13. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0_1_knapsack_dynamic_programming.html">14. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topological_sort_graph.html">15. Topological Sort (Graph)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../leetcode_tags/index.html">LeetCode Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../leetcode_template/index.html">LeetCode Template</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Algorithm Spices</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>LeetCode Pattern</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/leetcode_pattern/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="leetcode-pattern">
+<h1>LeetCode Pattern<a class="headerlink" href="#leetcode-pattern" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window.html">1. Sliding window</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window/index.html">1.1. Maximum Sum Subarray of Size K (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window/index.html#smallest-subarray-with-a-given-sum-easy">1.2. Smallest Subarray with a given sum (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window/index.html#longest-substring-with-k-distinct-characters-medium">1.3. Longest Substring with K Distinct Characters (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window/index.html#fruits-into-baskets-medium">1.4. Fruits into Baskets (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window/index.html#no-repeat-substring-hard">1.5. No-repeat Substring (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window/index.html#longest-substring-with-same-letters-after-replacement-hard">1.6. Longest Substring with Same Letters after Replacement (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window/index.html#longest-subarray-with-ones-after-replacement-hard">1.7. Longest Subarray with Ones after Replacement (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window/index.html#problem-challenge-1-permutation-in-a-string-hard">1.8. Problem Challenge 1 - Permutation in a String (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window/index.html#problem-challenge-2-string-anagrams-hard">1.9. Problem Challenge 2 - String Anagrams (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window/index.html#problem-challenge-3-smallest-window-containing-substring-hard">1.10. Problem Challenge 3 - Smallest Window containing Substring (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding_window/index.html#problem-challenge-4-words-concatenation-hard">1.11. Problem Challenge 4 - Words Concatenation (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="two_points.html">2. Two Points</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="two_points/index.html">2.1. Pair with Target Sum (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points/index.html#remove-duplicates-easy">2.2. Remove Duplicates (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points/index.html#squaring-a-sorted-array-easy">2.3. Squaring a Sorted Array (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points/index.html#triplet-sum-to-zero-medium">2.4. Triplet Sum to Zero (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points/index.html#triplet-sum-close-to-target-medium">2.5. Triplet Sum Close to Target (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points/index.html#triplets-with-smaller-sum-medium">2.6. Triplets with Smaller Sum (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points/index.html#subarrays-with-product-less-than-a-target-medium">2.7. Subarrays with Product Less than a Target (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points/index.html#dutch-national-flag-problem-medium">2.8. Dutch National Flag Problem (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points/index.html#problem-challenge-1-quadruple-sum-to-target-medium">2.9. Problem Challenge 1 - Quadruple Sum to Target (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points/index.html#problem-challenge-2-comparing-strings-containing-backspaces-medium">2.10. Problem Challenge 2 - Comparing Strings containing Backspaces (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points/index.html#problem-challenge-3-minimum-window-sort-medium">2.11. Problem Challenge 3 - Minimum Window Sort (medium)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fast_and_slow_pointers/index.html">3.1. LinkedList Cycle (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fast_and_slow_pointers/index.html#start-of-linkedlist-cycle-medium">3.2. Start of LinkedList Cycle (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fast_and_slow_pointers/index.html#happy-number-medium">3.3. Happy Number (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fast_and_slow_pointers/index.html#middle-of-the-linkedlist-easy">3.4. Middle of the LinkedList (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fast_and_slow_pointers/index.html#problem-challenge-1-palindrome-linkedlist-medium">3.5. Problem Challenge 1 - Palindrome LinkedList (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fast_and_slow_pointers/index.html#problem-challenge-2-rearrange-a-linkedlist-medium">3.6. Problem Challenge 2 - Rearrange a LinkedList (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fast_and_slow_pointers/index.html#problem-challenge-3-cycle-in-a-circular-array-hard">3.7. Problem Challenge 3 - Cycle in a Circular Array (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="merge_intervals.html">4. Merge Intervals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="merge_intervals/index.html">4.1. Merge Intervals (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge_intervals/index.html#insert-interval-medium">4.2. Insert Interval (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge_intervals/index.html#intervals-intersection-medium">4.3. Intervals Intersection (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge_intervals/index.html#conflicting-appointments-medium">4.4. Conflicting Appointments (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge_intervals/index.html#problem-challenge-1-minimum-meeting-rooms-hard">4.5. Problem Challenge 1 - Minimum Meeting Rooms (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge_intervals/index.html#problem-challenge-2-maximum-cpu-load-hard">4.6. Problem Challenge 2 - Maximum CPU Load (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge_intervals/index.html#problem-challenge-3-employee-free-time-hard">4.7. Problem Challenge 3 - Employee Free Time (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cyclic_sort.html">5. Cyclic Sort</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_sort/index.html">5.1. Cyclic Sort (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_sort/index.html#find-the-missing-number-easy">5.2. Find the Missing Number (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_sort/index.html#find-all-missing-numbers-easy">5.3. Find all Missing Numbers (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_sort/index.html#find-the-duplicate-number-easy">5.4. Find the Duplicate Number (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_sort/index.html#find-all-duplicate-numbers-easy">5.5. Find all Duplicate Numbers (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_sort/index.html#problem-challenge-1-find-the-corrupt-pair-easy">5.6. Problem Challenge 1 - Find the Corrupt Pair (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_sort/index.html#problem-challenge-2-find-the-smallest-missing-positive-number-medium">5.7. Problem Challenge 2 - Find the Smallest Missing Positive Number (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_sort/index.html#problem-challenge-3-find-the-first-k-missing-positive-numbers-hard">5.8. Problem Challenge 3 - Find the First K Missing Positive Numbers (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="in-place_reversal_of_a_linkedlist.html">6. In-place Reversal of a LinkedList</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="in-place_reversal_of_a_linkedlist/index.html">6.1. Reverse a LinkedList (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="in-place_reversal_of_a_linkedlist/index.html#reverse-a-sub-list-medium">6.2. Reverse a Sub-list (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="in-place_reversal_of_a_linkedlist/index.html#reverse-every-k-element-sub-list-medium">6.3. Reverse every K-element Sub-list (medium)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tree_breadth_first_search.html">7. Tree Breadth First Search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tree_breadth_first_search/index.html">7.1. Binary Tree Level Order Traversal (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_breadth_first_search/index.html#reverse-level-order-traversal-easy">7.2. Reverse Level Order Traversal (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_breadth_first_search/index.html#level-averages-in-a-binary-tree-easy">7.3. Level Averages in a Binary Tree (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_breadth_first_search/index.html#minimum-depth-of-a-binary-tree-easy">7.4. Minimum Depth of a Binary Tree (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_breadth_first_search/index.html#level-order-successor-easy">7.5. Level Order Successor (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_breadth_first_search/index.html#zigzag-traversal-medium">7.6. Zigzag Traversal (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_breadth_first_search/index.html#connect-level-order-siblings-medium">7.7. Connect Level Order Siblings (medium)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tree_depth_first_search.html">8. Tree Depth First Search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tree_depth_first_search/index.html">8.1. Binary Tree Path Sum (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_depth_first_search/index.html#all-paths-for-a-sum-medium">8.2. All Paths for a Sum (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_depth_first_search/index.html#sum-of-path-numbers-medium">8.3. Sum of Path Numbers (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_depth_first_search/index.html#path-with-given-sequence-medium">8.4. Path With Given Sequence (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_depth_first_search/index.html#count-paths-for-a-sum-medium">8.5. Count Paths for a Sum (medium)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="two_heaps.html">9. Two Heaps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="two_heaps/index.html">9.1. Find the Median of a Number Stream (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_heaps/index.html#sliding-window-median-hard">9.2. Sliding Window Median (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_heaps/index.html#maximize-capital-hard">9.3. Maximize Capital (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="subsets.html">10. Subsets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="subsets/index.html">10.1. Subsets (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsets/index.html#subsets-with-duplicates-easy">10.2. Subsets With Duplicates (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsets/index.html#permutations-medium">10.3. Permutations (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsets/index.html#string-permutations-by-changing-case-medium">10.4. String Permutations by changing case (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsets/index.html#balanced-parentheses-hard">10.5. Balanced Parentheses (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsets/index.html#unique-generalized-abbreviations-hard">10.6. Unique Generalized Abbreviations (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modified_binary_search.html">11. Modified Binary Search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modified_binary_search/index.html">11.1. Order-agnostic Binary Search (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_binary_search/index.html#bitonic-array-maximum-easy">11.2. Bitonic Array Maximum (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_binary_search/index.html#ceiling-of-a-number-medium">11.3. Ceiling of a Number (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_binary_search/index.html#next-letter-medium">11.4. Next Letter (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_binary_search/index.html#number-range-medium">11.5. Number Range (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_binary_search/index.html#search-in-a-sorted-infinite-array-medium">11.6. Search in a Sorted Infinite Array (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_binary_search/index.html#minimum-difference-element-medium">11.7. Minimum Difference Element (medium)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="top_k_elements.html">12. Top ‘K’ Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements/index.html">12.1. Top ‘K’ Numbers (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements/index.html#kth-smallest-number-easy">12.2. Kth Smallest Number (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements/index.html#k-closest-points-to-the-origin-easy">12.3. ‘K’ Closest Points to the Origin (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements/index.html#connect-ropes-easy">12.4. Connect Ropes (easy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements/index.html#top-k-frequent-numbers-medium">12.5. Top ‘K’ Frequent Numbers (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements/index.html#frequency-sort-medium">12.6. Frequency Sort (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements/index.html#kth-largest-number-in-a-stream-medium">12.7. Kth Largest Number in a Stream (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements/index.html#k-closest-numbers-medium">12.8. ‘K’ Closest Numbers (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements/index.html#maximum-distinct-elements-medium">12.9. Maximum Distinct Elements (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements/index.html#sum-of-elements-medium">12.10. Sum of Elements (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements/index.html#rearrange-string-hard">12.11. Rearrange String (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="k-way_merge.html">13. K-way merge</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="k-way_merge/index.html">13.1. Merge K Sorted Lists (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k-way_merge/index.html#kth-smallest-number-in-m-sorted-lists-medium">13.2. Kth Smallest Number in M Sorted Lists (Medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k-way_merge/index.html#kth-smallest-number-in-a-sorted-matrix-hard">13.3. Kth Smallest Number in a Sorted Matrix (Hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k-way_merge/index.html#smallest-number-range-hard">13.4. Smallest Number Range (Hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="0_1_knapsack_dynamic_programming.html">14. 0/1 Knapsack (Dynamic Programming)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="0_1_knapsack_dynamic_programming/index.html">14.1. 0/1 Knapsack (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0_1_knapsack_dynamic_programming/index.html#equal-subset-sum-partition-medium">14.2. Equal Subset Sum Partition (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0_1_knapsack_dynamic_programming/index.html#subset-sum-medium">14.3. Subset Sum (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0_1_knapsack_dynamic_programming/index.html#minimum-subset-sum-difference-hard">14.4. Minimum Subset Sum Difference (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topological_sort_graph.html">15. Topological Sort (Graph)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topological_sort_graph/index.html">15.1. Topological Sort (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topological_sort_graph/index.html#tasks-scheduling-medium">15.2. Tasks Scheduling (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topological_sort_graph/index.html#tasks-scheduling-order-medium">15.3. Tasks Scheduling Order (medium)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topological_sort_graph/index.html#all-tasks-scheduling-orders-hard">15.4. All Tasks Scheduling Orders (hard)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topological_sort_graph/index.html#alien-dictionary-hard">15.5. Alien Dictionary (hard)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sliding_window.html" class="btn btn-neutral float-right" title="1. Sliding window" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../preface.html" class="btn btn-neutral float-left" title="Learning Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, XiuFu Guo
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

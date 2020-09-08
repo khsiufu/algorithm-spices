@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Fast &amp; Slow pointers &mdash; Algorithm Spices  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.1. LinkedList Cycle (easy)" href="fast_and_slow_pointers/index.html" />
+    <link rel="prev" title="2.1. Pair with Target Sum (easy)" href="two_points/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Algorithm Spices
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../preface.html">Learning Data</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">LeetCode Pattern</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sliding_window.html">1. Sliding window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_points.html">2. Two Points</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Fast &amp; Slow pointers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fast_and_slow_pointers/index.html">3.1. LinkedList Cycle (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_and_slow_pointers/index.html#start-of-linkedlist-cycle-medium">3.2. Start of LinkedList Cycle (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_and_slow_pointers/index.html#happy-number-medium">3.3. Happy Number (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_and_slow_pointers/index.html#middle-of-the-linkedlist-easy">3.4. Middle of the LinkedList (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_and_slow_pointers/index.html#problem-challenge-1-palindrome-linkedlist-medium">3.5. Problem Challenge 1 - Palindrome LinkedList (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_and_slow_pointers/index.html#problem-challenge-2-rearrange-a-linkedlist-medium">3.6. Problem Challenge 2 - Rearrange a LinkedList (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_and_slow_pointers/index.html#problem-challenge-3-cycle-in-a-circular-array-hard">3.7. Problem Challenge 3 - Cycle in a Circular Array (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="merge_intervals.html">4. Merge Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_sort.html">5. Cyclic Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_breadth_first_search.html">6. Tree Breadth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_depth_first_search.html">7. Tree Depth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_heaps.html">8. Two Heaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsets.html">9. Subsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_binary_search.html">10. Modified Binary Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements.html">11. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k-way_merge.html">12. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0_1_knapsack_dynamic_programming.html">13. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topological_sort_graph.html">14. Topological Sort (Graph)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../leetcode_tags/index.html">LeetCode Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../leetcode_template/index.html">LeetCode Template</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Algorithm Spices</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">LeetCode Pattern</a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>Fast &amp; Slow pointers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/leetcode_pattern/fast_and_slow_pointers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fast-slow-pointers">
+<h1><span class="section-number">3. </span>Fast &amp; Slow pointers<a class="headerlink" href="#fast-slow-pointers" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fast_and_slow_pointers/index.html">3.1. LinkedList Cycle (easy)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast_and_slow_pointers/index.html#start-of-linkedlist-cycle-medium">3.2. Start of LinkedList Cycle (medium)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast_and_slow_pointers/index.html#happy-number-medium">3.3. Happy Number (medium)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast_and_slow_pointers/index.html#middle-of-the-linkedlist-easy">3.4. Middle of the LinkedList (easy)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast_and_slow_pointers/index.html#problem-challenge-1-palindrome-linkedlist-medium">3.5. Problem Challenge 1 - Palindrome LinkedList (medium)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast_and_slow_pointers/index.html#problem-challenge-2-rearrange-a-linkedlist-medium">3.6. Problem Challenge 2 - Rearrange a LinkedList (medium)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast_and_slow_pointers/index.html#problem-challenge-3-cycle-in-a-circular-array-hard">3.7. Problem Challenge 3 - Cycle in a Circular Array (hard)</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fast_and_slow_pointers/index.html" class="btn btn-neutral float-right" title="3.1. LinkedList Cycle (easy)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="two_points/index.html" class="btn btn-neutral float-left" title="2.1. Pair with Target Sum (easy)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, XiuFu Guo
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

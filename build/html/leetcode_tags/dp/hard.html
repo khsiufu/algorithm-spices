@@ -83,7 +83,8 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Learning Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Learning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_pattern/index.html">LeetCode Pattern</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">LeetCode Tags</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../advanced.html">1. Advanced</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../array.html">2. Array</a></li>
@@ -92,7 +93,10 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../dp.html">5. DP</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="easy.html">5.1. Easy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="medium.html">5.2. Medium</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">5.3. Hard</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">5.3. Hard</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#best-time-to-buy-and-sell-stock-iii">123. Best Time to Buy and Sell Stock III</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../list.html">6. List</a></li>
@@ -175,6 +179,23 @@
             
   <div class="section" id="hard">
 <h1><span class="section-number">5.3. </span>Hard<a class="headerlink" href="#hard" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="best-time-to-buy-and-sell-stock-iii">
+<h2>123. Best Time to Buy and Sell Stock III<a class="headerlink" href="#best-time-to-buy-and-sell-stock-iii" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/">123. Best Time to Buy and Sell Stock III</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Time: O(n), Space: O(1)</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">maxProfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">one_buy</span> <span class="o">=</span> <span class="n">two_buy</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>
+        <span class="n">one_profit</span> <span class="o">=</span> <span class="n">two_profit</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
+            <span class="n">one_buy</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">one_buy</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+            <span class="n">one_profit</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">one_profit</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="n">one_buy</span><span class="p">)</span>
+            <span class="n">two_buy</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">two_buy</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="n">one_profit</span><span class="p">)</span>
+            <span class="n">two_profit</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">two_profit</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="n">two_buy</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">two_profit</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 

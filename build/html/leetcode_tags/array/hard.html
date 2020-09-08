@@ -83,13 +83,17 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Learning Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Learning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_pattern/index.html">LeetCode Pattern</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">LeetCode Tags</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../advanced.html">1. Advanced</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../array.html">2. Array</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="easy.html">2.1. Easy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="medium.html">2.2. Medium</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">2.3. Hard</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.3. Hard</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#first-missing-positive">41. First Missing Positive</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../binary_search.html">3. Binary Search</a></li>
@@ -175,6 +179,25 @@
             
   <div class="section" id="hard">
 <h1><span class="section-number">2.3. </span>Hard<a class="headerlink" href="#hard" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="first-missing-positive">
+<h2>41. First Missing Positive<a class="headerlink" href="#first-missing-positive" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://leetcode.com/problems/first-missing-positive/">41. First Missing Positive</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">firstMissingPositive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 思路是把1放在数组第一个位置nums[0]，2放在第二个位置nums[1]，即需要把nums[i]放在nums[nums[i] - 1]上，遍历整个数组</span>
+        <span class="c1"># 如果 nums[i] != i + 1, 而 nums[i] 为整数且不大于n，另外 nums[i] 不等于 nums[nums[i] - 1] 的话，将两者位置调换</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="k">while</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">tmp</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">tmp</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
