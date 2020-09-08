@@ -103,6 +103,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#kth-smallest-number-in-m-sorted-lists-medium">14.2. Kth Smallest Number in M Sorted Lists (Medium)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#kth-smallest-number-in-a-sorted-matrix-hard">14.3. Kth Smallest Number in a Sorted Matrix (Hard)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#smallest-number-range-hard">14.4. Smallest Number Range (Hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-1-k-pairs-with-largest-sums-hard">14.5. Problem Challenge 1 - K Pairs with Largest Sums (Hard)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
@@ -182,15 +183,578 @@
             
   <div class="section" id="merge-k-sorted-lists-medium">
 <h1><span class="section-number">14.1. </span>Merge K Sorted Lists (medium)<a class="headerlink" href="#merge-k-sorted-lists-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array of ‘K’ sorted LinkedLists, merge them into one sorted list.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: L1=[2, 6, 8], L2=[3, 6, 7], L3=[1, 3, 4]</span>
+<span class="sd">Output: [1, 2, 3, 3, 4, 6, 6, 7, 8]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: L1=[5, 8, 9], L2=[1, 7]</span>
+<span class="sd">Output: [1, 5, 7, 8, 9]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">ListNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
+
+
+<span class="k">def</span> <span class="nf">merge_lists</span><span class="p">(</span><span class="n">lists</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">root</span> <span class="ow">in</span> <span class="n">lists</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+
+    <span class="n">head</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="n">heap</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">head</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">head</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">node</span><span class="p">,</span> <span class="n">node</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tail</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span>
+            <span class="n">tail</span> <span class="o">=</span> <span class="n">tail</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">head</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">l1</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">l1</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">l1</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+
+    <span class="n">l2</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">l2</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">l2</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+
+    <span class="n">l3</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">l3</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">l3</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">merge_lists</span><span class="p">([</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">l3</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here are the elements form the merged list: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">result</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">next</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">ListNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># used for the min-heap</span>
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
+
+
+<span class="k">def</span> <span class="nf">merge_lists</span><span class="p">(</span><span class="n">lists</span><span class="p">):</span>
+    <span class="n">minHeap</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># put the root of each list in the min heap</span>
+    <span class="k">for</span> <span class="n">root</span> <span class="ow">in</span> <span class="n">lists</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+
+    <span class="c1"># take the smallest(top) element form the min-heap and add it to the result</span>
+    <span class="c1"># if the top element has a next element add it to the heap</span>
+    <span class="n">resultHead</span><span class="p">,</span> <span class="n">resultTail</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="n">minHeap</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">resultHead</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">resultHead</span> <span class="o">=</span> <span class="n">resultTail</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">resultTail</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span>
+            <span class="n">resultTail</span> <span class="o">=</span> <span class="n">resultTail</span><span class="o">.</span><span class="n">next</span>
+
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">resultHead</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">l1</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">l1</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">l1</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+
+    <span class="n">l2</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">l2</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">l2</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+
+    <span class="n">l3</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">l3</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">l3</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">merge_lists</span><span class="p">([</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">l3</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here are the elements form the merged list: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">next</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Since we’ll be going through all the elements of all arrays and will be removing/adding one element to the heap in each step,</span>
+<span class="sd">the time complexity of the above algorithm will be O(N*logK), where ‘N’ is the total number of elements in all the ‘K’ input arrays.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(K) because, at any time, our min-heap will be storing one number from all the ‘K’ input arrays.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="kth-smallest-number-in-m-sorted-lists-medium">
 <h1><span class="section-number">14.2. </span>Kth Smallest Number in M Sorted Lists (Medium)<a class="headerlink" href="#kth-smallest-number-in-m-sorted-lists-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given ‘M’ sorted arrays, find the K’th smallest number among all the arrays.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: L1=[2, 6, 8], L2=[3, 6, 7], L3=[1, 3, 4], K=5</span>
+<span class="sd">Output: 4</span>
+<span class="sd">Explanation: The 5th smallest number among all the arrays is 4, this can be verified from the merged</span>
+<span class="sd">list of all the arrays: [1, 2, 3, 3, 4, 6, 6, 7, 8]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: L1=[5, 8, 9], L2=[1, 7], K=3</span>
+<span class="sd">Output: 7</span>
+<span class="sd">Explanation: The 3rd smallest number among all the arrays is 7.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">find_Kth_smallest</span><span class="p">(</span><span class="n">lists</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lists</span><span class="p">)):</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">lists</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lists</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">result</span><span class="p">:</span>
+        <span class="n">number</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">cur_list</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">number</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">cur_list</span><span class="p">):</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">cur_list</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cur_list</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="mi">5</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">find_Kth_smallest</span><span class="p">(</span><span class="n">lists</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">minHeap</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># put the 1st element of each list in the min heap</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lists</span><span class="p">)):</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">lists</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lists</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+    <span class="c1"># take the smallest(top) element form the min heap, if the running count is equal to k return the number</span>
+    <span class="n">numberCount</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">minHeap</span><span class="p">:</span>
+        <span class="n">number</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span>
+        <span class="n">numberCount</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">numberCount</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="c1"># if the array of the top element has more elements, add the next element to the heap</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">list</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">number</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="mi">5</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Since we’ll be going through at most ‘K’ elements among all the arrays,</span>
+<span class="sd">and we will remove/add one element in the heap in each step,</span>
+<span class="sd">the time complexity of the above algorithm will be O(K*logM) where ‘M’ is the total number of input arrays.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(M) because, at any time,</span>
+<span class="sd">our min-heap will be storing one number from all the ‘M’ input arrays.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Similar Problems</span>
+<span class="sd">Problem 1: Given ‘M’ sorted arrays, find the median number among all arrays.</span>
+<span class="sd">Solution: This problem is similar to our parent problem with K=Median.</span>
+<span class="sd">So if there are ‘N’ total numbers in all the arrays we need to find the K’th minimum number where K=N/2K.</span>
+<span class="sd">Problem 2: Given a list of ‘K’ sorted arrays, merge them into one sorted list.</span>
+<span class="sd">Solution: This problem is similar to Merge K Sorted Lists except that</span>
+<span class="sd">the input is a list of arrays compared to LinkedLists.</span>
+<span class="sd">To handle this, we can use a similar approach as discussed in our parent problem</span>
+<span class="sd">by keeping a track of the array and the element indices.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="kth-smallest-number-in-a-sorted-matrix-hard">
 <h1><span class="section-number">14.3. </span>Kth Smallest Number in a Sorted Matrix (Hard)<a class="headerlink" href="#kth-smallest-number-in-a-sorted-matrix-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given ‘M’ sorted arrays, find the K’th smallest number among all the arrays.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: L1=[2, 6, 8], L2=[3, 6, 7], L3=[1, 3, 4], K=5</span>
+<span class="sd">Output: 4</span>
+<span class="sd">Explanation: The 5th smallest number among all the arrays is 4, this can be verified from the merged</span>
+<span class="sd">list of all the arrays: [1, 2, 3, 3, 4, 6, 6, 7, 8]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: L1=[5, 8, 9], L2=[1, 7], K=3</span>
+<span class="sd">Output: 7</span>
+<span class="sd">Explanation: The 3rd smallest number among all the arrays is 7.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">find_Kth_smallest</span><span class="p">(</span><span class="n">lists</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lists</span><span class="p">)):</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">lists</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lists</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">result</span><span class="p">:</span>
+        <span class="n">number</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">cur_list</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">number</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">cur_list</span><span class="p">):</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">cur_list</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cur_list</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="mi">5</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">find_Kth_smallest</span><span class="p">(</span><span class="n">lists</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">minHeap</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># put the 1st element of each list in the min heap</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lists</span><span class="p">)):</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">lists</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lists</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+    <span class="c1"># take the smallest(top) element form the min heap, if the running count is equal to k return the number</span>
+    <span class="n">numberCount</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">minHeap</span><span class="p">:</span>
+        <span class="n">number</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span>
+        <span class="n">numberCount</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">numberCount</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="c1"># if the array of the top element has more elements, add the next element to the heap</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">list</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">number</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="mi">5</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Since we’ll be going through at most ‘K’ elements among all the arrays,</span>
+<span class="sd">and we will remove/add one element in the heap in each step,</span>
+<span class="sd">the time complexity of the above algorithm will be O(K*logM) where ‘M’ is the total number of input arrays.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(M) because, at any time,</span>
+<span class="sd">our min-heap will be storing one number from all the ‘M’ input arrays.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Similar Problems</span>
+<span class="sd">Problem 1: Given ‘M’ sorted arrays, find the median number among all arrays.</span>
+<span class="sd">Solution: This problem is similar to our parent problem with K=Median.</span>
+<span class="sd">So if there are ‘N’ total numbers in all the arrays we need to find the K’th minimum number where K=N/2K.</span>
+<span class="sd">Problem 2: Given a list of ‘K’ sorted arrays, merge them into one sorted list.</span>
+<span class="sd">Solution: This problem is similar to Merge K Sorted Lists except that</span>
+<span class="sd">the input is a list of arrays compared to LinkedLists.</span>
+<span class="sd">To handle this, we can use a similar approach as discussed in our parent problem</span>
+<span class="sd">by keeping a track of the array and the element indices.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+            <span class="n">row</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># as matrix[row][col] is less than or equal to the mid, let&#39;s keep track of the</span>
+            <span class="c1"># biggest number less than or equal to the mid</span>
+            <span class="n">smaller</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">smaller</span><span class="p">,</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">])</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="n">row</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">col</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">count</span><span class="p">,</span> <span class="n">smaller</span><span class="p">,</span> <span class="n">larger</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span> <span class="mi">2</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest</span><span class="p">([[</span><span class="o">-</span><span class="mi">5</span><span class="p">]],</span> <span class="mi">1</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">]],</span> <span class="mi">5</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">]],</span> <span class="mi">8</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The Binary Search could take O(log(max-min)) iterations where ‘max’ is the largest and ‘min’ is the smallest element in the matrix and in each iteration we take O(N)O(N) for counting, therefore, the overall time complexity of the algorithm will be O(N*log(max-min))O(N∗log(max−min)).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="smallest-number-range-hard">
 <h1><span class="section-number">14.4. </span>Smallest Number Range (Hard)<a class="headerlink" href="#smallest-number-range-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given ‘M’ sorted arrays, find the smallest range that includes at least one number from each of the ‘M’ lists.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: L1=[1, 5, 8], L2=[4, 12], L3=[7, 8, 10]</span>
+<span class="sd">Output: [4, 7]</span>
+<span class="sd">Explanation: The range [4, 7] includes 5 from L1, 4 from L2 and 7 from L3.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: L1=[1, 9], L2=[4, 12], L3=[7, 10, 16]</span>
+<span class="sd">Output: [9, 12]</span>
+<span class="sd">Explanation: The range [9, 12] includes 9 from L1, 12 from L2 and 10 from L3.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">find_smallest_range</span><span class="p">(</span><span class="n">lists</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">current_max</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lists</span><span class="p">:</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+        <span class="n">current_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">current_max</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">lists</span><span class="p">):</span>
+        <span class="n">number</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">current_list</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">current_max</span> <span class="o">-</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">number</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">current_max</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_list</span><span class="p">):</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="n">current_list</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">current_list</span><span class="p">))</span>
+            <span class="n">current_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">current_max</span><span class="p">,</span> <span class="n">current_list</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Smallest range is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_smallest_range</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">find_smallest_range</span><span class="p">(</span><span class="n">lists</span><span class="p">):</span>
+    <span class="n">minHeap</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">rangeStart</span><span class="p">,</span> <span class="n">rangeEnd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">currentMaxNumber</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+
+    <span class="c1"># put the 1st element of each array in the max heap</span>
+    <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="n">lists</span><span class="p">:</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">arr</span><span class="p">))</span>
+        <span class="n">currentMaxNumber</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">currentMaxNumber</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># take the smallest(top) element form the min heap, if it gives us smaller range, update the ranges</span>
+    <span class="c1"># if the array of the top element has more elements, insert the next element in the heap</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">lists</span><span class="p">):</span>
+        <span class="n">num</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rangeEnd</span> <span class="o">-</span> <span class="n">rangeStart</span> <span class="o">&gt;</span> <span class="n">currentMaxNumber</span> <span class="o">-</span> <span class="n">num</span><span class="p">:</span>
+            <span class="n">rangeStart</span> <span class="o">=</span> <span class="n">num</span>
+            <span class="n">rangeEnd</span> <span class="o">=</span> <span class="n">currentMaxNumber</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># insert the next element in the heap</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">arr</span><span class="p">))</span>
+            <span class="n">currentMaxNumber</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">currentMaxNumber</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">rangeStart</span><span class="p">,</span> <span class="n">rangeEnd</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Smallest range is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_smallest_range</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Since, at most, we’ll be going through all the elements of all the arrays and will remove/add one element in the heap in each step, t</span>
+<span class="sd">he time complexity of the above algorithm will be O(N*logM) where ‘N’ is the total number of elements in all the ‘M’ input arrays.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(M) because, at any time, our min-heap will be store one number from all the ‘M’ input arrays.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-1-k-pairs-with-largest-sums-hard">
+<h1><span class="section-number">14.5. </span>Problem Challenge 1 - K Pairs with Largest Sums (Hard)<a class="headerlink" href="#problem-challenge-1-k-pairs-with-largest-sums-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 1</span>
+<span class="sd">K Pairs with Largest Sums (Hard)</span>
+<span class="sd">Given two sorted arrays in descending order, find ‘K’ pairs with the largest sum where each pair consists of numbers from both the arrays.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: L1=[9, 8, 2], L2=[6, 3, 1], K=3</span>
+<span class="sd">Output: [9, 3], [9, 6], [8, 6]</span>
+<span class="sd">Explanation: These 3 pairs have the largest sum. No other pair has a sum larger than any of these.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: L1=[5, 2, 1], L2=[2, -1], K=3</span>
+<span class="sd">Output: [5, 2], [5, -1], [2, 2]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">find_k_largest_pairs</span><span class="p">(</span><span class="n">nums1</span><span class="p">,</span> <span class="n">nums2</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums1</span><span class="p">))):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums2</span><span class="p">))):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+                <span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">]]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+                    <span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">]]))</span>
+
+    <span class="k">while</span> <span class="n">heap</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pairs with largest sum are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_k_largest_pairs</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">find_k_largest_pairs</span><span class="p">(</span><span class="n">nums1</span><span class="p">,</span> <span class="n">nums2</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">minHeap</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums1</span><span class="p">))):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums2</span><span class="p">))):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+                <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># if the sum of the two numbers from the two arrays is smaller than the smallest(top)</span>
+                <span class="c1"># element of the heap, we can &#39;break&#39; here. Since the arrays are sorted in the</span>
+                <span class="c1"># descending order, we&#39;ll not be able to find a pair with a higher sum moving forward</span>
+                <span class="k">if</span> <span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">minHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>  <span class="c1"># we have a pair with a larger sum, remove top and insert this pair in the heap</span>
+                    <span class="n">heappop</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span>
+                    <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">minHeap</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pairs with largest sum are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_k_largest_pairs</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Since, at most, we’ll be going through all the elements of both arrays and we will add/remove one element in the heap in each step,</span>
+<span class="sd">the time complexity of the above algorithm will be O(N*M*logK) where ‘N’ and ‘M’ are the total number of elements in both arrays, respectively.</span>
+<span class="sd">If we assume that both arrays have at least ‘K’ elements then the time complexity can be simplified to O(K^2logK),</span>
+<span class="sd">because we are not iterating more than ‘K’ elements in both arrays.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity will be O(K) because, at any time, our Min Heap will be storing ‘K’ largest pairs.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </div>
 
 
