@@ -19,6 +19,7 @@ Contents:
    two_heaps
    subsets
    modified_binary_search
+   bitwise_xor
    top_k_elements
    k-way_merge
    0_1_knapsack_dynamic_programming
