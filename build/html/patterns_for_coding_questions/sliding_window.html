@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Sliding Window &mdash; Algorithm Spices  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.1. Maximum Sum Subarray of Size K (easy)" href="sliding_window/index.html" />
+    <link rel="prev" title="Patterns for Coding Questions" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Algorithm Spices
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../preface.html">Preface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Patterns for Coding Questions</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Sliding Window</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/index.html">1.1. Maximum Sum Subarray of Size K (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/index.html#smallest-subarray-with-a-given-sum-easy">1.2. Smallest Subarray with a given sum (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/index.html#longest-substring-with-k-distinct-characters-medium">1.3. Longest Substring with K Distinct Characters (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/index.html#fruits-into-baskets-medium">1.4. Fruits into Baskets (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/index.html#no-repeat-substring-hard">1.5. No-repeat Substring (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/index.html#longest-substring-with-same-letters-after-replacement-hard">1.6. Longest Substring with Same Letters after Replacement (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/index.html#longest-subarray-with-ones-after-replacement-hard">1.7. Longest Subarray with Ones after Replacement (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/index.html#problem-challenge-1-permutation-in-a-string-hard">1.8. Problem Challenge 1 - Permutation in a String (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/index.html#problem-challenge-2-string-anagrams-hard">1.9. Problem Challenge 2 - String Anagrams (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/index.html#problem-challenge-3-smallest-window-containing-substring-hard">1.10. Problem Challenge 3 - Smallest Window containing Substring (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding_window/index.html#problem-challenge-4-words-concatenation-hard">1.11. Problem Challenge 4 - Words Concatenation (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="two_points.html">2. Two Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge_intervals.html">4. Merge Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_sort.html">5. Cyclic Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="in-place_reversal_of_a_linkedlist.html">6. In-place Reversal of a LinkedList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_breadth_first_search.html">7. Tree Breadth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_depth_first_search.html">8. Tree Depth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_heaps.html">9. Two Heaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsets.html">10. Subsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_binary_search.html">11. Modified Binary Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bitwise_xor.html">12. Bitwise XOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top_k_elements.html">13. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k-way_merge.html">14. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topological_sort_graph.html">16. Topological Sort (Graph)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">17. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../leetcode_tags/index.html">LeetCode Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../leetcode_template/index.html">LeetCode Template</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Algorithm Spices</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Patterns for Coding Questions</a> &raquo;</li>
+        
+      <li><span class="section-number">1. </span>Sliding Window</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/patterns_for_coding_questions/sliding_window.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sliding-window">
+<h1><span class="section-number">1. </span>Sliding Window<a class="headerlink" href="#sliding-window" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/index.html">1.1. Maximum Sum Subarray of Size K (easy)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/index.html#smallest-subarray-with-a-given-sum-easy">1.2. Smallest Subarray with a given sum (easy)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/index.html#longest-substring-with-k-distinct-characters-medium">1.3. Longest Substring with K Distinct Characters (medium)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/index.html#fruits-into-baskets-medium">1.4. Fruits into Baskets (medium)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/index.html#no-repeat-substring-hard">1.5. No-repeat Substring (hard)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/index.html#longest-substring-with-same-letters-after-replacement-hard">1.6. Longest Substring with Same Letters after Replacement (hard)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/index.html#longest-subarray-with-ones-after-replacement-hard">1.7. Longest Subarray with Ones after Replacement (hard)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/index.html#problem-challenge-1-permutation-in-a-string-hard">1.8. Problem Challenge 1 - Permutation in a String (hard)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/index.html#problem-challenge-2-string-anagrams-hard">1.9. Problem Challenge 2 - String Anagrams (hard)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/index.html#problem-challenge-3-smallest-window-containing-substring-hard">1.10. Problem Challenge 3 - Smallest Window containing Substring (hard)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sliding_window/index.html#problem-challenge-4-words-concatenation-hard">1.11. Problem Challenge 4 - Words Concatenation (hard)</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sliding_window/index.html" class="btn btn-neutral float-right" title="1.1. Maximum Sum Subarray of Size K (easy)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Patterns for Coding Questions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, XiuFu Guo
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1198 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10.1. Subsets (easy) &mdash; Algorithm Spices  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="11. Modified Binary Search" href="../modified_binary_search.html" />
+    <link rel="prev" title="10. Subsets" href="../subsets.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Algorithm Spices
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Preface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Patterns for Coding Questions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_points.html">2. Two Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../merge_intervals.html">4. Merge Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cyclic_sort.html">5. Cyclic Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../in-place_reversal_of_a_linkedlist.html">6. In-place Reversal of a LinkedList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_breadth_first_search.html">7. Tree Breadth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_depth_first_search.html">8. Tree Depth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_heaps.html">9. Two Heaps</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../subsets.html">10. Subsets</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">10.1. Subsets (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subsets-with-duplicates-easy">10.2. Subsets With Duplicates (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#permutations-medium">10.3. Permutations (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#string-permutations-by-changing-case-medium">10.4. String Permutations by changing case (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#balanced-parentheses-hard">10.5. Balanced Parentheses (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unique-generalized-abbreviations-hard">10.6. Unique Generalized Abbreviations (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-1-evaluate-expression-hard">10.7. Problem Challenge 1 - Evaluate Expression (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-2-structurally-unique-binary-search-trees-hard">10.8. Problem Challenge 2 - Structurally Unique Binary Search Trees (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-3-count-of-structurally-unique-binary-search-trees-hard">10.9. Problem Challenge 3 - Count of Structurally Unique Binary Search Trees (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modified_binary_search.html">11. Modified Binary Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bitwise_xor.html">12. Bitwise XOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../top_k_elements.html">13. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">14. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topological_sort_graph.html">16. Topological Sort (Graph)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellaneous.html">17. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_tags/index.html">LeetCode Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_template/index.html">LeetCode Template</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Algorithm Spices</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Patterns for Coding Questions</a> &raquo;</li>
+        
+          <li><a href="../subsets.html"><span class="section-number">10. </span>Subsets</a> &raquo;</li>
+        
+      <li><span class="section-number">10.1. </span>Subsets (easy)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/patterns_for_coding_questions/subsets/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="subsets-easy">
+<h1><span class="section-number">10.1. </span>Subsets (easy)<a class="headerlink" href="#subsets-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given a set with distinct elements, find all of its distinct subsets.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [1, 3]</span>
+<span class="sd">Output: [], [1], [3], [1,3]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [1, 5, 3]</span>
+<span class="sd">Output: [], [1], [5], [3], [1,5], [1,3], [5,3], [1,5,3]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_subsets</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">subsets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">subsets</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+    <span class="k">for</span> <span class="n">currentNumber</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">subsets</span><span class="p">)):</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">subsets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">currentNumber</span><span class="p">)</span>
+            <span class="n">subsets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">subsets</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here is the list of subsets: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_subsets</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here is the list of subsets: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_subsets</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_subsets</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">subsets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># start by adding the empty subset</span>
+    <span class="n">subsets</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+    <span class="k">for</span> <span class="n">currentNumber</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="c1"># we will take all existing subsets and insert the current number in them to create new subsets</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">subsets</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="c1"># create a new subset from the existing subset and insert the current element to it</span>
+            <span class="nb">set</span> <span class="o">=</span> <span class="n">subsets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="nb">set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">currentNumber</span><span class="p">)</span>
+            <span class="n">subsets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">subsets</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here is the list of subsets: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_subsets</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here is the list of subsets: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_subsets</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Since, in each step, the number of subsets doubles as we add each element to all the existing subsets, the time complexity of the above algorithm is O(2^N),</span>
+<span class="sd">where ‘N’ is the total number of elements in the input set. This also means that, in the end, we will have a total of O(2^N) subsets.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">All the additional space used by our algorithm is for the output list. Since we will have a total of O(2^N) subsets,</span>
+<span class="sd">the space complexity of our algorithm is also O(2^N).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="subsets-with-duplicates-easy">
+<h1><span class="section-number">10.2. </span>Subsets With Duplicates (easy)<a class="headerlink" href="#subsets-with-duplicates-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given a set of numbers that might contain duplicates, find all of its distinct subsets.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [1, 3, 3]</span>
+<span class="sd">Output: [], [1], [3], [1,3], [3,3], [1,3,3]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [1, 5, 3, 3]</span>
+<span class="sd">Output: [], [1], [5], [3], [1,5], [1,3], [5,3], [1,5,3], [3,3], [1,3,3], [3,3,5], [1,5,3,3]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_subsets</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">subsets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">subsets</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+    <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">end</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">subsets</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+            <span class="nb">set</span> <span class="o">=</span> <span class="n">subsets</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="nb">set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">subsets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">subsets</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here is the list of subsets: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_subsets</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here is the list of subsets: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_subsets</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_subsets</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="c1"># sort the numbers to handle duplicates</span>
+    <span class="nb">list</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="n">subsets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">subsets</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+    <span class="n">startIndex</span><span class="p">,</span> <span class="n">endIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="n">startIndex</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># if current and the previous elements are same, create new subsets only from the subsets</span>
+        <span class="c1"># added in the previous step</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="n">startIndex</span> <span class="o">=</span> <span class="n">endIndex</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">endIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">subsets</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">endIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># create a new subset from the existing subset and add the current element to it</span>
+            <span class="nb">set</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">subsets</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="nb">set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">subsets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">subsets</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here is the list of subsets: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_subsets</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here is the list of subsets: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_subsets</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Since, in each step, the number of subsets could double (if not duplicate) as we add each element to all the existing subsets,</span>
+<span class="sd">the time complexity of the above algorithm is O(2^N), where ‘N’ is the total number of elements in the input set.</span>
+<span class="sd">This also means that, in the end, we will have a total of O(2^N) subsets at the most.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">All the additional space used by our algorithm is for the output list. Since at most we will have a total of O(2^N) subsets,</span>
+<span class="sd">the space complexity of our algorithm is also O(2^N).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="permutations-medium">
+<h1><span class="section-number">10.3. </span>Permutations (medium)<a class="headerlink" href="#permutations-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given a set of distinct numbers, find all of its permutations.</span>
+<span class="sd">Permutation is defined as the re-arranging of the elements of the set. For example, {1, 2, 3} has the following six permutations:</span>
+<span class="sd">{1, 2, 3}</span>
+<span class="sd">{1, 3, 2}</span>
+<span class="sd">{2, 1, 3}</span>
+<span class="sd">{2, 3, 1}</span>
+<span class="sd">{3, 1, 2}</span>
+<span class="sd">{3, 2, 1}</span>
+<span class="sd">If a set has ‘n’ distinct elements it will have n!n! permutations.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [1,3,5]</span>
+<span class="sd">Output: [1,3,5], [1,5,3], [3,1,5], [3,5,1], [5,1,3], [5,3,1]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">find_permutations</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">currentPermutation</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="n">currentPermutation</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">currentPermutation</span><span class="p">)):</span>
+            <span class="n">previousPermutation</span> <span class="o">=</span> <span class="n">currentPermutation</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">previousPermutation</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">newPermutation</span> <span class="o">=</span> <span class="n">previousPermutation</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">newPermutation</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">newPermutation</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newPermutation</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">currentPermutation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newPermutation</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here are all the permutations: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_permutations</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">find_permutations</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">numsLength</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">permutations</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="n">permutations</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+    <span class="k">for</span> <span class="n">currentNumber</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="c1"># we will take all existing permutations and add the current number to create new permutations</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">oldPermutation</span> <span class="o">=</span> <span class="n">permutations</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="c1"># create a new permutation by adding the current number at every position</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">oldPermutation</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">newPermutation</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">oldPermutation</span><span class="p">)</span>
+                <span class="n">newPermutation</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">currentNumber</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">newPermutation</span><span class="p">)</span> <span class="o">==</span> <span class="n">numsLength</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newPermutation</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">permutations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newPermutation</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here are all the permutations: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_permutations</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">We know that there are a total of N! permutations of a set with ‘N’ numbers.</span>
+<span class="sd">In the algorithm above, we are iterating through all of these permutations with the help of the two ‘for’ loops.</span>
+<span class="sd">In each iteration, we go through all the current permutations to insert a new number in them on line 17 (line 23 for C++ solution).</span>
+<span class="sd">To insert a number into a permutation of size ‘N’ will take O(N),</span>
+<span class="sd">which makes the overall time complexity of our algorithm O(N*N!).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">All the additional space used by our algorithm is for the result list and the queue to store the intermediate permutations.</span>
+<span class="sd">If you see closely, at any time, we don’t have more than N! permutations between the result list and the queue.</span>
+<span class="sd">Therefore the overall space complexity to store N! permutations each containing NN elements will be O(N*N!).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># recursive solution</span>
+<span class="k">def</span> <span class="nf">generate_permutations</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">generate_permutations_recursive</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[],</span> <span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">generate_permutations_recursive</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">currentPermutation</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">currentPermutation</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># create a new permutation by adding the current number at every position</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">currentPermutation</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">newPermutation</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">currentPermutation</span><span class="p">)</span>
+            <span class="n">newPermutation</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">nums</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+            <span class="n">generate_permutations_recursive</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">newPermutation</span><span class="p">,</span>
+                                            <span class="n">result</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here are all the permutations: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">generate_permutations</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="string-permutations-by-changing-case-medium">
+<h1><span class="section-number">10.4. </span>String Permutations by changing case (medium)<a class="headerlink" href="#string-permutations-by-changing-case-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given a string, find all of its permutations preserving the character sequence but changing case.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: &quot;ad52&quot;</span>
+<span class="sd">Output: &quot;ad52&quot;, &quot;Ad52&quot;, &quot;aD52&quot;, &quot;AD52&quot;</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: &quot;ab7c&quot;</span>
+<span class="sd">Output: &quot;ab7c&quot;, &quot;Ab7c&quot;, &quot;aB7c&quot;, &quot;AB7c&quot;, &quot;ab7C&quot;, &quot;Ab7C&quot;, &quot;aB7C&quot;, &quot;AB7C&quot;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_letter_case_string_permutations</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">permutations</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">permutations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">permutations</span><span class="p">)):</span>
+                <span class="n">newPermutation</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">permutations</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">newPermutation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">newPermutation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">swapcase</span><span class="p">()</span>
+                <span class="n">permutations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">newPermutation</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">permutations</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String permutations are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_letter_case_string_permutations</span><span class="p">(</span><span class="s2">&quot;ad52&quot;</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String permutations are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_letter_case_string_permutations</span><span class="p">(</span><span class="s2">&quot;ab7c&quot;</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_letter_case_string_permutations</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+    <span class="n">permutations</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">permutations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="c1"># process every character of the string one by one</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>  <span class="c1"># only process characters, skip digits</span>
+            <span class="c1"># we will take all existing permutations and change the letter case appropriately</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">chs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">permutations</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="c1"># if the current character is in upper case, change it to lower case or vice versa</span>
+                <span class="n">chs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">chs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">swapcase</span><span class="p">()</span>
+                <span class="n">permutations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chs</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">permutations</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String permutations are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_letter_case_string_permutations</span><span class="p">(</span><span class="s2">&quot;ad52&quot;</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String permutations are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_letter_case_string_permutations</span><span class="p">(</span><span class="s2">&quot;ab7c&quot;</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Since we can have 2^N permutations at the most and while processing each permutation we convert it into a character array,</span>
+<span class="sd">the overall time complexity of the algorithm will be O(N*2^N).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">All the additional space used by our algorithm is for the output list.</span>
+<span class="sd">Since we can have a total of O(2^N) permutations, the space complexity of our algorithm is O(N*2^N).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="balanced-parentheses-hard">
+<h1><span class="section-number">10.5. </span>Balanced Parentheses (hard)<a class="headerlink" href="#balanced-parentheses-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">For a given number ‘N’, write a function to generate all combination of ‘N’ pairs of balanced parentheses.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: N=2</span>
+<span class="sd">Output: (()), ()()</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: N=3</span>
+<span class="sd">Output: ((())), (()()), (())(), ()(()), ()()()</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">class</span> <span class="nc">ParenthesesString</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">openCount</span><span class="p">,</span> <span class="n">closeCount</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">str</span> <span class="o">=</span> <span class="nb">str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">openCount</span> <span class="o">=</span> <span class="n">openCount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closeCount</span> <span class="o">=</span> <span class="n">closeCount</span>
+
+
+<span class="k">def</span> <span class="nf">generate_valid_parentheses</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ParenthesesString</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">ps</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">ps</span><span class="o">.</span><span class="n">openCount</span> <span class="o">==</span> <span class="n">num</span> <span class="ow">and</span> <span class="n">ps</span><span class="o">.</span><span class="n">closeCount</span> <span class="o">==</span> <span class="n">num</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ps</span><span class="o">.</span><span class="n">str</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ps</span><span class="o">.</span><span class="n">openCount</span> <span class="o">&gt;</span> <span class="n">ps</span><span class="o">.</span><span class="n">closeCount</span><span class="p">:</span>
+                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">ParenthesesString</span><span class="p">(</span><span class="n">ps</span><span class="o">.</span><span class="n">str</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="n">ps</span><span class="o">.</span><span class="n">openCount</span><span class="p">,</span>
+                                      <span class="n">ps</span><span class="o">.</span><span class="n">closeCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">ps</span><span class="o">.</span><span class="n">openCount</span> <span class="o">&lt;</span> <span class="n">num</span><span class="p">:</span>
+                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">ParenthesesString</span><span class="p">(</span><span class="n">ps</span><span class="o">.</span><span class="n">str</span> <span class="o">+</span> <span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="n">ps</span><span class="o">.</span><span class="n">openCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">ps</span><span class="o">.</span><span class="n">closeCount</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All combinations of balanced parentheses are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">generate_valid_parentheses</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All combinations of balanced parentheses are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">generate_valid_parentheses</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">class</span> <span class="nc">ParenthesesString</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">openCount</span><span class="p">,</span> <span class="n">closeCount</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">str</span> <span class="o">=</span> <span class="nb">str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">openCount</span> <span class="o">=</span> <span class="n">openCount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closeCount</span> <span class="o">=</span> <span class="n">closeCount</span>
+
+
+<span class="k">def</span> <span class="nf">generate_valid_parentheses</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ParenthesesString</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">ps</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="c1"># if we&#39;ve reached the maximum number of open and close parentheses, add to the result</span>
+        <span class="k">if</span> <span class="n">ps</span><span class="o">.</span><span class="n">openCount</span> <span class="o">==</span> <span class="n">num</span> <span class="ow">and</span> <span class="n">ps</span><span class="o">.</span><span class="n">closeCount</span> <span class="o">==</span> <span class="n">num</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ps</span><span class="o">.</span><span class="n">str</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ps</span><span class="o">.</span><span class="n">openCount</span> <span class="o">&lt;</span> <span class="n">num</span><span class="p">:</span>  <span class="c1"># if we can add an open parentheses, add it</span>
+                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">ParenthesesString</span><span class="p">(</span><span class="n">ps</span><span class="o">.</span><span class="n">str</span> <span class="o">+</span> <span class="s2">&quot;(&quot;</span><span class="p">,</span> <span class="n">ps</span><span class="o">.</span><span class="n">openCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">ps</span><span class="o">.</span><span class="n">closeCount</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">ps</span><span class="o">.</span><span class="n">openCount</span> <span class="o">&gt;</span> <span class="n">ps</span><span class="o">.</span><span class="n">closeCount</span><span class="p">:</span>  <span class="c1"># if we can add a close parentheses, add it</span>
+                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">ParenthesesString</span><span class="p">(</span><span class="n">ps</span><span class="o">.</span><span class="n">str</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">,</span> <span class="n">ps</span><span class="o">.</span><span class="n">openCount</span><span class="p">,</span>
+                                      <span class="n">ps</span><span class="o">.</span><span class="n">closeCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All combinations of balanced parentheses are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">generate_valid_parentheses</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All combinations of balanced parentheses are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">generate_valid_parentheses</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="unique-generalized-abbreviations-hard">
+<h1><span class="section-number">10.6. </span>Unique Generalized Abbreviations (hard)<a class="headerlink" href="#unique-generalized-abbreviations-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given a word, write a function to generate all of its unique generalized abbreviations.</span>
+<span class="sd">Generalized abbreviation of a word can be generated by replacing each substring of the word by the count of characters in the substring. Take the example of “ab” which has four substrings: “”, “a”, “b”, and “ab”. After replacing these substrings in the actual word by the count of characters we get all the generalized abbreviations: “ab”, “1b”, “a1”, and “2”.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: &quot;BAT&quot;</span>
+<span class="sd">Output: &quot;BAT&quot;, &quot;BA1&quot;, &quot;B1T&quot;, &quot;B2&quot;, &quot;1AT&quot;, &quot;1A1&quot;, &quot;2T&quot;, &quot;3&quot;</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: &quot;code&quot;</span>
+<span class="sd">Output: &quot;code&quot;, &quot;cod1&quot;, &quot;co1e&quot;, &quot;co2&quot;, &quot;c1de&quot;, &quot;c1d1&quot;, &quot;c2e&quot;, &quot;c3&quot;, &quot;1ode&quot;, &quot;1od1&quot;, &quot;1o1e&quot;, &quot;1o2&quot;,</span>
+<span class="sd">&quot;2de&quot;, &quot;2d1&quot;, &quot;3e&quot;, &quot;4&quot;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">generate_generalized_abbreviation</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">generate_abbreviation_recursive</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">list</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">generate_abbreviation_recursive</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">abWord</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">start</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">abWord</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">abWord</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">generate_abbreviation_recursive</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">abWord</span><span class="p">),</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                        <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+
+        <span class="n">newword</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">abWord</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+        <span class="n">newword</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="n">start</span><span class="p">])</span>
+        <span class="n">generate_abbreviation_recursive</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">newword</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generalized abbreviation are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">generate_generalized_abbreviation</span><span class="p">(</span><span class="s2">&quot;BAT&quot;</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generalized abbreviation are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">generate_generalized_abbreviation</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">class</span> <span class="nc">AbbreviatedWord</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">str</span> <span class="o">=</span> <span class="nb">str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">count</span>
+
+
+<span class="k">def</span> <span class="nf">generate_generalized_abbreviation</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">wordLen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">AbbreviatedWord</span><span class="p">(</span><span class="nb">list</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">abWord</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">abWord</span><span class="o">.</span><span class="n">start</span> <span class="o">==</span> <span class="n">wordLen</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">abWord</span><span class="o">.</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">abWord</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">abWord</span><span class="o">.</span><span class="n">count</span><span class="p">))</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">abWord</span><span class="o">.</span><span class="n">str</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># continue abbreviating by incrementing the current abbreviation count</span>
+            <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">AbbreviatedWord</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">abWord</span><span class="o">.</span><span class="n">str</span><span class="p">),</span> <span class="n">abWord</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                <span class="n">abWord</span><span class="o">.</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+            <span class="c1"># restart abbreviating, append the count and the current character to the string</span>
+            <span class="k">if</span> <span class="n">abWord</span><span class="o">.</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">abWord</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">abWord</span><span class="o">.</span><span class="n">count</span><span class="p">))</span>
+
+            <span class="n">newWord</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">abWord</span><span class="o">.</span><span class="n">str</span><span class="p">)</span>
+            <span class="n">newWord</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="n">abWord</span><span class="o">.</span><span class="n">start</span><span class="p">])</span>
+            <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">AbbreviatedWord</span><span class="p">(</span><span class="n">newWord</span><span class="p">,</span> <span class="n">abWord</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generalized abbreviation are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">generate_generalized_abbreviation</span><span class="p">(</span><span class="s2">&quot;BAT&quot;</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generalized abbreviation are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">generate_generalized_abbreviation</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Since we had two options for each character, we will have a maximum of 2^N combinations.</span>
+<span class="sd">If you see the visual representation of Example-1 closely you will realize that it is equivalent to a binary tree,</span>
+<span class="sd">where each node has two children. This means that we will have 2^N leaf nodes and 2^N-1 intermediate nodes,</span>
+<span class="sd">so the total number of elements pushed to the queue will be 2^N + 2^N-1, which is asymptotically equivalent to O(2^N).</span>
+<span class="sd">While processing each element, we do need to concatenate the current string with a character.</span>
+<span class="sd">This operation will take O(N), so the overall time complexity of our algorithm will be O(N*2^N).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">All the additional space used by our algorithm is for the output list.</span>
+<span class="sd">Since we can’t have more than O(2^N) combinations, the space complexity of our algorithm is O(N*2^N).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># Recursive Solution</span>
+<span class="k">def</span> <span class="nf">generate_generalized_abbreviation</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">generate_abbreviation_recursive</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">list</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">generate_abbreviation_recursive</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">abWord</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">start</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">abWord</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">abWord</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># continue abbreviating by incrementing the current abbreviation count</span>
+        <span class="n">generate_abbreviation_recursive</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">abWord</span><span class="p">),</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                        <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+
+        <span class="c1"># restart abbreviating, append the count and the current character to the string</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">abWord</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+        <span class="n">newWord</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">abWord</span><span class="p">)</span>
+        <span class="n">newWord</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="n">start</span><span class="p">])</span>
+        <span class="n">generate_abbreviation_recursive</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">newWord</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generalized abbreviation are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">generate_generalized_abbreviation</span><span class="p">(</span><span class="s2">&quot;BAT&quot;</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generalized abbreviation are: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">generate_generalized_abbreviation</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-1-evaluate-expression-hard">
+<h1><span class="section-number">10.7. </span>Problem Challenge 1 - Evaluate Expression (hard)<a class="headerlink" href="#problem-challenge-1-evaluate-expression-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 1</span>
+<span class="sd">Evaluate Expression (hard)</span>
+<span class="sd">Given an expression containing digits and operations (+, -, *),</span>
+<span class="sd">find all possible ways in which the expression can be evaluated by grouping the numbers and operators using parentheses.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: &quot;1+2*3&quot;</span>
+<span class="sd">Output: 7, 9</span>
+<span class="sd">Explanation: 1+(2*3) =&gt; 7 and (1+2)*3 =&gt; 9</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: &quot;2*3-4-5&quot;</span>
+<span class="sd">Output: 8, -12, 7, -7, -3</span>
+<span class="sd">Explanation: 2*(3-(4-5)) =&gt; 8, 2*(3-4-5) =&gt; -12, 2*3-(4-5) =&gt; 7, 2*(3-4)-5 =&gt; -7, (2*3)-4-5 =&gt; -3</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">diff_ways_to_evaluate_expression</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+
+    <span class="k">if</span> <span class="s1">&#39;+&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">input</span> <span class="ow">and</span> <span class="s1">&#39;-&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">input</span> <span class="ow">and</span> <span class="s1">&#39;*&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">diff_ways_to_evaluate_expression</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">diff_ways_to_evaluate_expression</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])</span>
+
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">left</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">right</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;+&#39;</span><span class="p">:</span>
+                            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="nb">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span>
+                            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="nb">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+                            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expression evaluations: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">diff_ways_to_evaluate_expression</span><span class="p">(</span><span class="s2">&quot;1+2*3&quot;</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expression evaluations: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">diff_ways_to_evaluate_expression</span><span class="p">(</span><span class="s2">&quot;2*3-4-5&quot;</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">diff_ways_to_evaluate_expression</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">diff_ways_to_evaluate_expression_rec</span><span class="p">({},</span> <span class="nb">input</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">diff_ways_to_evaluate_expression_rec</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">input</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">map</span><span class="p">[</span><span class="nb">input</span><span class="p">]</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># base case: if the input string is a number, parse and return it.</span>
+    <span class="k">if</span> <span class="s1">&#39;+&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">input</span> <span class="ow">and</span> <span class="s1">&#39;-&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">input</span> <span class="ow">and</span> <span class="s1">&#39;*&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)):</span>
+            <span class="n">char</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">char</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="c1"># break the equation here into two parts and make recursively calls</span>
+                <span class="n">leftParts</span> <span class="o">=</span> <span class="n">diff_ways_to_evaluate_expression_rec</span><span class="p">(</span>
+                    <span class="nb">map</span><span class="p">,</span> <span class="nb">input</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">rightParts</span> <span class="o">=</span> <span class="n">diff_ways_to_evaluate_expression_rec</span><span class="p">(</span>
+                    <span class="nb">map</span><span class="p">,</span> <span class="nb">input</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])</span>
+                <span class="k">for</span> <span class="n">part1</span> <span class="ow">in</span> <span class="n">leftParts</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">part2</span> <span class="ow">in</span> <span class="n">rightParts</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s1">&#39;+&#39;</span><span class="p">:</span>
+                            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part1</span> <span class="o">+</span> <span class="n">part2</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+                            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part1</span> <span class="o">-</span> <span class="n">part2</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span>
+                            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part1</span> <span class="o">*</span> <span class="n">part2</span><span class="p">)</span>
+
+    <span class="nb">map</span><span class="p">[</span><span class="nb">input</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expression evaluations: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">diff_ways_to_evaluate_expression</span><span class="p">(</span><span class="s2">&quot;1+2*3&quot;</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expression evaluations: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">diff_ways_to_evaluate_expression</span><span class="p">(</span><span class="s2">&quot;2*3-4-5&quot;</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of this algorithm will be exponential and will be similar to Balanced Parentheses.</span>
+<span class="sd">Estimated time complexity will be O(N*2^N) but the actual time complexity ( O(4^n/\sqrt{n}) ) is bounded by the Catalan number and is beyond the scope of a coding interview.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of this algorithm will also be exponential, estimated at O(2^N) though the actual will be ( O(4^n/\sqrt{n})).</span>
+<span class="sd">Memoized version</span>
+<span class="sd">The problem has overlapping subproblems,</span>
+<span class="sd">as our recursive calls can be evaluating the same sub-expression multiple times.</span>
+<span class="sd">To resolve this, we can use memoization and store the intermediate results in a HashMap.</span>
+<span class="sd">In each function call, we can check our map to see if we have already evaluated this sub-expression before.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-2-structurally-unique-binary-search-trees-hard">
+<h1><span class="section-number">10.8. </span>Problem Challenge 2 - Structurally Unique Binary Search Trees (hard)<a class="headerlink" href="#problem-challenge-2-structurally-unique-binary-search-trees-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 2</span>
+<span class="sd">Structurally Unique Binary Search Trees (hard)</span>
+<span class="sd">Given a number ‘n’, write a function to return all structurally unique Binary Search Trees (BST) that can store values 1 to ‘n’?</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: 2</span>
+<span class="sd">Output: List containing root nodes of all structurally unique BSTs.</span>
+<span class="sd">Explanation: Here are the 2 structurally unique BSTs storing all numbers from 1 to 2:</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: 3</span>
+<span class="sd">Output: List containing root nodes of all structurally unique BSTs.</span>
+<span class="sd">Explanation: Here are the 5 structurally unique BSTs storing all numbers from 1 to 3:</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">find_unique_trees</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">find_unique_trees_recursive</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">find_unique_trees_recursive</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">end</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">find_unique_trees_recursive</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">find_unique_trees_recursive</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">left</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">right</span><span class="p">:</span>
+                <span class="n">root</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">j</span>
+                <span class="n">root</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">k</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total trees: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">find_unique_trees</span><span class="p">(</span><span class="mi">2</span><span class="p">))))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total trees: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">find_unique_trees</span><span class="p">(</span><span class="mi">3</span><span class="p">))))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">find_unique_trees</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">findUnique_trees_recursive</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">findUnique_trees_recursive</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># base condition, return &#39;None&#39; for an empty sub-tree</span>
+    <span class="c1"># consider n = 1, in this case we will have start = end = 1, this means we should have only one tree</span>
+    <span class="c1"># we will have two recursive calls, findUniqueTreesRecursive(1, 0) &amp; (2, 1)</span>
+    <span class="c1"># both of these should return &#39;None&#39; for the left and the right child</span>
+    <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">end</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># making &#39;i&#39; the root of the tree</span>
+        <span class="n">leftSubtrees</span> <span class="o">=</span> <span class="n">findUnique_trees_recursive</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">rightSubtrees</span> <span class="o">=</span> <span class="n">findUnique_trees_recursive</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">leftTree</span> <span class="ow">in</span> <span class="n">leftSubtrees</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">rightTree</span> <span class="ow">in</span> <span class="n">rightSubtrees</span><span class="p">:</span>
+                <span class="n">root</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">leftTree</span>
+                <span class="n">root</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">rightTree</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total trees: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">find_unique_trees</span><span class="p">(</span><span class="mi">2</span><span class="p">))))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total trees: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">find_unique_trees</span><span class="p">(</span><span class="mi">3</span><span class="p">))))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of this algorithm will be exponential and will be similar to Balanced Parentheses.</span>
+<span class="sd">Estimated time complexity will be O(n*2^n) but the actual time complexity ( O(4^n/\sqrt{n})) is bounded</span>
+<span class="sd">by the Catalan number and is beyond the scope of a coding interview. See more details here.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of this algorithm will be exponential too, estimated at O(2^n),</span>
+<span class="sd">but the actual will be ( O(4^n/\sqrt{n})).</span>
+<span class="sd">Memoized version</span>
+<span class="sd">Since our algorithm has overlapping subproblems, can we use memoization to improve it?</span>
+<span class="sd">We could, but every time we return the result of a subproblem from the cache,</span>
+<span class="sd">we have to clone the result list because these trees will be used as the left or right child of a tree.</span>
+<span class="sd">This cloning is equivalent to reconstructing the trees, therefore,</span>
+<span class="sd">the overall time complexity of the memoized algorithm will also be the same.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-3-count-of-structurally-unique-binary-search-trees-hard">
+<h1><span class="section-number">10.9. </span>Problem Challenge 3 - Count of Structurally Unique Binary Search Trees (hard)<a class="headerlink" href="#problem-challenge-3-count-of-structurally-unique-binary-search-trees-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 3</span>
+<span class="sd">Count of Structurally Unique Binary Search Trees (hard)</span>
+<span class="sd">Given a number ‘n’, write a function to return the count of structurally unique Binary Search Trees (BST) that can store values 1 to ‘n’.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: 2</span>
+<span class="sd">Output: 2</span>
+<span class="sd">Explanation: As we saw in the previous problem, there are 2 unique BSTs storing numbers from 1-2.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: 3</span>
+<span class="sd">Output: 5</span>
+<span class="sd">Explanation: There will be 5 unique BSTs that can store numbers from 1 to 5.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">count_trees</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">count_trees</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">count_trees</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="n">left</span> <span class="o">*</span> <span class="n">right</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total trees: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count_trees</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total trees: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count_trees</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">count_trees</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">count_trees_rec</span><span class="p">({},</span> <span class="n">n</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">count_trees_rec</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">map</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># making &#39;i&#39; the root of the tree</span>
+        <span class="n">countOfLeftSubtrees</span> <span class="o">=</span> <span class="n">count_trees_rec</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">countOfRightSubtrees</span> <span class="o">=</span> <span class="n">count_trees_rec</span><span class="p">(</span><span class="nb">map</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="p">(</span><span class="n">countOfLeftSubtrees</span> <span class="o">*</span> <span class="n">countOfRightSubtrees</span><span class="p">)</span>
+
+    <span class="nb">map</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total trees: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count_trees</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total trees: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count_trees</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity #</span>
+<span class="sd">The time complexity of this algorithm will be exponential and will be similar to Balanced Parentheses.</span>
+<span class="sd">Estimated time complexity will be O(n*2^n) but the actual time complexity ( O(4^n/\sqrt{n}))</span>
+<span class="sd">is bounded by the Catalan number and is beyond the scope of a coding interview.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of this algorithm will be exponential too, estimated O(2^n) but the actual will be (O(4^n/\sqrt{n}).</span>
+<span class="sd">Memorized version</span>
+<span class="sd">Our algorithm has overlapping subproblems as our recursive call will be evaluating the same sub-expression multiple times.</span>
+<span class="sd">To resolve this, we can use memorization and store the intermediate results in a HashMap.</span>
+<span class="sd">In each function call, we can check our map to see if we have already evaluated this sub-expression before.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../modified_binary_search.html" class="btn btn-neutral float-right" title="11. Modified Binary Search" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../subsets.html" class="btn btn-neutral float-left" title="10. Subsets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, XiuFu Guo
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

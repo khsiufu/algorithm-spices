@@ -1,0 +1,929 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5.1. Cyclic Sort (easy) &mdash; Algorithm Spices  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6. In-place Reversal of a LinkedList" href="../in-place_reversal_of_a_linkedlist.html" />
+    <link rel="prev" title="5. Cyclic Sort" href="../cyclic_sort.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Algorithm Spices
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Preface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Patterns for Coding Questions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_points.html">2. Two Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../merge_intervals.html">4. Merge Intervals</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../cyclic_sort.html">5. Cyclic Sort</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">5.1. Cyclic Sort (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#find-the-missing-number-easy">5.2. Find the Missing Number (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#find-all-missing-numbers-easy">5.3. Find all Missing Numbers (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#find-the-duplicate-number-easy">5.4. Find the Duplicate Number (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#find-all-duplicate-numbers-easy">5.5. Find all Duplicate Numbers (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-1-find-the-corrupt-pair-easy">5.6. Problem Challenge 1 - Find the Corrupt Pair (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-2-find-the-smallest-missing-positive-number-medium">5.7. Problem Challenge 2 - Find the Smallest Missing Positive Number (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-3-find-the-first-k-missing-positive-numbers-hard">5.8. Problem Challenge 3 - Find the First K Missing Positive Numbers (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../in-place_reversal_of_a_linkedlist.html">6. In-place Reversal of a LinkedList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_breadth_first_search.html">7. Tree Breadth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_depth_first_search.html">8. Tree Depth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_heaps.html">9. Two Heaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../subsets.html">10. Subsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modified_binary_search.html">11. Modified Binary Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bitwise_xor.html">12. Bitwise XOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../top_k_elements.html">13. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">14. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topological_sort_graph.html">16. Topological Sort (Graph)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellaneous.html">17. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_tags/index.html">LeetCode Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_template/index.html">LeetCode Template</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Algorithm Spices</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Patterns for Coding Questions</a> &raquo;</li>
+        
+          <li><a href="../cyclic_sort.html"><span class="section-number">5. </span>Cyclic Sort</a> &raquo;</li>
+        
+      <li><span class="section-number">5.1. </span>Cyclic Sort (easy)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/patterns_for_coding_questions/cyclic_sort/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cyclic-sort-easy">
+<h1><span class="section-number">5.1. </span>Cyclic Sort (easy)<a class="headerlink" href="#cyclic-sort-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">We are given an array containing ‘n’ objects. Each object, when created, was assigned a unique number from 1 to ‘n’ based on their creation sequence.</span>
+<span class="sd">This means that the object with sequence number ‘3’ was created just before the object with sequence number ‘4’.</span>
+<span class="sd">Write a function to sort the objects in-place on their creation sequence number in O(n) and without any extra space.</span>
+<span class="sd">For simplicity, let’s assume we are passed an integer array containing only the sequence numbers, though each number is actually an object.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [3, 1, 5, 4, 2]</span>
+<span class="sd">Output: [1, 2, 3, 4, 5]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 6, 4, 3, 1, 5]</span>
+<span class="sd">Output: [1, 2, 3, 4, 5, 6]</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: [1, 5, 6, 4, 3, 2]</span>
+<span class="sd">Output: [1, 2, 3, 4, 5, 6]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">cyclic_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">nums</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">cyclic_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># swap</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">nums</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cyclic_sort</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cyclic_sort</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cyclic_sort</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(n).</span>
+<span class="sd">Although we are not incrementing the index i when swapping the numbers, this will result in more than ‘n’ iterations of the loop,</span>
+<span class="sd">but in the worst-case scenario, the while loop will swap a total of ‘n-1’ numbers and once a number is at its correct index,</span>
+<span class="sd">we will move on to the next number by incrementing i. So overall, our algorithm will take O(n) + O(n-1) which is asymptotically equivalent to O(n).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="find-the-missing-number-easy">
+<h1><span class="section-number">5.2. </span>Find the Missing Number (easy)<a class="headerlink" href="#find-the-missing-number-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">We are given an array containing ‘n’ distinct numbers taken from the range 0 to ‘n’.</span>
+<span class="sd">Since the array has only ‘n’ numbers out of the total ‘n+1’ numbers, find the missing number.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [4, 0, 3, 1]</span>
+<span class="sd">Output: 2</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [8, 3, 5, 2, 4, 6, 0, 1]</span>
+<span class="sd">Output: 7</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_missing_number</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+            <span class="n">nums</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_missing_number</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># swap</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># find the first number missing from its index, that will be our required number</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+
+    <span class="k">return</span> <span class="n">n</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_missing_number</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_missing_number</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(n).</span>
+<span class="sd">In the while loop, although we are not incrementing the index i when swapping the numbers,</span>
+<span class="sd">this will result in more than ‘n’ iterations of the loop,</span>
+<span class="sd">but in the worst-case scenario, the while loop will swap a total of ‘n-1’ numbers and once a number is at its correct index,</span>
+<span class="sd">we will move on to the next number by incrementing i.</span>
+<span class="sd">In the end, we iterate the input array again to find the first number missing from its index,</span>
+<span class="sd">so overall, our algorithm will take O(n) + O(n-1) + O(n)  which is asymptotically equivalent to O(n).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="find-all-missing-numbers-easy">
+<h1><span class="section-number">5.3. </span>Find all Missing Numbers (easy)<a class="headerlink" href="#find-all-missing-numbers-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">We are given an unsorted array containing numbers taken from the range 1 to ‘n’.</span>
+<span class="sd">The array can have duplicates, which means some numbers will be missing. Find all those missing numbers.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [2, 3, 1, 8, 2, 3, 5, 1]</span>
+<span class="sd">Output: 4, 6, 7</span>
+<span class="sd">Explanation: The array should have all numbers from 1 to 8, due to duplicates 4, 6, and 7 are missing.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 4, 1, 2]</span>
+<span class="sd">Output: 3</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: [2, 3, 2, 1]</span>
+<span class="sd">Output: 4</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_missing_numbers</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">missingNumbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">missingNumbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">missingNumbers</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Be careful about i != j and nums[i] != nums[j]</span>
+<span class="sd">when there are duplicates in index i, then using i!=j as condition, while will keep looping</span>
+<span class="sd">using nums[i] != nums[j] can avoid this problem, because duplicates means there exists nums[i] = nums[j]</span>
+<span class="sd">2 4 1 2</span>
+<span class="sd">i=0</span>
+<span class="sd">4 2 1 2</span>
+<span class="sd">2 2 1 4</span>
+<span class="sd">i=1</span>
+<span class="sd">2 2 1 4</span>
+<span class="sd">i=2</span>
+<span class="sd">1 2 2 4</span>
+<span class="sd">i=3</span>
+<span class="sd">1 2 2 4</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode2</span>
+<span class="k">def</span> <span class="nf">find_missing_numbers</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">missingNumbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">missingNumbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">missingNumbers</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_missing_numbers</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># swap</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">missingNumbers</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">missingNumbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">missingNumbers</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_missing_numbers</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_missing_numbers</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_missing_numbers</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(n).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">Ignoring the space required for the output array, the algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="find-the-duplicate-number-easy">
+<h1><span class="section-number">5.4. </span>Find the Duplicate Number (easy)<a class="headerlink" href="#find-the-duplicate-number-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">We are given an unsorted array containing ‘n+1’ numbers taken from the range 1 to ‘n’.</span>
+<span class="sd">The array has only one duplicate but it can be repeated multiple times.</span>
+<span class="sd">Find that duplicate number without using any extra space. You are, however, allowed to modify the input array.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [1, 4, 4, 3, 2]</span>
+<span class="sd">Output: 4</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 1, 3, 3, 5, 4]</span>
+<span class="sd">Output: 3</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: [2, 4, 1, 4, 4]</span>
+<span class="sd">Output: 4</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_duplicate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+
+<span class="c1"># mycode2</span>
+<span class="k">def</span> <span class="nf">find_duplicate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_duplicate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># swap</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># we have found the duplicate</span>
+                <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_duplicate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_duplicate</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_duplicate</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(n).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The algorithm runs in constant space O(1) but modifies the input array.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Similar Problems</span>
+<span class="sd">Problem 1: Can we solve the above problem in O(1) space and without modifying the input array?</span>
+<span class="sd">Solution: While doing the cyclic sort, we realized that the array will have a cycle due to the duplicate number and that the start of the cycle will always point to the duplicate number.</span>
+<span class="sd">This means that we can use the fast &amp; the slow pointer method to find the duplicate number or the start of the cycle similar to Start of LinkedList Cycle.</span>
+<span class="sd">The time complexity of the above algorithm is O(n) and the space complexity is O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">find_duplicate</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="n">slow</span><span class="p">,</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">while</span> <span class="n">slow</span> <span class="o">!=</span> <span class="n">fast</span><span class="p">:</span>
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">slow</span><span class="p">]</span>
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">fast</span><span class="p">]]</span>
+
+    <span class="c1"># find cycle length</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">slow</span><span class="p">]]</span>
+    <span class="n">cycleLength</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="o">!=</span> <span class="n">arr</span><span class="p">[</span><span class="n">slow</span><span class="p">]:</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+        <span class="n">cycleLength</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">find_start</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">cycleLength</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">find_start</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">cycleLength</span><span class="p">):</span>
+    <span class="n">pointer1</span><span class="p">,</span> <span class="n">pointer2</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># move pointer2 ahead &#39;cycleLength&#39; steps</span>
+    <span class="k">while</span> <span class="n">cycleLength</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">pointer2</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">pointer2</span><span class="p">]</span>
+        <span class="n">cycleLength</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="c1"># increment both pointers until they meet at the start of the cycle</span>
+    <span class="k">while</span> <span class="n">pointer1</span> <span class="o">!=</span> <span class="n">pointer2</span><span class="p">:</span>
+        <span class="n">pointer1</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">pointer1</span><span class="p">]</span>
+        <span class="n">pointer2</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">pointer2</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">pointer1</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_duplicate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_duplicate</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_duplicate</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="find-all-duplicate-numbers-easy">
+<h1><span class="section-number">5.5. </span>Find all Duplicate Numbers (easy)<a class="headerlink" href="#find-all-duplicate-numbers-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">We are given an unsorted array containing ‘n’ numbers taken from the range 1 to ‘n’.</span>
+<span class="sd">The array has some duplicates, find all the duplicate numbers without using any extra space.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [3, 4, 4, 5, 5]</span>
+<span class="sd">Output: [4, 5]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [5, 4, 7, 2, 3, 5, 3]</span>
+<span class="sd">Output: [3, 5]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_all_duplicates</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">duplicateNumbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">duplicateNumbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">duplicateNumbers</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_all_duplicates</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># swap</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">duplicateNumbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">duplicateNumbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">duplicateNumbers</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_all_duplicates</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_all_duplicates</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(n).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">Ignoring the space required for storing the duplicates, the algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-1-find-the-corrupt-pair-easy">
+<h1><span class="section-number">5.6. </span>Problem Challenge 1 - Find the Corrupt Pair (easy)<a class="headerlink" href="#problem-challenge-1-find-the-corrupt-pair-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 1</span>
+<span class="sd">Find the Corrupt Pair (easy)</span>
+<span class="sd">We are given an unsorted array containing ‘n’ numbers taken from the range 1 to ‘n’. The array originally contained all the numbers from 1 to ‘n’, but due to a data error, one of the numbers got duplicated which also resulted in one number going missing. Find both these numbers.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [3, 1, 2, 5, 2]</span>
+<span class="sd">Output: [2, 4]</span>
+<span class="sd">Explanation: &#39;2&#39; is duplicated and &#39;4&#39; is missing.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [3, 1, 2, 3, 6, 4]</span>
+<span class="sd">Output: [3, 5]</span>
+<span class="sd">Explanation: &#39;3&#39; is duplicated and &#39;5&#39; is missing.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_corrupt_numbers</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">duplicate</span><span class="p">,</span> <span class="n">missing</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">duplicate</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+            <span class="n">missing</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">duplicate</span><span class="p">,</span> <span class="n">missing</span><span class="p">]</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_corrupt_numbers</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># swap</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_corrupt_numbers</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_corrupt_numbers</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(n).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-2-find-the-smallest-missing-positive-number-medium">
+<h1><span class="section-number">5.7. </span>Problem Challenge 2 - Find the Smallest Missing Positive Number (medium)<a class="headerlink" href="#problem-challenge-2-find-the-smallest-missing-positive-number-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 2</span>
+<span class="sd">Find the Smallest Missing Positive Number (medium)</span>
+<span class="sd">Given an unsorted array containing numbers, find the smallest missing positive number in it.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [-3, 1, 5, 4, 2]</span>
+<span class="sd">Output: 3</span>
+<span class="sd">Explanation: The smallest missing positive number is &#39;3&#39;</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [3, -2, 0, 1, 2]</span>
+<span class="sd">Output: 4</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: [3, 2, 5, 1]</span>
+<span class="sd">Output: 4</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_first_missing_positive</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_first_missing_positive</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># swap</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">nums</span><span class="o">.</span><span class="n">length</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_first_missing_positive</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_first_missing_positive</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_first_missing_positive</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(n).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-3-find-the-first-k-missing-positive-numbers-hard">
+<h1><span class="section-number">5.8. </span>Problem Challenge 3 - Find the First K Missing Positive Numbers (hard)<a class="headerlink" href="#problem-challenge-3-find-the-first-k-missing-positive-numbers-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 3</span>
+<span class="sd">Find the First K Missing Positive Numbers (hard)</span>
+<span class="sd">Given an unsorted array containing numbers and a number ‘k’, find the first ‘k’ missing positive numbers in the array.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [3, -1, 4, 5, 5], k=3</span>
+<span class="sd">Output: [1, 2, 6]</span>
+<span class="sd">Explanation: The smallest missing positive numbers are 1, 2 and 6.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 3, 4], k=3</span>
+<span class="sd">Output: [1, 5, 6]</span>
+<span class="sd">Explanation: The smallest missing positive numbers are 1, 5 and 6.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: [-2, -3, 4], k=2</span>
+<span class="sd">Output: [1, 2]</span>
+<span class="sd">Explanation: The smallest missing positive numbers are 1 and 2.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_first_k_missing_positive</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">missingNumbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+            <span class="n">missingNumbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">missingNumbers</span><span class="p">):</span>
+        <span class="n">missingNumbers</span> <span class="o">=</span> <span class="n">missingNumbers</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">missingNumbers</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">missingNumbers</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">max</span><span class="p">(</span>
+                    <span class="n">nums</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">max</span><span class="p">(</span><span class="n">missingNumbers</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+                <span class="n">missingNumbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">missingNumbers</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">missingNumbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">missingNumbers</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_first_k_missing_positive</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># swap</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">missingNumbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">extraNumbers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missingNumbers</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">missingNumbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">extraNumbers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># add the remaining missing numbers</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">missingNumbers</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+        <span class="n">candidateNumber</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">n</span>
+        <span class="c1"># ignore if the array contains the candidate number</span>
+        <span class="k">if</span> <span class="n">candidateNumber</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">extraNumbers</span><span class="p">:</span>
+            <span class="n">missingNumbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidateNumber</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">missingNumbers</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_first_k_missing_positive</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_first_k_missing_positive</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_first_k_missing_positive</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(n + k), as the last two for loops will run for O(n) and O(k) times respectively.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The algorithm needs O(k) space to store the extraNumbers.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../in-place_reversal_of_a_linkedlist.html" class="btn btn-neutral float-right" title="6. In-place Reversal of a LinkedList" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../cyclic_sort.html" class="btn btn-neutral float-left" title="5. Cyclic Sort" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, XiuFu Guo
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

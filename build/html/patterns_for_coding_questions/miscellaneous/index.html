@@ -1,0 +1,472 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>17.1. Kth Smallest Number (hard) &mdash; Algorithm Spices  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="LeetCode Tags" href="../../leetcode_tags/index.html" />
+    <link rel="prev" title="17. Miscellaneous" href="../miscellaneous.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Algorithm Spices
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Preface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Patterns for Coding Questions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_points.html">2. Two Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../merge_intervals.html">4. Merge Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cyclic_sort.html">5. Cyclic Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../in-place_reversal_of_a_linkedlist.html">6. In-place Reversal of a LinkedList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_breadth_first_search.html">7. Tree Breadth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_depth_first_search.html">8. Tree Depth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_heaps.html">9. Two Heaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../subsets.html">10. Subsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modified_binary_search.html">11. Modified Binary Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bitwise_xor.html">12. Bitwise XOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../top_k_elements.html">13. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">14. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topological_sort_graph.html">16. Topological Sort (Graph)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../miscellaneous.html">17. Miscellaneous</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">17.1. Kth Smallest Number (hard)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_tags/index.html">LeetCode Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_template/index.html">LeetCode Template</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Algorithm Spices</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Patterns for Coding Questions</a> &raquo;</li>
+        
+          <li><a href="../miscellaneous.html"><span class="section-number">17. </span>Miscellaneous</a> &raquo;</li>
+        
+      <li><span class="section-number">17.1. </span>Kth Smallest Number (hard)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/patterns_for_coding_questions/miscellaneous/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kth-smallest-number-hard">
+<h1><span class="section-number">17.1. </span>Kth Smallest Number (hard)<a class="headerlink" href="#kth-smallest-number-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an unsorted array of numbers, find Kth smallest number in it.</span>
+<span class="sd">Please note that it is the Kth smallest number in the sorted order, not the Kth distinct element.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [1, 5, 12, 2, 11, 5], K = 3</span>
+<span class="sd">Output: 5</span>
+<span class="sd">Explanation: The 3rd smallest number is &#39;5&#39;, as the first two smaller numbers are [1, 2].</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [1, 5, 12, 2, 11, 5], K = 4</span>
+<span class="sd">Output: 5</span>
+<span class="sd">Explanation: The 4th smallest number is &#39;5&#39;, as the first three smaller numbers are</span>
+<span class="sd">[1, 2, 5].</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: [5, 12, 11, -1, 12], K = 3</span>
+<span class="sd">Output: 11</span>
+<span class="sd">Explanation: The 3rd smallest number is &#39;11&#39;, as the first two small numbers are [5, -1].</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">find_Kth_smallest_number</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="o">-</span><span class="n">num</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="o">-</span><span class="n">num</span> <span class="o">&gt;</span> <span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+                <span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="o">-</span><span class="n">num</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+    <span class="c1"># since there are two 5s in the input array, our 3rd and 4th smallest numbers should be a &#39;5&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">4</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># 1. Brute-force</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">find_Kth_smallest_number</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="c1"># to handle duplicates, we will keep track of previous smallest number and its index</span>
+    <span class="n">previousSmallestNum</span><span class="p">,</span> <span class="n">previousSmallestIndex</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">currentSmallestNum</span><span class="p">,</span> <span class="n">currentSmallestIndex</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">previousSmallestNum</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">currentSmallestNum</span><span class="p">:</span>
+                <span class="c1"># found the next smallest number</span>
+                <span class="n">currentSmallestNum</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">currentSmallestIndex</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">previousSmallestNum</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">previousSmallestIndex</span><span class="p">:</span>
+                <span class="c1"># found a number which is equal to the previous smallest number; since numbers can repeat,</span>
+                <span class="c1"># we will consider &#39;nums[j]&#39; only if it has a different index than previous smallest</span>
+                <span class="n">currentSmallestNum</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">currentSmallestIndex</span> <span class="o">=</span> <span class="n">j</span>
+                <span class="k">break</span>  <span class="c1"># break here as we have found our definitive next smallest number</span>
+
+        <span class="c1"># current smallest number becomes previous smallest number for the next iteration</span>
+        <span class="n">previousSmallestNum</span> <span class="o">=</span> <span class="n">currentSmallestNum</span>
+        <span class="n">previousSmallestIndex</span> <span class="o">=</span> <span class="n">currentSmallestIndex</span>
+        <span class="n">currentSmallestNum</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+
+    <span class="k">return</span> <span class="n">previousSmallestNum</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+    <span class="c1"># since there are two 5s in the input array, our 3rd and 4th smallest numbers should be a &#39;5&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">4</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time &amp; Space Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N*K). The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># 2. Brute-force using Sorting</span>
+<span class="k">def</span> <span class="nf">find_Kth_smallest_number</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">nums</span><span class="p">)[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+    <span class="c1"># since there are two 5s in the input array, our 3rd and 4th smallest numbers should be a &#39;5&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">4</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time &amp; Space Complexity</span>
+<span class="sd">Sorting will take O(NlogN)O(NlogN) and if we are not using an in-place sorting algorithm, we will need O(N)O(N) space.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># 3. Using Max-Heap</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">find_Kth_smallest_number</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">maxHeap</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># put first k numbers in the max heap</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">maxHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># go through the remaining numbers of the array, if the number from the array is smaller than the</span>
+    <span class="c1"># top(biggest) number of the heap, remove the top number from heap and add the number from array</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">heappop</span><span class="p">(</span><span class="n">maxHeap</span><span class="p">)</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">maxHeap</span><span class="p">,</span> <span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># the root of the heap has the Kth smallest number</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">maxHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+    <span class="c1"># since there are two 5s in the input array, our 3rd and 4th smallest numbers should be a &#39;5&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">4</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time &amp; Space Complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(K*logK + (N-K)*logK) which is asymptotically equal to O(N*logK).</span>
+<span class="sd">The space complexity will be O(K) because we need to store ‘K’ smallest numbers in the heap.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">4. Using Min-Heap</span>
+<span class="sd">Also discussed in Kth Smallest Number, we can use a Min Heap to find the Kth smallest number.</span>
+<span class="sd">We can insert all the numbers in the min-heap and then extract the top ‘K’ numbers from the heap to find the Kth smallest number.</span>
+<span class="sd">Time &amp; Space Complexity</span>
+<span class="sd">Inserting all numbers in the heap will take O(N*logN) and extracting ‘K’ numbers will take O(K*logN).</span>
+<span class="sd">Overall, the time complexity of this algorithm will be O(N*logN+K*logN) and the space complexity will be O(N).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># 5. Using Partition Scheme of Quicksort</span>
+<span class="k">def</span> <span class="nf">find_Kth_smallest_number</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">find_Kth_smallest_number_rec</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">find_Kth_smallest_number_rec</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># search lower part</span>
+        <span class="k">return</span> <span class="n">find_Kth_smallest_number_rec</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># search higher part</span>
+    <span class="k">return</span> <span class="n">find_Kth_smallest_number_rec</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">low</span> <span class="o">==</span> <span class="n">high</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">low</span>
+
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">high</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+        <span class="c1"># all elements less than &#39;pivot&#39; will be before the index &#39;low&#39;</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="p">:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">low</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">low</span><span class="p">]</span>
+            <span class="n">low</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># put the pivot in its correct place</span>
+    <span class="n">nums</span><span class="p">[</span><span class="n">low</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">high</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">high</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">low</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">low</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+    <span class="c1"># since there are two 5s in the input array, our 3rd and 4th smallest numbers should be a &#39;5&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">4</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kth smallest number is: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_Kth_smallest_number</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../leetcode_tags/index.html" class="btn btn-neutral float-right" title="LeetCode Tags" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../miscellaneous.html" class="btn btn-neutral float-left" title="17. Miscellaneous" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, XiuFu Guo
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

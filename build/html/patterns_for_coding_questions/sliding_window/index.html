@@ -1,0 +1,1291 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.1. Maximum Sum Subarray of Size K (easy) &mdash; Algorithm Spices  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2. Two Points" href="../two_points.html" />
+    <link rel="prev" title="1. Sliding Window" href="../sliding_window.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Algorithm Spices
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Preface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Patterns for Coding Questions</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../sliding_window.html">1. Sliding Window</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1.1. Maximum Sum Subarray of Size K (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smallest-subarray-with-a-given-sum-easy">1.2. Smallest Subarray with a given sum (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#longest-substring-with-k-distinct-characters-medium">1.3. Longest Substring with K Distinct Characters (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fruits-into-baskets-medium">1.4. Fruits into Baskets (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#no-repeat-substring-hard">1.5. No-repeat Substring (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#longest-substring-with-same-letters-after-replacement-hard">1.6. Longest Substring with Same Letters after Replacement (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#longest-subarray-with-ones-after-replacement-hard">1.7. Longest Subarray with Ones after Replacement (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-1-permutation-in-a-string-hard">1.8. Problem Challenge 1 - Permutation in a String (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-2-string-anagrams-hard">1.9. Problem Challenge 2 - String Anagrams (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-3-smallest-window-containing-substring-hard">1.10. Problem Challenge 3 - Smallest Window containing Substring (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-4-words-concatenation-hard">1.11. Problem Challenge 4 - Words Concatenation (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../two_points.html">2. Two Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../merge_intervals.html">4. Merge Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cyclic_sort.html">5. Cyclic Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../in-place_reversal_of_a_linkedlist.html">6. In-place Reversal of a LinkedList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_breadth_first_search.html">7. Tree Breadth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_depth_first_search.html">8. Tree Depth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_heaps.html">9. Two Heaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../subsets.html">10. Subsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modified_binary_search.html">11. Modified Binary Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bitwise_xor.html">12. Bitwise XOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../top_k_elements.html">13. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">14. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topological_sort_graph.html">16. Topological Sort (Graph)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellaneous.html">17. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_tags/index.html">LeetCode Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_template/index.html">LeetCode Template</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Algorithm Spices</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Patterns for Coding Questions</a> &raquo;</li>
+        
+          <li><a href="../sliding_window.html"><span class="section-number">1. </span>Sliding Window</a> &raquo;</li>
+        
+      <li><span class="section-number">1.1. </span>Maximum Sum Subarray of Size K (easy)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/patterns_for_coding_questions/sliding_window/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="maximum-sum-subarray-of-size-k-easy">
+<h1><span class="section-number">1.1. </span>Maximum Sum Subarray of Size K (easy)<a class="headerlink" href="#maximum-sum-subarray-of-size-k-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement #</span>
+<span class="sd">Given an array of positive numbers and a positive number ‘k’, find the maximum sum of any contiguous subarray of size ‘k’.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [2, 1, 5, 1, 3, 2], k=3</span>
+<span class="sd">Output: 9</span>
+<span class="sd">Explanation: Subarray with maximum sum is [5, 1, 3].</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 3, 4, 1, 5], k=2</span>
+<span class="sd">Output: 7</span>
+<span class="sd">Explanation: Subarray with maximum sum is [3, 4].</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">max_sub_array_of_size_k</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">arr</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">max_sum</span><span class="p">,</span> <span class="n">window_sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">window_start</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="n">window_sum</span> <span class="o">+=</span> <span class="n">arr</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span>  <span class="c1"># add the next element</span>
+        <span class="c1"># slide the window, we don&#39;t need to slide if we&#39;ve not hit the required window size of &#39;k&#39;</span>
+        <span class="k">if</span> <span class="n">window_end</span> <span class="o">&gt;=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">max_sum</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_sum</span><span class="p">,</span> <span class="n">window_sum</span><span class="p">)</span>
+            <span class="n">window_sum</span> <span class="o">-=</span> <span class="n">arr</span><span class="p">[</span><span class="n">window_start</span><span class="p">]</span>  <span class="c1"># subtract the element going out</span>
+            <span class="n">window_start</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># slide the window ahead</span>
+    <span class="k">return</span> <span class="n">max_sum</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">max_sub_array_of_size_k</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">arr</span><span class="p">):</span>
+    <span class="n">max_sum</span><span class="p">,</span> <span class="n">window_sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">window_start</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="n">window_sum</span> <span class="o">+=</span> <span class="n">arr</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span>  <span class="c1"># add the next element</span>
+        <span class="c1"># slide the window, we don&#39;t need to slide if we&#39;ve not hit the required window size of &#39;k&#39;</span>
+        <span class="k">if</span> <span class="n">window_end</span> <span class="o">&gt;=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">max_sum</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_sum</span><span class="p">,</span> <span class="n">window_sum</span><span class="p">)</span>
+            <span class="n">window_sum</span> <span class="o">-=</span> <span class="n">arr</span><span class="p">[</span><span class="n">window_start</span><span class="p">]</span>  <span class="c1"># subtract the element going out</span>
+            <span class="n">window_start</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># slide the window ahead</span>
+    <span class="k">return</span> <span class="n">max_sum</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum sum of a subarray of size K: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">max_sub_array_of_size_k</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum sum of a subarray of size K: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">max_sub_array_of_size_k</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N).</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="smallest-subarray-with-a-given-sum-easy">
+<h1><span class="section-number">1.2. </span>Smallest Subarray with a given sum (easy)<a class="headerlink" href="#smallest-subarray-with-a-given-sum-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array of positive numbers and a positive number ‘S’, find the length of the smallest contiguous subarray whose sum is greater than or equal to ‘S’. Return 0, if no such subarray exists.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [2, 1, 5, 2, 3, 2], S=7</span>
+<span class="sd">Output: 2</span>
+<span class="sd">Explanation: The smallest subarray with a sum great than or equal to &#39;7&#39; is [5, 2].</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 1, 5, 2, 8], S=7</span>
+<span class="sd">Output: 1</span>
+<span class="sd">Explanation: The smallest subarray with a sum greater than or equal to &#39;7&#39; is [8].</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: [3, 4, 1, 1, 6], S=8</span>
+<span class="sd">Output: 3</span>
+<span class="sd">Explanation: Smallest subarrays with a sum greater than or equal to &#39;8&#39; are [3, 4, 1] or [1, 1, 6].</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">smallest_subarray_with_given_sum</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">arr</span><span class="p">):</span>
+    <span class="n">window_sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">min_length</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">window_start</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="n">window_sum</span> <span class="o">+=</span> <span class="n">arr</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span>  <span class="c1"># add the next element</span>
+        <span class="c1"># shrink the window as small as possible until the &#39;window_sum&#39; is smaller than &#39;s&#39;</span>
+        <span class="k">while</span> <span class="n">window_sum</span> <span class="o">&gt;=</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">min_length</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_length</span><span class="p">,</span> <span class="n">window_end</span> <span class="o">-</span> <span class="n">window_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">window_sum</span> <span class="o">-=</span> <span class="n">arr</span><span class="p">[</span><span class="n">window_start</span><span class="p">]</span>
+            <span class="n">window_start</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">min_length</span> <span class="o">==</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">min_length</span>
+
+
+<span class="c1"># answer</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">smallest_subarray_with_given_sum</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">arr</span><span class="p">):</span>
+    <span class="n">window_sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">min_length</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">window_start</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="n">window_sum</span> <span class="o">+=</span> <span class="n">arr</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span>  <span class="c1"># add the next element</span>
+        <span class="c1"># shrink the window as small as possible until the &#39;window_sum&#39; is smaller than &#39;s&#39;</span>
+        <span class="k">while</span> <span class="n">window_sum</span> <span class="o">&gt;=</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">min_length</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_length</span><span class="p">,</span> <span class="n">window_end</span> <span class="o">-</span> <span class="n">window_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">window_sum</span> <span class="o">-=</span> <span class="n">arr</span><span class="p">[</span><span class="n">window_start</span><span class="p">]</span>
+            <span class="n">window_start</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">min_length</span> <span class="o">==</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">min_length</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Smallest subarray length: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">smallest_subarray_with_given_sum</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Smallest subarray length: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">smallest_subarray_with_given_sum</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Smallest subarray length: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">smallest_subarray_with_given_sum</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N).</span>
+<span class="sd">The outer for loop runs for all elements and the inner while loop processes each element only once, therefore the time complexity of the algorithm will be O(N+N) which is asymptotically equivalent to O(N).</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="longest-substring-with-k-distinct-characters-medium">
+<h1><span class="section-number">1.3. </span>Longest Substring with K Distinct Characters (medium)<a class="headerlink" href="#longest-substring-with-k-distinct-characters-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement #</span>
+<span class="sd">Given a string, find the length of the longest substring in it with no more than K distinct characters.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: String=&quot;araaci&quot;, K=2</span>
+<span class="sd">Output: 4</span>
+<span class="sd">Explanation: The longest substring with no more than &#39;2&#39; distinct characters is &quot;araa&quot;.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: String=&quot;araaci&quot;, K=1</span>
+<span class="sd">Output: 2</span>
+<span class="sd">Explanation: The longest substring with no more than &#39;1&#39; distinct characters is &quot;aa&quot;.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: String=&quot;cbbebi&quot;, K=3</span>
+<span class="sd">Output: 5</span>
+<span class="sd">Explanation: The longest substrings with no more than &#39;3&#39; distinct characters are &quot;cbbeb&quot; &amp; &quot;bbebi&quot;.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">longest_substring_with_k_distinct</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">dict_arr</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">max_len</span><span class="p">,</span> <span class="n">win_start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">win_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dict_arr</span><span class="p">:</span>
+            <span class="n">dict_arr</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dict_arr</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_arr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dict_arr</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">dict_arr</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dict_arr</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">win_start</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_len</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dict_arr</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+    <span class="k">return</span> <span class="n">max_len</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">longest_substring_with_k_distinct</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">window_start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">max_length</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">char_frequency</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># in the following loop we&#39;ll try to extend the range [window_start, window_end]</span>
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="n">right_char</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">right_char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">char_frequency</span><span class="p">:</span>
+            <span class="n">char_frequency</span><span class="p">[</span><span class="n">right_char</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">char_frequency</span><span class="p">[</span><span class="n">right_char</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># shrink the sliding window, until we are left with &#39;k&#39; distinct characters in the char_frequency</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">char_frequency</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">left_char</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">window_start</span><span class="p">]</span>
+            <span class="n">char_frequency</span><span class="p">[</span><span class="n">left_char</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">char_frequency</span><span class="p">[</span><span class="n">left_char</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">char_frequency</span><span class="p">[</span><span class="n">left_char</span><span class="p">]</span>
+            <span class="n">window_start</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># shrink the window</span>
+        <span class="c1"># remember the maximum length so far</span>
+        <span class="n">max_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="n">window_end</span> <span class="o">-</span> <span class="n">window_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_length</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of the longest substring: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">longest_substring_with_k_distinct</span><span class="p">(</span><span class="s2">&quot;araaci&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of the longest substring: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">longest_substring_with_k_distinct</span><span class="p">(</span><span class="s2">&quot;araaci&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of the longest substring: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">longest_substring_with_k_distinct</span><span class="p">(</span><span class="s2">&quot;cbbebi&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N) where ‘N’ is the number of characters in the input string.</span>
+<span class="sd">The outer for loop runs for all characters and the inner while loop processes each character only once, therefore the time complexity of the algorithm will be O(N+N) which is asymptotically equivalent to O(N).</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The space complexity of the algorithm is O(K), as we will be storing a maximum of ‘K+1’ characters in the HashMap.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fruits-into-baskets-medium">
+<h1><span class="section-number">1.4. </span>Fruits into Baskets (medium)<a class="headerlink" href="#fruits-into-baskets-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array of characters where each character represents a fruit tree, you are given two baskets and your goal is to put maximum number of fruits in each basket. The only restriction is that each basket can have only one type of fruit.</span>
+<span class="sd">You can start with any tree, but once you have started you can’t skip a tree. You will pick one fruit from each tree until you cannot, i.e., you will stop when you have to pick from a third fruit type.</span>
+<span class="sd">Write a function to return the maximum number of fruits in both the baskets.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: Fruit=[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;A&#39;, &#39;C&#39;]</span>
+<span class="sd">Output: 3</span>
+<span class="sd">Explanation: We can put 2 &#39;C&#39; in one basket and one &#39;A&#39; in the other from the subarray [&#39;C&#39;, &#39;A&#39;, &#39;C&#39;]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: Fruit=[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;B&#39;, &#39;B&#39;, &#39;C&#39;]</span>
+<span class="sd">Output: 5</span>
+<span class="sd">Explanation: We can put 3 &#39;B&#39; in one basket and two &#39;C&#39; in the other basket.</span>
+<span class="sd">This can be done if we start with the second letter: [&#39;B&#39;, &#39;C&#39;, &#39;B&#39;, &#39;B&#39;, &#39;C&#39;]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">fruits_into_baskets</span><span class="p">(</span><span class="n">fruits</span><span class="p">):</span>
+    <span class="n">max_len</span><span class="p">,</span> <span class="n">win_start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">dict_fruits</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">win_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fruits</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">fruits</span><span class="p">[</span><span class="n">win_end</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dict_fruits</span><span class="p">:</span>
+            <span class="n">dict_fruits</span><span class="p">[</span><span class="n">fruits</span><span class="p">[</span><span class="n">win_end</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dict_fruits</span><span class="p">[</span><span class="n">fruits</span><span class="p">[</span><span class="n">win_end</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_fruits</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dict_fruits</span><span class="p">[</span><span class="n">fruits</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">dict_fruits</span><span class="p">[</span><span class="n">fruits</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dict_fruits</span><span class="p">[</span><span class="n">fruits</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">win_start</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_fruits</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_len</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dict_fruits</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+    <span class="k">return</span> <span class="n">max_len</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">fruits_into_baskets</span><span class="p">(</span><span class="n">fruits</span><span class="p">):</span>
+    <span class="n">window_start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">max_length</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">fruit_frequency</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># try to extend the range [window_start, window_end]</span>
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fruits</span><span class="p">)):</span>
+        <span class="n">right_fruit</span> <span class="o">=</span> <span class="n">fruits</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">right_fruit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fruit_frequency</span><span class="p">:</span>
+            <span class="n">fruit_frequency</span><span class="p">[</span><span class="n">right_fruit</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">fruit_frequency</span><span class="p">[</span><span class="n">right_fruit</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># shrink the sliding window, until we are left with &#39;2&#39; fruits in the fruit frequency dictionary</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">fruit_frequency</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">left_fruit</span> <span class="o">=</span> <span class="n">fruits</span><span class="p">[</span><span class="n">window_start</span><span class="p">]</span>
+            <span class="n">fruit_frequency</span><span class="p">[</span><span class="n">left_fruit</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">fruit_frequency</span><span class="p">[</span><span class="n">left_fruit</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">fruit_frequency</span><span class="p">[</span><span class="n">left_fruit</span><span class="p">]</span>
+            <span class="n">window_start</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># shrink the window</span>
+        <span class="n">max_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="n">window_end</span> <span class="o">-</span> <span class="n">window_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_length</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum number of fruits: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">fruits_into_baskets</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum number of fruits: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">fruits_into_baskets</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N) where ‘N’ is the number of characters in the input array.</span>
+<span class="sd">The outer for loop runs for all characters and the inner while loop processes each character only once, therefore the time complexity of the algorithm will be O(N+N)which is asymptotically equivalent to O(N).</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The algorithm runs in constant space O(1) as there can be a maximum of three types of fruits stored in the frequency map.</span>
+<span class="sd">Similar Problems</span>
+<span class="sd">Problem 1: Longest Substring with at most 2 distinct characters</span>
+<span class="sd">Given a string, find the length of the longest substring in it with at most two distinct characters.</span>
+<span class="sd">Solution: This problem is exactly similar to our parent problem.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="no-repeat-substring-hard">
+<h1><span class="section-number">1.5. </span>No-repeat Substring (hard)<a class="headerlink" href="#no-repeat-substring-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given a string, find the length of the longest substring which has no repeating characters.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: String=&quot;aabccbb&quot;</span>
+<span class="sd">Output: 3</span>
+<span class="sd">Explanation: The longest substring without any repeating characters is &quot;abc&quot;.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: String=&quot;abbbb&quot;</span>
+<span class="sd">Output: 2</span>
+<span class="sd">Explanation: The longest substring without any repeating characters is &quot;ab&quot;.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: String=&quot;abccde&quot;</span>
+<span class="sd">Output: 3</span>
+<span class="sd">Explanation: Longest substrings without any repeating characters are &quot;abc&quot; &amp; &quot;cde&quot;.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">non_repeat_substring</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+    <span class="n">max_len</span><span class="p">,</span> <span class="n">win_start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">dict_str</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">win_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dict_str</span><span class="p">:</span>
+            <span class="n">dict_str</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dict_str</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_str</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dict_str</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">dict_str</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">dict_str</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dict_str</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">win_start</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_str</span><span class="p">)</span> <span class="o">==</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dict_str</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+            <span class="n">max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_len</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_str</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">max_len</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">non_repeat_substring</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+    <span class="n">window_start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">max_length</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">char_index_map</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># try to extend the range [windowStart, windowEnd]</span>
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="n">right_char</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span>
+        <span class="c1"># if the map already contains the &#39;right_char&#39;, shrink the window from the beginning so that</span>
+        <span class="c1"># we have only one occurrence of &#39;right_char&#39;</span>
+        <span class="k">if</span> <span class="n">right_char</span> <span class="ow">in</span> <span class="n">char_index_map</span><span class="p">:</span>
+            <span class="c1"># this is tricky; in the current window, we will not have any &#39;right_char&#39; after its previous index</span>
+            <span class="c1"># and if &#39;window_start&#39; is already ahead of the last index of &#39;right_char&#39;, we&#39;ll keep &#39;window_start&#39;</span>
+            <span class="n">window_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">window_start</span><span class="p">,</span> <span class="n">char_index_map</span><span class="p">[</span><span class="n">right_char</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># insert the &#39;right_char&#39; into the map</span>
+        <span class="n">char_index_map</span><span class="p">[</span><span class="n">right_char</span><span class="p">]</span> <span class="o">=</span> <span class="n">window_end</span>
+        <span class="c1"># remember the maximum length so far</span>
+        <span class="n">max_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="n">window_end</span> <span class="o">-</span> <span class="n">window_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_length</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of the longest substring: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">non_repeat_substring</span><span class="p">(</span><span class="s2">&quot;aabccbb&quot;</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of the longest substring: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">non_repeat_substring</span><span class="p">(</span><span class="s2">&quot;abbbb&quot;</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of the longest substring: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">non_repeat_substring</span><span class="p">(</span><span class="s2">&quot;abccde&quot;</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N) where ‘N’ is the number of characters in the input string.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The space complexity of the algorithm will be O(K) where KK is the number of distinct characters in the input string.</span>
+<span class="sd">This also means K&lt;=N, because in the worst case, the whole string might not have any repeating character so the entire string will be added to the HashMap.</span>
+<span class="sd">Having said that, since we can expect a fixed set of characters in the input string (e.g., 26 for English letters), we can say that the algorithm runs in fixed space O(1); in this case, we can use a fixed-size array instead of the HashMap.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="longest-substring-with-same-letters-after-replacement-hard">
+<h1><span class="section-number">1.6. </span>Longest Substring with Same Letters after Replacement (hard)<a class="headerlink" href="#longest-substring-with-same-letters-after-replacement-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given a string with lowercase letters only, if you are allowed to replace no more than ‘k’ letters with any letter, find the length of the longest substring having the same letters after replacement.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: String=&quot;aabccbb&quot;, k=2</span>
+<span class="sd">Output: 5</span>
+<span class="sd">Explanation: Replace the two &#39;c&#39; with &#39;b&#39; to have a longest repeating substring &quot;bbbbb&quot;.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: String=&quot;abbcb&quot;, k=1</span>
+<span class="sd">Output: 4</span>
+<span class="sd">Explanation: Replace the &#39;c&#39; with &#39;b&#39; to have a longest repeating substring &quot;bbbb&quot;.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: String=&quot;abccde&quot;, k=1</span>
+<span class="sd">Output: 3</span>
+<span class="sd">Explanation: Replace the &#39;b&#39; or &#39;d&#39; with &#39;c&#39; to have the longest repeating substring &quot;ccc&quot;.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">length_of_longest_substring</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">win_start</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">dict_str</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">win_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dict_str</span><span class="p">:</span>
+            <span class="n">dict_str</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dict_str</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">cnt</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dict_str</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">while</span> <span class="n">win_end</span> <span class="o">-</span> <span class="n">win_start</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cnt</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">dict_str</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">win_start</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_len</span><span class="p">,</span> <span class="n">win_end</span> <span class="o">-</span> <span class="n">win_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">max_len</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">length_of_longest_substring</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">window_start</span><span class="p">,</span> <span class="n">max_length</span><span class="p">,</span> <span class="n">max_repeat_letter_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">frequency_map</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Try to extend the range [window_start, window_end]</span>
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="n">right_char</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">right_char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">frequency_map</span><span class="p">:</span>
+            <span class="n">frequency_map</span><span class="p">[</span><span class="n">right_char</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">frequency_map</span><span class="p">[</span><span class="n">right_char</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">max_repeat_letter_count</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_repeat_letter_count</span><span class="p">,</span>
+                                      <span class="n">frequency_map</span><span class="p">[</span><span class="n">right_char</span><span class="p">])</span>
+
+        <span class="c1"># Current window size is from window_start to window_end, overall we have a letter which is</span>
+        <span class="c1"># repeating &#39;max_repeat_letter_count&#39; times, this means we can have a window which has one letter</span>
+        <span class="c1"># repeating &#39;max_repeat_letter_count&#39; times and the remaining letters we should replace.</span>
+        <span class="c1"># if the remaining letters are more than &#39;k&#39;, it is the time to shrink the window as we</span>
+        <span class="c1"># are not allowed to replace more than &#39;k&#39; letters</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">window_end</span> <span class="o">-</span> <span class="n">window_start</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">max_repeat_letter_count</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">left_char</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">window_start</span><span class="p">]</span>
+            <span class="n">frequency_map</span><span class="p">[</span><span class="n">left_char</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">window_start</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">max_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="n">window_end</span> <span class="o">-</span> <span class="n">window_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_length</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">length_of_longest_substring</span><span class="p">(</span><span class="s2">&quot;aabccbb&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">length_of_longest_substring</span><span class="p">(</span><span class="s2">&quot;abbcb&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">length_of_longest_substring</span><span class="p">(</span><span class="s2">&quot;abccde&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N) where ‘N’ is the number of letters in the input string.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">As we are expecting only the lower case letters in the input string, we can conclude that the space complexity will be O(26), to store each letter’s frequency in the HashMap, which is asymptotically equal to O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="longest-subarray-with-ones-after-replacement-hard">
+<h1><span class="section-number">1.7. </span>Longest Subarray with Ones after Replacement (hard)<a class="headerlink" href="#longest-subarray-with-ones-after-replacement-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array containing 0s and 1s, if you are allowed to replace no more than ‘k’ 0s with 1s, find the length of the longest contiguous subarray having all 1s.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: Array=[0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], k=2</span>
+<span class="sd">Output: 6</span>
+<span class="sd">Explanation: Replace the &#39;0&#39; at index 5 and 8 to have the longest contiguous subarray of 1s having length 6.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: Array=[0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], k=3</span>
+<span class="sd">Output: 9</span>
+<span class="sd">Explanation: Replace the &#39;0&#39; at index 6, 9, and 10 to have the longest contiguous subarray of 1s having length 9.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">length_of_longest_substring</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">win_start</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">zero_posi</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">win_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">win_end</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">zero_posi</span><span class="p">[</span><span class="n">cnt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">win_end</span>
+
+            <span class="k">if</span> <span class="n">cnt</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
+                <span class="n">win_start</span> <span class="o">=</span> <span class="n">zero_posi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">zero_posi</span> <span class="o">=</span> <span class="n">zero_posi</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">cnt</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="n">max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_len</span><span class="p">,</span> <span class="n">win_end</span> <span class="o">-</span> <span class="n">win_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">max_len</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">length_of_longest_substring</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">window_start</span><span class="p">,</span> <span class="n">max_length</span><span class="p">,</span> <span class="n">max_ones_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="c1"># Try to extend the range [window_start, window_end]</span>
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">max_ones_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Current window size is from window_start to window_end, overall we have a maximum of 1s</span>
+        <span class="c1"># repeating &#39;max_ones_count&#39; times, this means we can have a window with &#39;max_ones_count&#39; 1s</span>
+        <span class="c1"># and the remaining are 0s which should replace with 1s.</span>
+        <span class="c1"># now, if the remaining 1s are more than &#39;k&#39;, it is the time to shrink the window as we</span>
+        <span class="c1"># are not allowed to replace more than &#39;k&#39; 0s</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">window_end</span> <span class="o">-</span> <span class="n">window_start</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">max_ones_count</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">window_start</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">max_ones_count</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">window_start</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">max_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="n">window_end</span> <span class="o">-</span> <span class="n">window_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_length</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">length_of_longest_substring</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">length_of_longest_substring</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N) where ‘N’ is the count of numbers in the input array.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-1-permutation-in-a-string-hard">
+<h1><span class="section-number">1.8. </span>Problem Challenge 1 - Permutation in a String (hard)<a class="headerlink" href="#problem-challenge-1-permutation-in-a-string-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 1</span>
+<span class="sd">Permutation in a String (hard)</span>
+<span class="sd">Given a string and a pattern, find out if the string contains any permutation of the pattern.</span>
+<span class="sd">Permutation is defined as the re-arranging of the characters of the string. For example, “abc” has the following six permutations:</span>
+<span class="sd">abc</span>
+<span class="sd">acb</span>
+<span class="sd">bac</span>
+<span class="sd">bca</span>
+<span class="sd">cab</span>
+<span class="sd">cba</span>
+<span class="sd">If a string has ‘n’ distinct characters it will have n!n! permutations.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: String=&quot;oidbcaf&quot;, Pattern=&quot;abc&quot;</span>
+<span class="sd">Output: true</span>
+<span class="sd">Explanation: The string contains &quot;bca&quot; which is a permutation of the given pattern.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: String=&quot;odicf&quot;, Pattern=&quot;dc&quot;</span>
+<span class="sd">Output: false</span>
+<span class="sd">Explanation: No permutation of the pattern is present in the given string as a substring.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: String=&quot;bcdxabcdy&quot;, Pattern=&quot;bcdyabcdx&quot;</span>
+<span class="sd">Output: true</span>
+<span class="sd">Explanation: Both the string and the pattern are a permutation of each other.</span>
+<span class="sd">Example 4:</span>
+<span class="sd">Input: String=&quot;aaacb&quot;, Pattern=&quot;abc&quot;</span>
+<span class="sd">Output: true</span>
+<span class="sd">Explanation: The string contains &quot;acb&quot; which is a permutation of the given pattern.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_permutation</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">p_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">s_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">p_dict</span><span class="p">:</span>
+            <span class="n">p_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s_dict</span><span class="p">:</span>
+                <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)]]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)]]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)]]</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s_dict</span><span class="p">:</span>
+                <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">s_dict</span> <span class="o">==</span> <span class="n">p_dict</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_permutation</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+    <span class="n">window_start</span><span class="p">,</span> <span class="n">matched</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">char_frequency</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="nb">chr</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">chr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">char_frequency</span><span class="p">:</span>
+            <span class="n">char_frequency</span><span class="p">[</span><span class="nb">chr</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">char_frequency</span><span class="p">[</span><span class="nb">chr</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># our goal is to match all the characters from the &#39;char_frequency&#39; with the current window</span>
+    <span class="c1"># try to extend the range [window_start, window_end]</span>
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="n">right_char</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">right_char</span> <span class="ow">in</span> <span class="n">char_frequency</span><span class="p">:</span>
+            <span class="c1"># decrement the frequency of matched character</span>
+            <span class="n">char_frequency</span><span class="p">[</span><span class="n">right_char</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">char_frequency</span><span class="p">[</span><span class="n">right_char</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">matched</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">matched</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">char_frequency</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="c1"># shrink the window by one character</span>
+        <span class="k">if</span> <span class="n">window_end</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">left_char</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">window_start</span><span class="p">]</span>
+            <span class="n">window_start</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">left_char</span> <span class="ow">in</span> <span class="n">char_frequency</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">char_frequency</span><span class="p">[</span><span class="n">left_char</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">matched</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">char_frequency</span><span class="p">[</span><span class="n">left_char</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Permutation exist: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_permutation</span><span class="p">(</span><span class="s2">&quot;oidbcaf&quot;</span><span class="p">,</span> <span class="s2">&quot;abc&quot;</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Permutation exist: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_permutation</span><span class="p">(</span><span class="s2">&quot;odicf&quot;</span><span class="p">,</span> <span class="s2">&quot;dc&quot;</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Permutation exist: &#39;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_permutation</span><span class="p">(</span><span class="s2">&quot;bcdxabcdy&quot;</span><span class="p">,</span> <span class="s2">&quot;bcdyabcdx&quot;</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Permutation exist: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_permutation</span><span class="p">(</span><span class="s2">&quot;aaacb&quot;</span><span class="p">,</span> <span class="s2">&quot;abc&quot;</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity #</span>
+<span class="sd">The time complexity of the above algorithm will be O(N + M) where ‘N’ and ‘M’ are the number of characters in the input string and the pattern respectively.</span>
+
+<span class="sd">Space Complexity #</span>
+<span class="sd">The space complexity of the algorithm is O(M) since in the worst case,</span>
+<span class="sd">the whole pattern can have distinct characters which will go into the HashMap.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-2-string-anagrams-hard">
+<h1><span class="section-number">1.9. </span>Problem Challenge 2 - String Anagrams (hard)<a class="headerlink" href="#problem-challenge-2-string-anagrams-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 2</span>
+<span class="sd">String Anagrams (hard)</span>
+<span class="sd">Given a string and a pattern, find all anagrams of the pattern in the given string.</span>
+<span class="sd">Anagram is actually a Permutation of a string. For example, “abc” has the following six anagrams:</span>
+<span class="sd">abc</span>
+<span class="sd">acb</span>
+<span class="sd">bac</span>
+<span class="sd">bca</span>
+<span class="sd">cab</span>
+<span class="sd">cba</span>
+<span class="sd">Write a function to return a list of starting indices of the anagrams of the pattern in the given string.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: String=&quot;ppqp&quot;, Pattern=&quot;pq&quot;</span>
+<span class="sd">Output: [1, 2]</span>
+<span class="sd">Explanation: The two anagrams of the pattern in the given string are &quot;pq&quot; and &quot;qp&quot;.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: String=&quot;abbcabc&quot;, Pattern=&quot;abc&quot;</span>
+<span class="sd">Output: [2, 3, 4]</span>
+<span class="sd">Explanation: The three anagrams of the pattern in the given string are &quot;bca&quot;, &quot;cab&quot;, and &quot;abc&quot;.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_string_anagrams</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+    <span class="n">result_indexes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">p_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">s_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">p_dict</span><span class="p">:</span>
+            <span class="n">p_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s_dict</span><span class="p">:</span>
+                <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)]]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)]]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)]]</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s_dict</span><span class="p">:</span>
+                <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">s_dict</span> <span class="o">==</span> <span class="n">p_dict</span><span class="p">:</span>
+            <span class="n">result_indexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result_indexes</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_string_anagrams</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+    <span class="n">window_start</span><span class="p">,</span> <span class="n">matched</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">char_frequency</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="nb">chr</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">chr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">char_frequency</span><span class="p">:</span>
+            <span class="n">char_frequency</span><span class="p">[</span><span class="nb">chr</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">char_frequency</span><span class="p">[</span><span class="nb">chr</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">result_indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Our goal is to match all the characters from the &#39;char_frequency&#39; with the current window</span>
+    <span class="c1"># try to extend the range [window_start, window_end]</span>
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="n">right_char</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">right_char</span> <span class="ow">in</span> <span class="n">char_frequency</span><span class="p">:</span>
+            <span class="c1"># Decrement the frequency of matched character</span>
+            <span class="n">char_frequency</span><span class="p">[</span><span class="n">right_char</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">char_frequency</span><span class="p">[</span><span class="n">right_char</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">matched</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">matched</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">char_frequency</span><span class="p">):</span>  <span class="c1"># Have we found an anagram?</span>
+            <span class="n">result_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">window_start</span><span class="p">)</span>
+
+        <span class="c1"># Shrink the sliding window</span>
+        <span class="k">if</span> <span class="n">window_end</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">left_char</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">window_start</span><span class="p">]</span>
+            <span class="n">window_start</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">left_char</span> <span class="ow">in</span> <span class="n">char_frequency</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">char_frequency</span><span class="p">[</span><span class="n">left_char</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">matched</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># Before putting the character back, decrement the matched count</span>
+                <span class="n">char_frequency</span><span class="p">[</span><span class="n">left_char</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># Put the character back</span>
+
+    <span class="k">return</span> <span class="n">result_indices</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_string_anagrams</span><span class="p">(</span><span class="s2">&quot;ppqp&quot;</span><span class="p">,</span> <span class="s2">&quot;pq&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_string_anagrams</span><span class="p">(</span><span class="s2">&quot;abbcabc&quot;</span><span class="p">,</span> <span class="s2">&quot;abc&quot;</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N + M) where ‘N’ and ‘M’ are the number of characters in the input string and the pattern respectively.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The space complexity of the algorithm is O(M) since in the worst case, the whole pattern can have distinct characters which will go into the HashMap.</span>
+<span class="sd">In the worst case, we also need O(N) space for the result list, this will happen when the pattern has only one character and the string contains only that character.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-3-smallest-window-containing-substring-hard">
+<h1><span class="section-number">1.10. </span>Problem Challenge 3 - Smallest Window containing Substring (hard)<a class="headerlink" href="#problem-challenge-3-smallest-window-containing-substring-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 3</span>
+<span class="sd">Smallest Window containing Substring (hard)</span>
+<span class="sd">Given a string and a pattern, find the smallest substring in the given string which has all the characters of the given pattern.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: String=&quot;aabdec&quot;, Pattern=&quot;abc&quot;</span>
+<span class="sd">Output: &quot;abdec&quot;</span>
+<span class="sd">Explanation: The smallest substring having all characters of the pattern is &quot;abdec&quot;</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: String=&quot;abdabca&quot;, Pattern=&quot;abc&quot;</span>
+<span class="sd">Output: &quot;abc&quot;</span>
+<span class="sd">Explanation: The smallest substring having all characters of the pattern is &quot;abc&quot;.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: String=&quot;adcad&quot;, Pattern=&quot;abc&quot;</span>
+<span class="sd">Output: &quot;&quot;</span>
+<span class="sd">Explanation: No substring in the given string has all characters of the pattern.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">find_substring</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">p_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">s_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">win_start</span><span class="p">,</span> <span class="n">min_len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">p_dict</span><span class="p">:</span>
+            <span class="n">p_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">win_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s_dict</span><span class="p">:</span>
+            <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_end</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">s_dict</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="nb">set</span><span class="p">(</span><span class="n">p_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">s_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())):</span>
+            <span class="k">if</span> <span class="n">win_end</span> <span class="o">-</span> <span class="n">win_start</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">min_len</span><span class="p">:</span>
+                <span class="n">min_len</span> <span class="o">=</span> <span class="n">win_end</span> <span class="o">-</span> <span class="n">win_start</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">win_end</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">:]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">:</span><span class="n">win_end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">[</span><span class="n">win_start</span><span class="p">]]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">win_start</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_substring</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+    <span class="n">window_start</span><span class="p">,</span> <span class="n">matched</span><span class="p">,</span> <span class="n">substr_start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">min_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">char_frequency</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="nb">chr</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">chr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">char_frequency</span><span class="p">:</span>
+            <span class="n">char_frequency</span><span class="p">[</span><span class="nb">chr</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">char_frequency</span><span class="p">[</span><span class="nb">chr</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># try to extend the range [window_start, window_end]</span>
+    <span class="k">for</span> <span class="n">window_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="n">right_char</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">window_end</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">right_char</span> <span class="ow">in</span> <span class="n">char_frequency</span><span class="p">:</span>
+            <span class="n">char_frequency</span><span class="p">[</span><span class="n">right_char</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">char_frequency</span><span class="p">[</span>
+                    <span class="n">right_char</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Count every matching of a character</span>
+                <span class="n">matched</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Shrink the window if we can, finish as soon as we remove a matched character</span>
+        <span class="k">while</span> <span class="n">matched</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">min_length</span> <span class="o">&gt;</span> <span class="n">window_end</span> <span class="o">-</span> <span class="n">window_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">min_length</span> <span class="o">=</span> <span class="n">window_end</span> <span class="o">-</span> <span class="n">window_start</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">substr_start</span> <span class="o">=</span> <span class="n">window_start</span>
+
+            <span class="n">left_char</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">window_start</span><span class="p">]</span>
+            <span class="n">window_start</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">left_char</span> <span class="ow">in</span> <span class="n">char_frequency</span><span class="p">:</span>
+                <span class="c1"># Note that we could have redundant matching characters, therefore we&#39;ll decrement the</span>
+                <span class="c1"># matched count only when a useful occurrence of a matched character is going out of the window</span>
+                <span class="k">if</span> <span class="n">char_frequency</span><span class="p">[</span><span class="n">left_char</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">matched</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">char_frequency</span><span class="p">[</span><span class="n">left_char</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">min_length</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">[</span><span class="n">substr_start</span><span class="p">:</span><span class="n">substr_start</span> <span class="o">+</span> <span class="n">min_length</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_substring</span><span class="p">(</span><span class="s2">&quot;aabdec&quot;</span><span class="p">,</span> <span class="s2">&quot;abc&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_substring</span><span class="p">(</span><span class="s2">&quot;abdabca&quot;</span><span class="p">,</span> <span class="s2">&quot;abc&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_substring</span><span class="p">(</span><span class="s2">&quot;adcad&quot;</span><span class="p">,</span> <span class="s2">&quot;abc&quot;</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N + M) where ‘N’ and ‘M’ are the number of characters in the input string and the pattern respectively.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The space complexity of the algorithm is O(M) since in the worst case, the whole pattern can have distinct characters which will go into the HashMap.</span>
+<span class="sd">In the worst case, we also need O(N) space for the resulting substring, which will happen when the input string is a permutation of the pattern.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-4-words-concatenation-hard">
+<h1><span class="section-number">1.11. </span>Problem Challenge 4 - Words Concatenation (hard)<a class="headerlink" href="#problem-challenge-4-words-concatenation-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 4</span>
+<span class="sd">Words Concatenation (hard)</span>
+<span class="sd">Given a string and a list of words, find all the starting indices of substrings in the given string that are a concatenation of all the given words exactly once without any overlapping of words. It is given that all words are of the same length.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: String=&quot;catfoxcat&quot;, Words=[&quot;cat&quot;, &quot;fox&quot;]</span>
+<span class="sd">Output: [0, 3]</span>
+<span class="sd">Explanation: The two substring containing both the words are &quot;catfox&quot; &amp; &quot;foxcat&quot;.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: String=&quot;catcatfoxfox&quot;, Words=[&quot;cat&quot;, &quot;fox&quot;]</span>
+<span class="sd">Output: [3]</span>
+<span class="sd">Explanation: The only substring containing both the words is &quot;catfox&quot;.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_word_concatenation</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
+    <span class="n">result_indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">word_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+    <span class="n">word_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">-</span> <span class="n">word_count</span> <span class="o">*</span> <span class="n">word_len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">curr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">word_count</span> <span class="o">*</span> <span class="n">word_len</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">word_count</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">words</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">curr</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">cnt</span> <span class="o">==</span> <span class="n">word_count</span><span class="p">:</span>
+        <span class="n">result_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result_indices</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_word_concatenation</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="n">word_frequency</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">word_frequency</span><span class="p">:</span>
+            <span class="n">word_frequency</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">word_frequency</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">result_indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">words_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+    <span class="n">word_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">-</span> <span class="n">words_count</span> <span class="o">*</span> <span class="n">word_length</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">words_seen</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">words_count</span><span class="p">):</span>
+            <span class="n">next_word_index</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">*</span> <span class="n">word_length</span>
+            <span class="c1"># Get the next word from the string</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">next_word_index</span><span class="p">:</span><span class="n">next_word_index</span> <span class="o">+</span> <span class="n">word_length</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">word_frequency</span><span class="p">:</span>  <span class="c1"># Break if we don&#39;t need this word</span>
+                <span class="k">break</span>
+
+        <span class="c1"># Add the word to the &#39;words_seen&#39; map</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">words_seen</span><span class="p">:</span>
+            <span class="n">words_seen</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">words_seen</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># No need to process further if the word has higher frequency than required</span>
+        <span class="k">if</span> <span class="n">words_seen</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">word_frequency</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">words_count</span><span class="p">:</span>  <span class="c1"># Store index if we have found all the words</span>
+            <span class="n">result_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result_indices</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_word_concatenation</span><span class="p">(</span><span class="s2">&quot;catfoxcat&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;fox&quot;</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_word_concatenation</span><span class="p">(</span><span class="s2">&quot;catcatfoxfox&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;fox&quot;</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N * M * Len) where ‘N’ is the number of characters in the given string,</span>
+<span class="sd">‘M’ is the total number of words, and ‘Len’ is the length of a word.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The space complexity of the algorithm is O(M) since at most, we will be storing all the words in the two HashMaps.</span>
+<span class="sd">In the worst case, we also need O(N) space for the resulting list. So, the overall space complexity of the algorithm will be O(M+N).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../two_points.html" class="btn btn-neutral float-right" title="2. Two Points" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../sliding_window.html" class="btn btn-neutral float-left" title="1. Sliding Window" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, XiuFu Guo
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

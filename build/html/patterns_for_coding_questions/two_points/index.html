@@ -1,0 +1,1262 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.1. Pair with Target Sum (easy) &mdash; Algorithm Spices  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Fast &amp; Slow pointers" href="../fast_and_slow_pointers.html" />
+    <link rel="prev" title="2. Two Points" href="../two_points.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Algorithm Spices
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Preface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Patterns for Coding Questions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding Window</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../two_points.html">2. Two Points</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.1. Pair with Target Sum (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#remove-duplicates-easy">2.2. Remove Duplicates (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#squaring-a-sorted-array-easy">2.3. Squaring a Sorted Array (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#triplet-sum-to-zero-medium">2.4. Triplet Sum to Zero (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#triplet-sum-close-to-target-medium">2.5. Triplet Sum Close to Target (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#triplets-with-smaller-sum-medium">2.6. Triplets with Smaller Sum (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subarrays-with-product-less-than-a-target-medium">2.7. Subarrays with Product Less than a Target (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dutch-national-flag-problem-medium">2.8. Dutch National Flag Problem (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-1-quadruple-sum-to-target-medium">2.9. Problem Challenge 1 - Quadruple Sum to Target (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-2-comparing-strings-containing-backspaces-medium">2.10. Problem Challenge 2 - Comparing Strings containing Backspaces (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-3-minimum-window-sort-medium">2.11. Problem Challenge 3 - Minimum Window Sort (medium)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../merge_intervals.html">4. Merge Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cyclic_sort.html">5. Cyclic Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../in-place_reversal_of_a_linkedlist.html">6. In-place Reversal of a LinkedList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_breadth_first_search.html">7. Tree Breadth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_depth_first_search.html">8. Tree Depth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_heaps.html">9. Two Heaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../subsets.html">10. Subsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modified_binary_search.html">11. Modified Binary Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bitwise_xor.html">12. Bitwise XOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../top_k_elements.html">13. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">14. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topological_sort_graph.html">16. Topological Sort (Graph)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellaneous.html">17. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_tags/index.html">LeetCode Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_template/index.html">LeetCode Template</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Algorithm Spices</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Patterns for Coding Questions</a> &raquo;</li>
+        
+          <li><a href="../two_points.html"><span class="section-number">2. </span>Two Points</a> &raquo;</li>
+        
+      <li><span class="section-number">2.1. </span>Pair with Target Sum (easy)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/patterns_for_coding_questions/two_points/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pair-with-target-sum-easy">
+<h1><span class="section-number">2.1. </span>Pair with Target Sum (easy)<a class="headerlink" href="#pair-with-target-sum-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array of sorted numbers and a target sum, find a pair in the array whose sum is equal to the given target.</span>
+<span class="sd">Write a function to return the indices of the two numbers (i.e. the pair) such that they add up to the given target.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [1, 2, 3, 4, 6], target=6</span>
+<span class="sd">Output: [1, 3]</span>
+<span class="sd">Explanation: The numbers at index 1 and 3 add up to 6: 2+4=6</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 5, 9, 11], target=11</span>
+<span class="sd">Output: [0, 2]</span>
+<span class="sd">Explanation: The numbers at index 0 and 2 add up to 11: 2+9=11</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">pair_with_targetsum</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target_sum</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target_sum</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">target_sum</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">pair_with_targetsum</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target_sum</span><span class="p">):</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">):</span>
+        <span class="n">current_sum</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">current_sum</span> <span class="o">==</span> <span class="n">target_sum</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">target_sum</span> <span class="o">&gt;</span> <span class="n">current_sum</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># we need a pair with a bigger sum</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># we need a pair with a smaller sum</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pair_with_targetsum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pair_with_targetsum</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="mi">11</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N),</span>
+<span class="sd">where ‘N’ is the total number of elements in the given array.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">An Alternate approach</span>
+<span class="sd">Instead of using a two-pointer or a binary search approach,</span>
+<span class="sd">we can utilize a HashTable to search for the required pair.</span>
+<span class="sd">We can iterate through the array one number at a time.</span>
+<span class="sd">Let’s say during our iteration we are at number ‘X’,</span>
+<span class="sd">so we need to find ‘Y’ such that “X + Y == TargetX+Y==Target”.</span>
+<span class="sd">We will do two things here:</span>
+<span class="sd">Search for ‘Y’ (which is equivalent to “Target - XTarget−X”) in the HashTable.</span>
+<span class="sd">If it is there, we have found the required pair.</span>
+<span class="sd">Otherwise, insert “X” in the HashTable, so that we can search it for the later numbers.</span>
+<span class="sd">Here is what our algorithm will look like:</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">pair_with_targetsum</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target_sum</span><span class="p">):</span>
+    <span class="n">nums</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># to store numbers and their indices</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">target_sum</span> <span class="o">-</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">target_sum</span> <span class="o">-</span> <span class="n">num</span><span class="p">],</span> <span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pair_with_targetsum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pair_with_targetsum</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="mi">11</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N),</span>
+<span class="sd">where ‘N’ is the total number of elements in the given array.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The space complexity will also be O(N), as, in the worst case, we will be pushing ‘N’ numbers in the HashTable.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-duplicates-easy">
+<h1><span class="section-number">2.2. </span>Remove Duplicates (easy)<a class="headerlink" href="#remove-duplicates-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array of sorted numbers, remove all duplicates from it. You should not use any extra space; after removing the duplicates in-place return the new length of the array.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [2, 3, 3, 3, 6, 9, 9]</span>
+<span class="sd">Output: 4</span>
+<span class="sd">Explanation: The first four elements after removing the duplicates will be [2, 3, 6, 9].</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 2, 2, 11]</span>
+<span class="sd">Output: 2</span>
+<span class="sd">Explanation: The first two elements after removing the duplicates will be [2, 11].</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">remove_duplicates</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">remove_duplicates</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="c1"># index of the next non-duplicate element</span>
+    <span class="n">next_non_duplicate</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">next_non_duplicate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">arr</span><span class="p">[</span><span class="n">next_non_duplicate</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">next_non_duplicate</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">next_non_duplicate</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">remove_duplicates</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">remove_duplicates</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N),</span>
+<span class="sd">where ‘N’ is the total number of elements in the given array.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Similar Questions #</span>
+<span class="sd">Problem 1: Given an unsorted array of numbers and a target ‘key’, remove all instances of ‘key’ in-place and return the new length of the array.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [3, 2, 3, 6, 3, 10, 9, 3], Key=3</span>
+<span class="sd">Output: 4</span>
+<span class="sd">Explanation: The first four elements after removing every &#39;Key&#39; will be [2, 6, 10, 9].</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 11, 2, 2, 1], Key=2</span>
+<span class="sd">Output: 2</span>
+<span class="sd">Explanation: The first two elements after removing every &#39;Key&#39; will be [11, 1].</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">remove_element</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="n">nextElement</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># index of the next element which is not &#39;key&#39;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">key</span><span class="p">:</span>
+            <span class="n">arr</span><span class="p">[</span><span class="n">nextElement</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">nextElement</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">nextElement</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Array new length: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">remove_element</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Array new length: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">remove_element</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time and Space Complexity:</span>
+<span class="sd">The time complexity of the above algorithm will be O(N), where ‘N’ is the total number of elements in the given array.</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="squaring-a-sorted-array-easy">
+<h1><span class="section-number">2.3. </span>Squaring a Sorted Array (easy)<a class="headerlink" href="#squaring-a-sorted-array-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given a sorted array, create a new array containing squares of all the number of the input array in the sorted order.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [-2, -1, 0, 2, 3]</span>
+<span class="sd">Output: [0, 1, 4, 4, 9]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [-3, -1, 0, 1, 2]</span>
+<span class="sd">Output: [0 1 1 4 9]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">make_squares</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">&gt;=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">:</span>
+            <span class="n">squares</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">squares</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">squares</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">make_squares</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">highestSquareIdx</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+        <span class="n">leftSquare</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">*</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span>
+        <span class="n">rightSquare</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">*</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">leftSquare</span> <span class="o">&gt;</span> <span class="n">rightSquare</span><span class="p">:</span>
+            <span class="n">squares</span><span class="p">[</span><span class="n">highestSquareIdx</span><span class="p">]</span> <span class="o">=</span> <span class="n">leftSquare</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">squares</span><span class="p">[</span><span class="n">highestSquareIdx</span><span class="p">]</span> <span class="o">=</span> <span class="n">rightSquare</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">highestSquareIdx</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">squares</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Squares: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">make_squares</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Squares: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">make_squares</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N) as we are iterating the input array only once.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of the above algorithm will also be O(N); this space will be used for the output array.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="triplet-sum-to-zero-medium">
+<h1><span class="section-number">2.4. </span>Triplet Sum to Zero (medium)<a class="headerlink" href="#triplet-sum-to-zero-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array of unsorted numbers, find all unique triplets in it that add up to zero.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [-3, 0, 1, 2, -1, 1, -2]</span>
+<span class="sd">Output: [-3, 1, 2], [-2, 0, 2], [-2, 1, 1], [-1, 0, 1]</span>
+<span class="sd">Explanation: There are four unique triplets whose sum is equal to zero.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [-5, 2, -1, -2, 3]</span>
+<span class="sd">Output: [[-5, 2, 3], [-2, -1, 3]]</span>
+<span class="sd">Explanation: There are two unique triplets whose sum is equal to zero.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">search_triplets</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="n">triplets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">arr</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="n">search_pair</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="o">-</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">triplets</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">triplets</span>
+
+
+<span class="k">def</span> <span class="nf">search_pair</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target_sum</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">triplets</span><span class="p">):</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">==</span> <span class="n">target_sum</span><span class="p">:</span>
+            <span class="n">triplets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="o">-</span><span class="n">target_sum</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]])</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">target_sum</span><span class="p">:</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">search_triplets</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="n">arr</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">triplets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>  <span class="c1"># skip same element to avoid duplicate triplets</span>
+            <span class="k">continue</span>
+        <span class="n">search_pair</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="o">-</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">triplets</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">triplets</span>
+
+
+<span class="k">def</span> <span class="nf">search_pair</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target_sum</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">triplets</span><span class="p">):</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">):</span>
+        <span class="n">current_sum</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">current_sum</span> <span class="o">==</span> <span class="n">target_sum</span><span class="p">:</span>  <span class="c1"># found the triplet</span>
+            <span class="n">triplets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="o">-</span><span class="n">target_sum</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]])</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># skip same element to avoid duplicate triplets</span>
+            <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># skip same element to avoid duplicate triplets</span>
+        <span class="k">elif</span> <span class="n">target_sum</span> <span class="o">&gt;</span> <span class="n">current_sum</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># we need a pair with a bigger sum</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># we need a pair with a smaller sum</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">search_triplets</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">search_triplets</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Sorting the array will take O(N * logN).</span>
+<span class="sd">The searchPair() function will take O(N).</span>
+<span class="sd">As we are calling searchPair() for every number in the input array,</span>
+<span class="sd">this means that overall searchTriplets() will take O(N * logN + N^2), which is asymptotically equivalent to O(N^2).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">Ignoring the space required for the output array,</span>
+<span class="sd">the space complexity of the above algorithm will be O(N) which is required for sorting.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="triplet-sum-close-to-target-medium">
+<h1><span class="section-number">2.5. </span>Triplet Sum Close to Target (medium)<a class="headerlink" href="#triplet-sum-close-to-target-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Triplet Sum Close to Target (medium)</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array of unsorted numbers and a target number, find a triplet in the array whose sum is as close to the target number as possible, return the sum of the triplet.</span>
+<span class="sd">If there are more than one such triplet, return the sum of the triplet with the smallest sum.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [-2, 0, 1, 2], target=2</span>
+<span class="sd">Output: 1</span>
+<span class="sd">Explanation: The triplet [-2, 1, 2] has the closest sum to the target.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [-3, -1, 1, 2], target=1</span>
+<span class="sd">Output: 0</span>
+<span class="sd">Explanation: The triplet [-3, 1, 2] has the closest sum to the target.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: [1, 0, 1, 1], target=100</span>
+<span class="sd">Output: 3</span>
+<span class="sd">Explanation: The triplet [1, 1, 1] has the closest sum to the target.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">triplet_sum_close_to_target</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target_sum</span><span class="p">):</span>
+
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">arr</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">min_sum</span><span class="p">,</span> <span class="n">err_min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">target_sum</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="n">err_min</span><span class="p">:</span>
+                <span class="n">err_min</span> <span class="o">=</span> <span class="n">err</span>
+                <span class="n">min_sum</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">err</span> <span class="o">==</span> <span class="n">err_min</span><span class="p">:</span>
+                <span class="n">min_sum</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_sum</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target_sum</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">target_sum</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">min_sum</span>
+
+
+<span class="c1"># answer</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">triplet_sum_close_to_target</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target_sum</span><span class="p">):</span>
+    <span class="n">arr</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">smallest_difference</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">):</span>
+            <span class="n">target_diff</span> <span class="o">=</span> <span class="n">target_sum</span> <span class="o">-</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">-</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">target_diff</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># we&#39;ve found a triplet with an exact sum</span>
+                <span class="k">return</span> <span class="n">target_sum</span> <span class="o">-</span> <span class="n">target_diff</span>  <span class="c1"># return sum of all the numbers</span>
+
+            <span class="c1"># the second part of the following &#39;if&#39; is to handle the smallest sum when we have more than one solution</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">target_diff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">smallest_difference</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+                    <span class="nb">abs</span><span class="p">(</span><span class="n">target_diff</span><span class="p">)</span> <span class="o">==</span> <span class="nb">abs</span><span class="p">(</span><span class="n">smallest_difference</span><span class="p">)</span>
+                    <span class="ow">and</span> <span class="n">target_diff</span> <span class="o">&gt;</span> <span class="n">smallest_difference</span><span class="p">):</span>
+                <span class="n">smallest_difference</span> <span class="o">=</span> <span class="n">target_diff</span>  <span class="c1"># save the closest and the biggest difference</span>
+
+            <span class="k">if</span> <span class="n">target_diff</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># we need a triplet with a bigger sum</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># we need a triplet with a smaller sum</span>
+
+    <span class="k">return</span> <span class="n">target_sum</span> <span class="o">-</span> <span class="n">smallest_difference</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">triplet_sum_close_to_target</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">triplet_sum_close_to_target</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">triplet_sum_close_to_target</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Sorting the array will take O(N* logN)O(N∗logN). Overall searchTriplet() will take O(N * logN + N^2),</span>
+<span class="sd">which is asymptotically equivalent to O(N^2).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of the above algorithm will be O(N) which is required for sorting.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="triplets-with-smaller-sum-medium">
+<h1><span class="section-number">2.6. </span>Triplets with Smaller Sum (medium)<a class="headerlink" href="#triplets-with-smaller-sum-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array arr of unsorted numbers and a target sum, count all triplets in it such that arr[i] + arr[j] + arr[k] &lt; target where i, j, and k are three different indices. Write a function to return the count of such triplets.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [-1, 0, 2, 3], target=3</span>
+<span class="sd">Output: 2</span>
+<span class="sd">Explanation: There are two triplets whose sum is less than the target: [-1, 0, 3], [-1, 0, 2]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [-1, 4, 2, 1, 3], target=5</span>
+<span class="sd">Output: 4</span>
+<span class="sd">Explanation: There are four triplets whose sum is less than the target:</span>
+<span class="sd">   [-1, 1, 4], [-1, 1, 3], [-1, 1, 2], [-1, 2, 3]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">triplet_with_smaller_sum</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">arr</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">triplet_with_smaller_sum</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">arr</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="n">search_pair</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span> <span class="o">-</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="k">def</span> <span class="nf">search_pair</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target_sum</span><span class="p">,</span> <span class="n">first</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target_sum</span><span class="p">:</span>  <span class="c1"># found the triplet</span>
+            <span class="c1"># since arr[right] &gt;= arr[left], therefore, we can replace arr[right] by any number between</span>
+            <span class="c1"># left and right to get a sum less than the target sum</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># we need a pair with a smaller sum</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">triplet_with_smaller_sum</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">triplet_with_smaller_sum</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Sorting the array will take O(N * logN). The searchPair() will take O(N).</span>
+<span class="sd">So, overall searchTriplets() will take O(N * logN + N^2), which is asymptotically equivalent to O(N^2).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">Ignoring the space required for the output array,</span>
+<span class="sd">the space complexity of the above algorithm will be O(N) which is required for sorting if we are not using an in-place sorting algorithm.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="subarrays-with-product-less-than-a-target-medium">
+<h1><span class="section-number">2.7. </span>Subarrays with Product Less than a Target (medium)<a class="headerlink" href="#subarrays-with-product-less-than-a-target-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array with positive numbers and a target number,</span>
+<span class="sd">find all of its contiguous subarrays whose product is less than the target number.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [2, 5, 3, 10], target=30</span>
+<span class="sd">Output: [2], [5], [2, 5], [3], [5, 3], [10]</span>
+<span class="sd">Explanation: There are six contiguous subarrays whose product is less than the target.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [8, 2, 6, 5], target=50</span>
+<span class="sd">Output: [8], [2], [8, 2], [6], [2, 6], [5], [6, 5]</span>
+<span class="sd">Explanation: There are seven contiguous subarrays whose product is less than the target.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_subarrays</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">win_start</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">win_end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+
+        <span class="n">product</span> <span class="o">*=</span> <span class="n">arr</span><span class="p">[</span><span class="n">win_end</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">product</span> <span class="o">&gt;=</span> <span class="n">target</span> <span class="ow">and</span> <span class="n">win_start</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+            <span class="n">product</span> <span class="o">/=</span> <span class="n">arr</span><span class="p">[</span><span class="n">win_start</span><span class="p">]</span>
+            <span class="n">win_start</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">product</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">temp_i</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">win_end</span><span class="p">,</span> <span class="n">win_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">temp_i</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="n">temp_i</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">find_subarrays</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">right</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="n">product</span> <span class="o">*=</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">product</span> <span class="o">&gt;=</span> <span class="n">target</span> <span class="ow">and</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+            <span class="n">product</span> <span class="o">/=</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># since the product of all numbers from left to right is less than the target therefore,</span>
+        <span class="c1"># all subarrays from lef to right will have a product less than the target too; to avoid</span>
+        <span class="c1"># duplicates, we will start with a subarray containing only arr[right] and then extend it</span>
+        <span class="n">temp_list</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">temp_list</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">temp_list</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_subarrays</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="mi">30</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_subarrays</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">50</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The main for-loop managing the sliding window takes O(N)but creating subarrays can take up to O(N^2) in the worst case.</span>
+<span class="sd">Therefore overall, our algorithm will take O(N^3).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">Ignoring the space required for the output list, the algorithm runs in O(N) space which is used for the temp list.</span>
+<span class="sd">At the most, we need a space of O(n^2) for all the output lists.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dutch-national-flag-problem-medium">
+<h1><span class="section-number">2.8. </span>Dutch National Flag Problem (medium)<a class="headerlink" href="#dutch-national-flag-problem-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array containing 0s, 1s and 2s, sort the array in-place. You should treat numbers of the array as objects,</span>
+<span class="sd">hence, we can’t count 0s, 1s, and 2s to recreate the array.</span>
+<span class="sd">The flag of the Netherlands consists of three colors: red, white and blue;</span>
+<span class="sd">and since our input array also consists of three different numbers that is why it is called Dutch National Flag problem.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [1, 0, 2, 1, 0]</span>
+<span class="sd">Output: [0 0 1 1 2]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 2, 0, 1, 2, 0]</span>
+<span class="sd">Output: [0 0 1 2 2 2 ]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">dutch_flag_sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N) as we are iterating the input array only once.</span>
+<span class="sd">Space complexity #</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-1-quadruple-sum-to-target-medium">
+<h1><span class="section-number">2.9. </span>Problem Challenge 1 - Quadruple Sum to Target (medium)<a class="headerlink" href="#problem-challenge-1-quadruple-sum-to-target-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 1</span>
+<span class="sd">Quadruple Sum to Target (medium)</span>
+<span class="sd">Given an array of unsorted numbers and a target number, find all unique quadruplets in it, whose sum is equal to the target number.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [4, 1, 2, -1, 1, -3], target=1</span>
+<span class="sd">Output: [-3, -1, 1, 4], [-3, 1, 1, 2]</span>
+<span class="sd">Explanation: Both the quadruplets add up to the target.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 0, -1, 1, -2, 2], target=2</span>
+<span class="sd">Output: [-2, 0, 2, 2], [-1, 0, 1, 2]</span>
+<span class="sd">Explanation: Both the quadruplets add up to the target.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">search_quadruplets</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">quadruplets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+
+    <span class="n">arr</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="k">continue</span>
+            <span class="n">search_pair</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">quadruplets</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">quadruplets</span>
+
+
+<span class="k">def</span> <span class="nf">search_pair</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">quadruplets</span><span class="p">):</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="n">sub_target</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">==</span> <span class="n">sub_target</span><span class="p">:</span>
+            <span class="n">quadruplets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]])</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">sub_target</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">search_quadruplets</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">arr</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">quadruplets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="c1"># skip same element to avoid duplicate quadruplets</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="c1"># skip same element to avoid duplicate quadruplets</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="k">continue</span>
+            <span class="n">search_pairs</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">quadruplets</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">quadruplets</span>
+
+
+<span class="k">def</span> <span class="nf">search_pairs</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target_sum</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="n">quadruplets</span><span class="p">):</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="n">second</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">first</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">second</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">sum</span> <span class="o">==</span> <span class="n">target_sum</span><span class="p">:</span>  <span class="c1"># found the quadruplet</span>
+            <span class="n">quadruplets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">first</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">second</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]])</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]):</span>
+                <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># skip same element to avoid duplicate quadruplets</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
+                <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># skip same element to avoid duplicate quadruplets</span>
+        <span class="k">elif</span> <span class="nb">sum</span> <span class="o">&lt;</span> <span class="n">target_sum</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># we need a pair with a bigger sum</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># we need a pair with a smaller sum</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">search_quadruplets</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">search_quadruplets</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">Sorting the array will take O(N*logN). Overall searchQuadruplets() will take O(N * logN + N^3), which is asymptotically equivalent to O(N^3).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of the above algorithm will be O(N) which is required for sorting.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-2-comparing-strings-containing-backspaces-medium">
+<h1><span class="section-number">2.10. </span>Problem Challenge 2 - Comparing Strings containing Backspaces (medium)<a class="headerlink" href="#problem-challenge-2-comparing-strings-containing-backspaces-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 2</span>
+<span class="sd">Comparing Strings containing Backspaces (medium)</span>
+<span class="sd">Given two strings containing backspaces (identified by the character ‘#’), check if the two strings are equal.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: str1=&quot;xy#z&quot;, str2=&quot;xzz#&quot;</span>
+<span class="sd">Output: true</span>
+<span class="sd">Explanation: After applying backspaces the strings become &quot;xz&quot; and &quot;xz&quot; respectively.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: str1=&quot;xy#z&quot;, str2=&quot;xyz#&quot;</span>
+<span class="sd">Output: false</span>
+<span class="sd">Explanation: After applying backspaces the strings become &quot;xz&quot; and &quot;xy&quot; respectively.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: str1=&quot;xp#&quot;, str2=&quot;xyz##&quot;</span>
+<span class="sd">Output: true</span>
+<span class="sd">Explanation: After applying backspaces the strings become &quot;x&quot; and &quot;x&quot; respectively.</span>
+<span class="sd">In &quot;xyz##&quot;, the first &#39;#&#39; removes the character &#39;z&#39; and the second &#39;#&#39; removes the character &#39;y&#39;.</span>
+<span class="sd">Example 4:</span>
+<span class="sd">Input: str1=&quot;xywrrmp&quot;, str2=&quot;xywrrmu#p&quot;</span>
+<span class="sd">Output: true</span>
+<span class="sd">Explanation: After applying backspaces the strings become &quot;xywrrmp&quot; and &quot;xywrrmp&quot; respectively.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">backspace_compare</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">str2</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="k">if</span> <span class="n">clean</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span> <span class="o">==</span> <span class="n">clean</span><span class="p">(</span><span class="n">str2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;#&#39;</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">+</span> <span class="n">count</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[:</span><span class="n">i</span> <span class="o">-</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">count</span>
+
+        <span class="k">elif</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">-</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="k">elif</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[:</span><span class="n">i</span> <span class="o">-</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">str</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">backspace_compare</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">str2</span><span class="p">):</span>
+    <span class="c1"># use two pointer approach to compare the strings</span>
+    <span class="n">index1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">index2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">str2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">index1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">index2</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">i1</span> <span class="o">=</span> <span class="n">get_next_valid_char_index</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">index1</span><span class="p">)</span>
+        <span class="n">i2</span> <span class="o">=</span> <span class="n">get_next_valid_char_index</span><span class="p">(</span><span class="n">str2</span><span class="p">,</span> <span class="n">index2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i2</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># reached the end of both the strings</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i2</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># reached the end of one of the strings</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">str1</span><span class="p">[</span><span class="n">i1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">str2</span><span class="p">[</span><span class="n">i2</span><span class="p">]:</span>  <span class="c1"># check if the characters are equal</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">index1</span> <span class="o">=</span> <span class="n">i1</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">index2</span> <span class="o">=</span> <span class="n">i2</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">def</span> <span class="nf">get_next_valid_char_index</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="n">backspace_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;#&#39;</span><span class="p">:</span>  <span class="c1"># found a backspace character</span>
+            <span class="n">backspace_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">backspace_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># a non-backspace character</span>
+            <span class="n">backspace_count</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">index</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># skip a backspace or a valid character</span>
+
+    <span class="k">return</span> <span class="n">index</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">backspace_compare</span><span class="p">(</span><span class="s2">&quot;xy#z&quot;</span><span class="p">,</span> <span class="s2">&quot;xzz#&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">backspace_compare</span><span class="p">(</span><span class="s2">&quot;xy#z&quot;</span><span class="p">,</span> <span class="s2">&quot;xyz#&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">backspace_compare</span><span class="p">(</span><span class="s2">&quot;xp#&quot;</span><span class="p">,</span> <span class="s2">&quot;xyz##&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">backspace_compare</span><span class="p">(</span><span class="s2">&quot;xywrrmp&quot;</span><span class="p">,</span> <span class="s2">&quot;xywrrmu#p&quot;</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(M+N) where ‘M’ and ‘N’ are the lengths of the two input strings respectively.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-3-minimum-window-sort-medium">
+<h1><span class="section-number">2.11. </span>Problem Challenge 3 - Minimum Window Sort (medium)<a class="headerlink" href="#problem-challenge-3-minimum-window-sort-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 3</span>
+<span class="sd">Minimum Window Sort (medium)</span>
+<span class="sd">Given an array, find the length of the smallest subarray in it which when sorted will sort the whole array.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [1, 2, 5, 3, 7, 10, 9, 12]</span>
+<span class="sd">Output: 5</span>
+<span class="sd">Explanation: We need to sort only the subarray [5, 3, 7, 10, 9] to make the whole array sorted</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [1, 3, 2, 0, -1, 7, 10]</span>
+<span class="sd">Output: 5</span>
+<span class="sd">Explanation: We need to sort only the subarray [1, 3, 2, 0, -1] to make the whole array sorted</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: [1, 2, 3]</span>
+<span class="sd">Output: 0</span>
+<span class="sd">Explanation: The array is already sorted</span>
+<span class="sd">Example 4:</span>
+<span class="sd">Input: [3, 2, 1]</span>
+<span class="sd">Output: 3</span>
+<span class="sd">Explanation: The whole array needs to be sorted.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">shortest_window_sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">max_num</span><span class="p">,</span> <span class="n">min_num</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+
+    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+        <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">right</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">right</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+        <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">max_num</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_num</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">min_num</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_num</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">min_num</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">i</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">max_num</span><span class="p">:</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">i</span>
+
+    <span class="k">if</span> <span class="n">right</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="c1"># answer</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">shortest_window_sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="c1"># find the first number out of sorting order from the beginning</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">low</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">low</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">arr</span><span class="p">[</span><span class="n">low</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
+        <span class="n">low</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">low</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># if the array is sorted</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="c1"># find the first number out of sorting order from the end</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">high</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">high</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">arr</span><span class="p">[</span><span class="n">high</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]):</span>
+        <span class="n">high</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="c1"># find the maximum and minimum of the subarray</span>
+    <span class="n">subarray_max</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">subarray_min</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">subarray_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">subarray_max</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">subarray_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">subarray_min</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+
+    <span class="c1"># extend the subarray to include any number which is bigger than the minimum of the subarray</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">low</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">low</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">subarray_min</span><span class="p">):</span>
+        <span class="n">low</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="c1"># extend the subarray to include any number which is smaller than the maximum of the subarray</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">high</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">high</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">subarray_max</span><span class="p">):</span>
+        <span class="n">high</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">high</span> <span class="o">-</span> <span class="n">low</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">shortest_window_sort</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">shortest_window_sort</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">shortest_window_sort</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">shortest_window_sort</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm will be O(N)O(N).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The algorithm runs in constant space O(1)O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../fast_and_slow_pointers.html" class="btn btn-neutral float-right" title="3. Fast &amp; Slow pointers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../two_points.html" class="btn btn-neutral float-left" title="2. Two Points" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, XiuFu Guo
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1156 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4.1. Merge Intervals (medium) &mdash; Algorithm Spices  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5. Cyclic Sort" href="../cyclic_sort.html" />
+    <link rel="prev" title="4. Merge Intervals" href="../merge_intervals.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Algorithm Spices
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Preface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Patterns for Coding Questions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_points.html">2. Two Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../merge_intervals.html">4. Merge Intervals</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.1. Merge Intervals (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#insert-interval-medium">4.2. Insert Interval (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intervals-intersection-medium">4.3. Intervals Intersection (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conflicting-appointments-medium">4.4. Conflicting Appointments (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-1-minimum-meeting-rooms-hard">4.5. Problem Challenge 1 - Minimum Meeting Rooms (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-2-maximum-cpu-load-hard">4.6. Problem Challenge 2 - Maximum CPU Load (hard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-3-employee-free-time-hard">4.7. Problem Challenge 3 - Employee Free Time (hard)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cyclic_sort.html">5. Cyclic Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../in-place_reversal_of_a_linkedlist.html">6. In-place Reversal of a LinkedList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_breadth_first_search.html">7. Tree Breadth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_depth_first_search.html">8. Tree Depth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_heaps.html">9. Two Heaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../subsets.html">10. Subsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modified_binary_search.html">11. Modified Binary Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bitwise_xor.html">12. Bitwise XOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../top_k_elements.html">13. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">14. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topological_sort_graph.html">16. Topological Sort (Graph)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellaneous.html">17. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_tags/index.html">LeetCode Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_template/index.html">LeetCode Template</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Algorithm Spices</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Patterns for Coding Questions</a> &raquo;</li>
+        
+          <li><a href="../merge_intervals.html"><span class="section-number">4. </span>Merge Intervals</a> &raquo;</li>
+        
+      <li><span class="section-number">4.1. </span>Merge Intervals (medium)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/patterns_for_coding_questions/merge_intervals/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="merge-intervals-medium">
+<h1><span class="section-number">4.1. </span>Merge Intervals (medium)<a class="headerlink" href="#merge-intervals-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Intervals: [[1,4], [2,5], [7,9]]</span>
+<span class="sd">Output: [[1,5], [7,9]]</span>
+<span class="sd">Explanation: Since the first two intervals [1,4] and [2,5] overlap, we merged them into one [1,5].</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Intervals: [[6,7], [2,4], [5,9]]</span>
+<span class="sd">Output: [[2,4], [5,9]]</span>
+<span class="sd">Explanation: Since the intervals [6,7] and [5,9] overlap, we merged them into one [5,9].</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Intervals: [[1,4], [2,6], [3,5]]</span>
+<span class="sd">Output: [[1,6]]</span>
+<span class="sd">Explanation: Since all the given intervals overlap, we merged them into one.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+
+<span class="k">class</span> <span class="nc">interval</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="k">def</span> <span class="nf">print_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
+    <span class="n">intervals</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+    <span class="n">merged</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)):</span>
+        <span class="n">curr</span> <span class="o">=</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">merged</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">prev</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">curr</span><span class="o">.</span><span class="n">start</span> <span class="ow">and</span> <span class="n">prev</span><span class="o">.</span><span class="n">end</span> <span class="o">&gt;=</span> <span class="n">curr</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+            <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prev</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">prev</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">curr</span><span class="o">.</span><span class="n">start</span> <span class="ow">and</span> <span class="n">prev</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;=</span> <span class="n">curr</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+            <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curr</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">prev</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">curr</span><span class="o">.</span><span class="n">start</span> <span class="ow">and</span> <span class="n">prev</span><span class="o">.</span><span class="n">end</span> <span class="o">&gt;=</span> <span class="n">curr</span><span class="o">.</span><span class="n">start</span><span class="p">:</span>
+            <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="p">(</span><span class="n">prev</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">curr</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">prev</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">curr</span><span class="o">.</span><span class="n">start</span> <span class="ow">and</span> <span class="n">prev</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;=</span> <span class="n">curr</span><span class="o">.</span><span class="n">start</span><span class="p">:</span>
+            <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="p">(</span><span class="n">curr</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">prev</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prev</span><span class="p">)</span>
+            <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">merged</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merged intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">merge</span><span class="p">([</span><span class="n">interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">interval</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]):</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merged intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">merge</span><span class="p">([</span><span class="n">interval</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">interval</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]):</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merged intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">merge</span><span class="p">([</span><span class="n">interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">interval</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]):</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+
+<span class="k">class</span> <span class="nc">Interval</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="k">def</span> <span class="nf">print_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">intervals</span>
+
+    <span class="c1"># sort the intervals on the start time</span>
+    <span class="n">intervals</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+
+    <span class="n">mergedIntervals</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">intervals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">intervals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">end</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)):</span>
+        <span class="n">interval</span> <span class="o">=</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">interval</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">:</span>  <span class="c1"># overlapping intervals, adjust the &#39;end&#39;</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># non-overlapping interval, add the previous internval and reset</span>
+            <span class="n">mergedIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">start</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">end</span>
+
+    <span class="c1"># add the last interval</span>
+    <span class="n">mergedIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">mergedIntervals</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merged intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">merge</span><span class="p">([</span><span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]):</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merged intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">merge</span><span class="p">([</span><span class="n">Interval</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]):</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merged intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">merge</span><span class="p">([</span><span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]):</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(N * logN), where ‘N’ is the total number of intervals.</span>
+<span class="sd">We are iterating the intervals only once which will take O(N), in the beginning though,</span>
+<span class="sd">since we need to sort the intervals, our algorithm will take O(N * logN).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of the above algorithm will be O(N) as we need to return a list containing all the merged intervals.</span>
+<span class="sd">We will also need O(N) space for sorting.</span>
+<span class="sd">For Java, depending on its version, Collection.sort() either uses Merge sort or Timsort, and both these algorithms need O(N) space.</span>
+<span class="sd">Overall, our algorithm has a space complexity of O(N).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="insert-interval-medium">
+<h1><span class="section-number">4.2. </span>Insert Interval (medium)<a class="headerlink" href="#insert-interval-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given a list of non-overlapping intervals sorted by their start time, insert a given interval at the correct position and merge all necessary intervals to produce a list that has only mutually exclusive intervals.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: Intervals=[[1,3], [5,7], [8,12]], New Interval=[4,6]</span>
+<span class="sd">Output: [[1,3], [4,7], [8,12]]</span>
+<span class="sd">Explanation: After insertion, since [4,6] overlaps with [5,7], we merged them into one [4,7].</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: Intervals=[[1,3], [5,7], [8,12]], New Interval=[4,10]</span>
+<span class="sd">Output: [[1,3], [4,12]]</span>
+<span class="sd">Explanation: After insertion, since [4,10] overlaps with [5,7] &amp; [8,12], we merged them into [4,12].</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: Intervals=[[2,3],[5,7]], New Interval=[1,4]</span>
+<span class="sd">Output: [[1,4], [5,7]]</span>
+<span class="sd">Explanation: After insertion, since [1,4] overlaps with [2,3], we merged them into one [1,4].</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="n">new_interval</span><span class="p">):</span>
+    <span class="n">merged</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)):</span>
+
+        <span class="k">if</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">new_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">new_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span>
+                <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">new_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">new_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">new_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">new_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">new_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">i</span>
+
+        <span class="k">if</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">new_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_interval</span><span class="p">)</span>
+                <span class="n">new_interval</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">new_interval</span> <span class="o">!=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_interval</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">merged</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intervals after inserting the new interval: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">insert</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">]],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intervals after inserting the new interval: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">insert</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">]],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intervals after inserting the new interval: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">insert</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="n">new_interval</span><span class="p">):</span>
+    <span class="n">merged</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+
+    <span class="c1"># skip (and add to output) all intervals that come before the &#39;new_interval&#39;</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span> <span class="ow">and</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">end</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">new_interval</span><span class="p">[</span><span class="n">start</span><span class="p">]:</span>
+        <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># merge all intervals that overlap with &#39;new_interval&#39;</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span> <span class="ow">and</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">new_interval</span><span class="p">[</span><span class="n">end</span><span class="p">]:</span>
+        <span class="n">new_interval</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start</span><span class="p">],</span> <span class="n">new_interval</span><span class="p">[</span><span class="n">start</span><span class="p">])</span>
+        <span class="n">new_interval</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">end</span><span class="p">],</span> <span class="n">new_interval</span><span class="p">[</span><span class="n">end</span><span class="p">])</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># insert the new_interval</span>
+    <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_interval</span><span class="p">)</span>
+
+    <span class="c1"># add all the remaining intervals to the output</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
+        <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">merged</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intervals after inserting the new interval: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">insert</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">]],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intervals after inserting the new interval: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">insert</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">]],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intervals after inserting the new interval: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">insert</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">As we are iterating through all the intervals only once, the time complexity of the above algorithm is O(N)O,</span>
+<span class="sd">where ‘N’ is the total number of intervals.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of the above algorithm will be O(N) as we need to return a list containing all the merged intervals.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="intervals-intersection-medium">
+<h1><span class="section-number">4.3. </span>Intervals Intersection (medium)<a class="headerlink" href="#intervals-intersection-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given two lists of intervals, find the intersection of these two lists. Each list consists of disjoint intervals sorted on their start time.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: arr1=[[1, 3], [5, 6], [7, 9]], arr2=[[2, 3], [5, 7]]</span>
+<span class="sd">Output: [2, 3], [5, 6], [7, 7]</span>
+<span class="sd">Explanation: The output list contains the common intervals between the two lists.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: arr1=[[1, 3], [5, 7], [9, 12]], arr2=[[5, 10]]</span>
+<span class="sd">Output: [5, 7], [9, 10]</span>
+<span class="sd">Explanation: The output list contains the common intervals between the two lists.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">intervals_a</span><span class="p">,</span> <span class="n">intervals_b</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># TODO: Write your code here</span>
+
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals_a</span><span class="p">)</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals_b</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intervals Intersection: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">merge</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intervals Intersection: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">merge</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">intervals_a</span><span class="p">,</span> <span class="n">intervals_b</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals_a</span><span class="p">)</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals_b</span><span class="p">):</span>
+        <span class="c1"># check if intervals overlap and intervals_a[i]&#39;s start time lies within the other intervals_b[j]</span>
+        <span class="n">a_overlaps_b</span> <span class="o">=</span> <span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="ow">and</span> \
+                       <span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">end</span><span class="p">]</span>
+
+        <span class="c1"># check if intervals overlap and intervals_a[j]&#39;s start time lies within the other intervals_b[i]</span>
+        <span class="n">b_overlaps_a</span> <span class="o">=</span> <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="ow">and</span> \
+                       <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">end</span><span class="p">]</span>
+
+        <span class="c1"># store the the intersection part</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">a_overlaps_b</span> <span class="ow">or</span> <span class="n">b_overlaps_a</span><span class="p">):</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span>
+                <span class="nb">max</span><span class="p">(</span><span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start</span><span class="p">],</span> <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">start</span><span class="p">]),</span>
+                <span class="nb">min</span><span class="p">(</span><span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">end</span><span class="p">],</span> <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">end</span><span class="p">])</span>
+            <span class="p">])</span>
+
+        <span class="c1"># move next from the interval which is finishing first</span>
+        <span class="k">if</span> <span class="n">intervals_a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">end</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">intervals_b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">end</span><span class="p">]:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intervals Intersection: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">merge</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intervals Intersection: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">merge</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">As we are iterating through both the lists once, the time complexity of the above algorithm is O(N + M),</span>
+<span class="sd">where ‘N’ and ‘M’ are the total number of intervals in the input arrays respectively.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">Ignoring the space needed for the result list, the algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conflicting-appointments-medium">
+<h1><span class="section-number">4.4. </span>Conflicting Appointments (medium)<a class="headerlink" href="#conflicting-appointments-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Given an array of intervals representing ‘N’ appointments, find out if a person can attend all the appointments.</span>
+
+<span class="sd">Example 1:</span>
+
+<span class="sd">Appointments: [[1,4], [2,5], [7,9]]</span>
+<span class="sd">Output: false</span>
+<span class="sd">Explanation: Since [1,4] and [2,5] overlap, a person cannot attend both of these appointments.</span>
+
+<span class="sd">Example 2:</span>
+
+<span class="sd">Appointments: [[6,7], [2,4], [8,12]]</span>
+<span class="sd">Output: true</span>
+<span class="sd">Explanation: None of the appointments overlap, therefore a person can attend all of them.</span>
+
+<span class="sd">Example 3:</span>
+
+<span class="sd">Appointments: [[4,5], [2,3], [3,6]]</span>
+<span class="sd">Output: false</span>
+<span class="sd">Explanation: Since [4,5] and [3,6] overlap, a person cannot attend both of these appointments.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">can_attend_all_appointments</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+
+    <span class="n">intervals</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)):</span>
+
+        <span class="k">if</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can attend all appointments: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_attend_all_appointments</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can attend all appointments: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_attend_all_appointments</span><span class="p">([[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can attend all appointments: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_attend_all_appointments</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">can_attend_all_appointments</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
+    <span class="n">intervals</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">intervals</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">end</span><span class="p">]:</span>
+            <span class="c1"># please note the comparison above, it is &quot;&lt;&quot; and not &quot;&lt;=&quot;</span>
+            <span class="c1"># while merging we needed &quot;&lt;=&quot; comparison, as we will be merging the two</span>
+            <span class="c1"># intervals having condition &quot;intervals[i][start] == intervals[i - 1][end]&quot; but</span>
+            <span class="c1"># such intervals don&#39;t represent conflicting appointments as one starts right</span>
+            <span class="c1"># after the other</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can attend all appointments: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_attend_all_appointments</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can attend all appointments: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_attend_all_appointments</span><span class="p">([[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can attend all appointments: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">can_attend_all_appointments</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(N*logN), where ‘N’ is the total number of appointments.</span>
+<span class="sd">Though we are iterating the intervals only once, our algorithm will take O(N * logN) since we need to sort them in the beginning.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of the above algorithm will be O(N), which we need for sorting.</span>
+<span class="sd">For Java, Arrays.sort() uses Timsort, which needs O(N) space.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-1-minimum-meeting-rooms-hard">
+<h1><span class="section-number">4.5. </span>Problem Challenge 1 - Minimum Meeting Rooms (hard)<a class="headerlink" href="#problem-challenge-1-minimum-meeting-rooms-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Solution Review: Problem Challenge 1 - Minimum Meeting Rooms (hard)</span>
+<span class="sd">Given a list of intervals representing the start and end time of ‘N’ meetings,</span>
+<span class="sd">find the minimum number of rooms required to hold all the meetings.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Meetings: [[1,4], [2,5], [7,9]]</span>
+
+<span class="sd">Output: 2</span>
+<span class="sd">Explanation: Since [1,4] and [2,5] overlap, we need two rooms to hold these two meetings. [7,9] can</span>
+<span class="sd">occur in any of the two rooms later.</span>
+
+<span class="sd">Example 2:</span>
+<span class="sd">Meetings: [[6,7], [2,4], [8,12]]</span>
+
+<span class="sd">Output: 1</span>
+<span class="sd">Explanation: None of the meetings overlap, therefore we only need one room to hold all meetings.</span>
+
+<span class="sd">Example 3:</span>
+<span class="sd">Meetings: [[1,4], [2,3], [3,6]]</span>
+
+<span class="sd">Output:2</span>
+<span class="sd">Explanation: Since [1,4] overlaps with the other two meetings [2,3] and [3,6], we need two rooms to</span>
+<span class="sd">hold all the meetings.</span>
+
+<span class="sd">Example 4:</span>
+<span class="sd">Meetings: [[4,5], [2,3], [2,4], [3,5]]</span>
+
+<span class="sd">Output: 2</span>
+<span class="sd">Explanation: We will need one room for [2,3] and [3,5], and another room for [2,4] and [4,5].</span>
+<span class="sd">Here is a visual representation of Example 4:</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">Meeting</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">end</span>
+
+
+<span class="k">def</span> <span class="nf">min_meeting_rooms</span><span class="p">(</span><span class="n">meetings</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">meetings</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+    <span class="n">conflict</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">min_rooms</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">meeting</span> <span class="ow">in</span> <span class="n">meetings</span><span class="p">:</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">conflict</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">meeting</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">conflict</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+            <span class="n">heappop</span><span class="p">(</span><span class="n">conflict</span><span class="p">)</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">conflict</span><span class="p">,</span> <span class="n">meeting</span><span class="p">)</span>
+        <span class="n">min_rooms</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">conflict</span><span class="p">),</span> <span class="n">min_rooms</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">min_rooms</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Minimum meeting rooms required: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+        <span class="n">min_meeting_rooms</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">Meeting</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;Minimum meeting rooms required: &quot;</span> <span class="o">+</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">min_meeting_rooms</span><span class="p">([</span><span class="n">Meeting</span><span class="p">(</span>
+            <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;Minimum meeting rooms required: &quot;</span> <span class="o">+</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">min_meeting_rooms</span><span class="p">([</span><span class="n">Meeting</span><span class="p">(</span>
+            <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;Minimum meeting rooms required: &quot;</span> <span class="o">+</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">min_meeting_rooms</span><span class="p">([</span><span class="n">Meeting</span><span class="p">(</span>
+            <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Minimum meeting rooms required: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+        <span class="n">min_meeting_rooms</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">Meeting</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1">#answer</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">Meeting</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="c1"># min heap based on meeting.end</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">end</span>
+
+
+<span class="k">def</span> <span class="nf">min_meeting_rooms</span><span class="p">(</span><span class="n">meetings</span><span class="p">):</span>
+    <span class="c1"># sort the meetings by start time</span>
+    <span class="n">meetings</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+
+    <span class="n">minRooms</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">minHeap</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">meeting</span> <span class="ow">in</span> <span class="n">meetings</span><span class="p">:</span>
+        <span class="c1"># remove all the meetings that have ended</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">meeting</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">minHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">):</span>
+            <span class="n">heappop</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span>
+        <span class="c1"># add the current meeting into min_heap</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="n">meeting</span><span class="p">)</span>
+        <span class="c1"># all active meetings are in the min_heap, so we need rooms for all of them.</span>
+        <span class="n">minRooms</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">minRooms</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">minHeap</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">minRooms</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Minimum meeting rooms required: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+        <span class="n">min_meeting_rooms</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">Meeting</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;Minimum meeting rooms required: &quot;</span> <span class="o">+</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">min_meeting_rooms</span><span class="p">([</span><span class="n">Meeting</span><span class="p">(</span>
+            <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;Minimum meeting rooms required: &quot;</span> <span class="o">+</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">min_meeting_rooms</span><span class="p">([</span><span class="n">Meeting</span><span class="p">(</span>
+            <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;Minimum meeting rooms required: &quot;</span> <span class="o">+</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">min_meeting_rooms</span><span class="p">([</span><span class="n">Meeting</span><span class="p">(</span>
+            <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Meeting</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Minimum meeting rooms required: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+        <span class="n">min_meeting_rooms</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">Meeting</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+             <span class="n">Meeting</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(N*logN), where ‘N’ is the total number of meetings. T</span>
+<span class="sd">his is due to the sorting that we did in the beginning.</span>
+<span class="sd">Also, while iterating the meetings we might need to poll/offer meeting to the priority queue.</span>
+<span class="sd">Each of these operations can take O(logN).</span>
+<span class="sd">Overall our algorithm will take O(NlogN).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of the above algorithm will be O(N) which is required for sorting.</span>
+<span class="sd">Also, in the worst case scenario, we’ll have to insert all the meetings into the Min Heap (when all meetings overlap) which will also take O(N) space.</span>
+<span class="sd">The overall space complexity of our algorithm is O(N).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-2-maximum-cpu-load-hard">
+<h1><span class="section-number">4.6. </span>Problem Challenge 2 - Maximum CPU Load (hard)<a class="headerlink" href="#problem-challenge-2-maximum-cpu-load-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 2</span>
+<span class="sd">Maximum CPU Load (hard)</span>
+<span class="sd">We are given a list of Jobs. Each job has a Start time, an End time, and a CPU load when it is running.</span>
+<span class="sd">Our goal is to find the maximum CPU load at any time if all the jobs are running on the same machine.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Jobs: [[1,4,3], [2,5,4], [7,9,6]]</span>
+<span class="sd">Output: 7</span>
+<span class="sd">Explanation: Since [1,4,3] and [2,5,4] overlap, their maximum CPU load (3+4=7) will be when both the</span>
+<span class="sd">jobs are running at the same time i.e., during the time interval (2,4).</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Jobs: [[6,7,10], [2,4,11], [8,12,15]]</span>
+<span class="sd">Output: 15</span>
+<span class="sd">Explanation: None of the jobs overlap, therefore we will take the maximum load of any job which is 15.</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Jobs: [[1,4,2], [2,4,1], [3,6,5]]</span>
+<span class="sd">Output: 8</span>
+<span class="sd">Explanation: Maximum CPU load will be 8 as all jobs overlap during the time interval [3,4].</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">job</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">cpu_load</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpu_load</span> <span class="o">=</span> <span class="n">cpu_load</span>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">end</span>
+
+
+<span class="k">def</span> <span class="nf">find_max_cpu_load</span><span class="p">(</span><span class="n">jobs</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">jobs</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+
+    <span class="n">sum_cpu_load</span><span class="p">,</span> <span class="n">temp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">conflict</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">:</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">conflict</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">job</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">conflict</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+            <span class="n">temp</span> <span class="o">-=</span> <span class="n">conflict</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cpu_load</span>
+            <span class="n">heappop</span><span class="p">(</span><span class="n">conflict</span><span class="p">)</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">conflict</span><span class="p">,</span> <span class="n">job</span><span class="p">)</span>
+        <span class="n">temp</span> <span class="o">+=</span> <span class="n">job</span><span class="o">.</span><span class="n">cpu_load</span>
+        <span class="n">sum_cpu_load</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sum_cpu_load</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">sum_cpu_load</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum CPU load at any time: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_max_cpu_load</span><span class="p">([</span><span class="n">job</span><span class="p">(</span>
+              <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">job</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">job</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum CPU load at any time: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_max_cpu_load</span><span class="p">([</span><span class="n">job</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+                                 <span class="n">job</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+                                 <span class="n">job</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum CPU load at any time: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_max_cpu_load</span><span class="p">([</span><span class="n">job</span><span class="p">(</span>
+              <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">job</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">job</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">job</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">cpu_load</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpu_load</span> <span class="o">=</span> <span class="n">cpu_load</span>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="c1"># min heap based on job.end</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">end</span>
+
+
+<span class="k">def</span> <span class="nf">find_max_cpu_load</span><span class="p">(</span><span class="n">jobs</span><span class="p">):</span>
+    <span class="c1"># sort the jobs by start time</span>
+    <span class="n">jobs</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+    <span class="n">max_cpu_load</span><span class="p">,</span> <span class="n">current_cpu_load</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">min_heap</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">:</span>
+        <span class="c1"># remove all the jobs that have ended</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">min_heap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">min_heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">):</span>
+            <span class="n">current_cpu_load</span> <span class="o">-=</span> <span class="n">min_heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cpu_load</span>
+            <span class="n">heappop</span><span class="p">(</span><span class="n">min_heap</span><span class="p">)</span>
+        <span class="c1"># add the current job into min_heap</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">min_heap</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="n">current_cpu_load</span> <span class="o">+=</span> <span class="n">j</span><span class="o">.</span><span class="n">cpu_load</span>
+        <span class="n">max_cpu_load</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_cpu_load</span><span class="p">,</span> <span class="n">current_cpu_load</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_cpu_load</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum CPU load at any time: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_max_cpu_load</span><span class="p">([</span><span class="n">job</span><span class="p">(</span>
+              <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">job</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">job</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum CPU load at any time: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_max_cpu_load</span><span class="p">([</span><span class="n">job</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+                                 <span class="n">job</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+                                 <span class="n">job</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">)])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum CPU load at any time: &quot;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_max_cpu_load</span><span class="p">([</span><span class="n">job</span><span class="p">(</span>
+              <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">job</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">job</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(N*logN), where ‘N’ is the total number of jobs.</span>
+<span class="sd">This is due to the sorting that we did in the beginning.</span>
+<span class="sd">Also, while iterating the jobs, we might need to poll/offer jobs to the priority queue.</span>
+<span class="sd">Each of these operations can take O(logN). Overall our algorithm will take O(NlogN).</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of the above algorithm will be O(N), which is required for sorting.</span>
+<span class="sd">Also, in the worst case, we have to insert all the jobs into the priority queue (when all jobs overlap) which will also take O(N) space.</span>
+<span class="sd">The overall space complexity of our algorithm is O(N).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-3-employee-free-time-hard">
+<h1><span class="section-number">4.7. </span>Problem Challenge 3 - Employee Free Time (hard)<a class="headerlink" href="#problem-challenge-3-employee-free-time-hard" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 3</span>
+<span class="sd">Employee Free Time (hard)</span>
+<span class="sd">For ‘K’ employees, we are given a list of intervals representing the working hours of each employee.</span>
+<span class="sd">Our goal is to find out if there is a free interval that is common to all employees.</span>
+<span class="sd">You can assume that each list of employee working hours is sorted on the start time.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: Employee Working Hours=[[[1,3], [5,6]], [[2,3], [6,8]]]</span>
+<span class="sd">Output: [3,5]</span>
+<span class="sd">Explanation: Both the employess are free between [3,5].</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: Employee Working Hours=[[[1,3], [9,12]], [[2,4]], [[6,8]]]</span>
+<span class="sd">Output: [4,6], [8,9]</span>
+<span class="sd">Explanation: All employess are free between [4,6] and [8,9].</span>
+<span class="sd">Example 3:</span>
+<span class="sd">Input: Employee Working Hours=[[[1,3]], [[2,4]], [[3,5], [7,9]]]</span>
+<span class="sd">Output: [5,7]</span>
+<span class="sd">Explanation: All employess are free between [5,7].</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># mycode</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+
+<span class="k">class</span> <span class="nc">Interval</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="k">def</span> <span class="nf">print_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">find_employee_free_time</span><span class="p">(</span><span class="n">schedule</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">schedule</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+            <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+    <span class="n">temp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Interval</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">input</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)],</span>
+             <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Free intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">find_employee_free_time</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+        <span class="n">interval</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="nb">input</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">)],</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span>
+             <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Free intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">find_employee_free_time</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+        <span class="n">interval</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="nb">input</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span>
+             <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Free intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">find_employee_free_time</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+        <span class="n">interval</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># answer</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">Interval</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="k">def</span> <span class="nf">print_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">EmployeeInterval</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">employeeIndex</span><span class="p">,</span> <span class="n">intervalIndex</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="n">interval</span>  <span class="c1"># interval representing employee&#39;s working hours</span>
+        <span class="c1"># index of the list containing working hours of this employee</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">employeeIndex</span> <span class="o">=</span> <span class="n">employeeIndex</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">intervalIndex</span> <span class="o">=</span> <span class="n">intervalIndex</span>  <span class="c1"># index of the interval in the employee list</span>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="c1"># min heap based on meeting.end</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">start</span>
+
+
+<span class="k">def</span> <span class="nf">find_employee_free_time</span><span class="p">(</span><span class="n">schedule</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">schedule</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">schedule</span><span class="p">)</span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">minHeap</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+    <span class="c1"># insert the first interval of each employee to the queue</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="n">EmployeeInterval</span><span class="p">(</span><span class="n">schedule</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+    <span class="n">previousInterval</span> <span class="o">=</span> <span class="n">minHeap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">interval</span>
+    <span class="k">while</span> <span class="n">minHeap</span><span class="p">:</span>
+        <span class="n">queueTop</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span>
+        <span class="c1"># if previousInterval is not overlapping with the next interval, insert a free interval</span>
+        <span class="k">if</span> <span class="n">previousInterval</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="n">queueTop</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">start</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">Interval</span><span class="p">(</span><span class="n">previousInterval</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">queueTop</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">start</span><span class="p">))</span>
+            <span class="n">previousInterval</span> <span class="o">=</span> <span class="n">queueTop</span><span class="o">.</span><span class="n">interval</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># overlapping intervals, update the previousInterval if needed</span>
+            <span class="k">if</span> <span class="n">previousInterval</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="n">queueTop</span><span class="o">.</span><span class="n">interval</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+                <span class="n">previousInterval</span> <span class="o">=</span> <span class="n">queueTop</span><span class="o">.</span><span class="n">interval</span>
+
+        <span class="c1"># if there are more intervals available for the same employee, add their next interval</span>
+        <span class="n">employeeSchedule</span> <span class="o">=</span> <span class="n">schedule</span><span class="p">[</span><span class="n">queueTop</span><span class="o">.</span><span class="n">employeeIndex</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">employeeSchedule</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">queueTop</span><span class="o">.</span><span class="n">intervalIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span>
+                <span class="n">minHeap</span><span class="p">,</span>
+                <span class="n">EmployeeInterval</span><span class="p">(</span><span class="n">employeeSchedule</span><span class="p">[</span><span class="n">queueTop</span><span class="o">.</span><span class="n">intervalIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
+                                 <span class="n">queueTop</span><span class="o">.</span><span class="n">employeeIndex</span><span class="p">,</span>
+                                 <span class="n">queueTop</span><span class="o">.</span><span class="n">intervalIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="nb">input</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)],</span>
+             <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Free intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">find_employee_free_time</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+        <span class="n">interval</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="nb">input</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">)],</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span>
+             <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Free intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">find_employee_free_time</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+        <span class="n">interval</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="nb">input</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span>
+             <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Free intervals: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">find_employee_free_time</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+        <span class="n">interval</span><span class="o">.</span><span class="n">print_interval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time complexity</span>
+<span class="sd">The time complexity of the above algorithm is O(N*logK), where ‘N’ is the total number of intervals and ‘K’ is the total number of employees.</span>
+<span class="sd">This is due to the fact that we are iterating through the intervals only once (which will take O(N),</span>
+<span class="sd">and every time we process an interval, we remove (and can insert) one interval in the Min Heap, (which will take O(logK)O(logK)).</span>
+<span class="sd">At any time the heap will not have more than ‘K’ elements.</span>
+<span class="sd">Space complexity</span>
+<span class="sd">The space complexity of the above algorithm will be O(K) as at any time the heap will not have more than ‘K’ elements.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../cyclic_sort.html" class="btn btn-neutral float-right" title="5. Cyclic Sort" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../merge_intervals.html" class="btn btn-neutral float-left" title="4. Merge Intervals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, XiuFu Guo
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

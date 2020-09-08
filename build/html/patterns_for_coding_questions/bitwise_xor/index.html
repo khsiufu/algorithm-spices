@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>12.1. Single Number (easy) &mdash; Algorithm Spices  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="13. Top ‘K’ Elements" href="../top_k_elements.html" />
+    <link rel="prev" title="12. Bitwise XOR" href="../bitwise_xor.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Algorithm Spices
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../preface.html">Preface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Patterns for Coding Questions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sliding_window.html">1. Sliding Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_points.html">2. Two Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fast_and_slow_pointers.html">3. Fast &amp; Slow pointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../merge_intervals.html">4. Merge Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cyclic_sort.html">5. Cyclic Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../in-place_reversal_of_a_linkedlist.html">6. In-place Reversal of a LinkedList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_breadth_first_search.html">7. Tree Breadth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tree_depth_first_search.html">8. Tree Depth First Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../two_heaps.html">9. Two Heaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../subsets.html">10. Subsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modified_binary_search.html">11. Modified Binary Search</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../bitwise_xor.html">12. Bitwise XOR</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">12.1. Single Number (easy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#two-single-numbers-medium">12.2. Two Single Numbers (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#complement-of-base-10-number-medium">12.3. Complement of Base 10 Number (medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-challenge-1">12.4. Problem Challenge 1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../top_k_elements.html">13. Top ‘K’ Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../k-way_merge.html">14. K-way merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0_1_knapsack_dynamic_programming.html">15. 0/1 Knapsack (Dynamic Programming)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topological_sort_graph.html">16. Topological Sort (Graph)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscellaneous.html">17. Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_tags/index.html">LeetCode Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../leetcode_template/index.html">LeetCode Template</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Algorithm Spices</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Patterns for Coding Questions</a> &raquo;</li>
+        
+          <li><a href="../bitwise_xor.html"><span class="section-number">12. </span>Bitwise XOR</a> &raquo;</li>
+        
+      <li><span class="section-number">12.1. </span>Single Number (easy)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/patterns_for_coding_questions/bitwise_xor/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="single-number-easy">
+<h1><span class="section-number">12.1. </span>Single Number (easy)<a class="headerlink" href="#single-number-easy" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">In a non-empty array of integers, every number appears twice except for one, find that single number.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: 1, 4, 2, 1, 3, 2, 3</span>
+<span class="sd">Output: 4</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: 7, 9, 7</span>
+<span class="sd">Output: 9</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_single_number</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">^</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">s</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_single_number</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_single_number</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+        <span class="n">num</span> <span class="o">^=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">num</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">find_single_number</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity:</span>
+<span class="sd">Time complexity of this solution is O(n) as we iterate through all numbers of the input once.</span>
+<span class="sd">Space Complexity:</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="two-single-numbers-medium">
+<h1><span class="section-number">12.2. </span>Two Single Numbers (medium)<a class="headerlink" href="#two-single-numbers-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">In a non-empty array of numbers, every number appears exactly twice except two numbers that appear only once. Find the two numbers that appear only once.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [1, 4, 2, 1, 3, 5, 6, 2, 3, 5]</span>
+<span class="sd">Output: [4, 6]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [2, 1, 3, 2]</span>
+<span class="sd">Output: [1, 3]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">find_single_numbers</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="c1"># TODO: Write your code here</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="nb">sum</span> <span class="o">^=</span> <span class="n">num</span>
+
+    <span class="n">diff</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">diff</span> <span class="o">&amp;</span> <span class="nb">sum</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>
+
+    <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&amp;</span> <span class="n">diff</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">num1</span> <span class="o">^=</span> <span class="n">num</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">num2</span> <span class="o">^=</span> <span class="n">num</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Single numbers are:&#39;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_single_numbers</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Single numbers are:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_single_numbers</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">First for loop is to find num1 ^ num2. The first right one of num1^num2 marks the difference of the two numbers,</span>
+<span class="sd">and the third loop is to divide the array into two sets and find the single number respectively.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">find_single_numbers</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="c1"># get the XOR of the all the numbers</span>
+    <span class="n">n1xn2</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="n">n1xn2</span> <span class="o">^=</span> <span class="n">num</span>
+
+    <span class="c1"># get the rightmost bit that is &#39;1&#39;</span>
+    <span class="n">rightmost_set_bit</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">rightmost_set_bit</span> <span class="o">&amp;</span> <span class="n">n1xn2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">rightmost_set_bit</span> <span class="o">=</span> <span class="n">rightmost_set_bit</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>
+    <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">&amp;</span> <span class="n">rightmost_set_bit</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># the bit is set</span>
+            <span class="n">num1</span> <span class="o">^=</span> <span class="n">num</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># the bit is not set</span>
+            <span class="n">num2</span> <span class="o">^=</span> <span class="n">num</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Single numbers are:&#39;</span> <span class="o">+</span>
+          <span class="nb">str</span><span class="p">(</span><span class="n">find_single_numbers</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Single numbers are:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">find_single_numbers</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of this solution is O(n) where ‘n’ is the number of elements in the input array.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The algorithm runs in constant space O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="complement-of-base-10-number-medium">
+<h1><span class="section-number">12.3. </span>Complement of Base 10 Number (medium)<a class="headerlink" href="#complement-of-base-10-number-medium" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Statement</span>
+<span class="sd">Every non-negative integer N has a binary representation, for example, 8 can be represented as “1000” in binary and 7 as “0111” in binary.</span>
+<span class="sd">The complement of a binary representation is the number in binary that we get when we change every 1 to a 0 and every 0 to a 1. For example, the binary complement of “1010” is “0101”.</span>
+<span class="sd">For a given positive number N in base-10, return the complement of its binary representation as a base-10 integer.</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: 8</span>
+<span class="sd">Output: 7</span>
+<span class="sd">Explanation: 8 is 1000 in binary, its complement is 0111 in binary, which is 7 in base-10.</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: 10</span>
+<span class="sd">Output: 5</span>
+<span class="sd">Explanation: 10 is 1010 in binary, its complement is 0101 in binary, which is 5 in base-10.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">calculate_bitwise_complement</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c1">#TODO: Write your code here</span>
+    <span class="n">count</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span>
+    <span class="k">while</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">n</span> <span class="o">^</span> <span class="n">s</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bitwise complement is: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">calculate_bitwise_complement</span><span class="p">(</span><span class="mi">8</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bitwise complement is: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">calculate_bitwise_complement</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">calculate_bitwise_complement</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="c1"># count number of total bits in &#39;num&#39;</span>
+    <span class="n">bit_count</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">bit_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+
+    <span class="c1"># for a number which is a complete power of &#39;2&#39; i.e., it can be written as pow(2, n), if we</span>
+    <span class="c1"># subtract &#39;1&#39; from such a number, we get a number which has &#39;n&#39; least significant bits set to &#39;1&#39;.</span>
+    <span class="c1"># For example, &#39;4&#39; which is a complete power of &#39;2&#39;, and &#39;3&#39; (which is one less than 4) has a binary</span>
+    <span class="c1"># representation of &#39;11&#39; i.e., it has &#39;2&#39; least significant bits set to &#39;1&#39;</span>
+    <span class="n">all_bits_set</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">bit_count</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># from the solution description: complement = number ^ all_bits_set</span>
+    <span class="k">return</span> <span class="n">num</span> <span class="o">^</span> <span class="n">all_bits_set</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bitwise complement is: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">calculate_bitwise_complement</span><span class="p">(</span><span class="mi">8</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bitwise complement is: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">calculate_bitwise_complement</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">Time complexity of this solution is O(b)O where ‘b’ is the number of bits required to store the given number.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">Space complexity of this solution is O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problem-challenge-1">
+<h1><span class="section-number">12.4. </span>Problem Challenge 1<a class="headerlink" href="#problem-challenge-1" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Problem Challenge 1</span>
+<span class="sd">Given a binary matrix representing an image, we want to flip the image horizontally, then invert it.</span>
+<span class="sd">To flip an image horizontally means that each row of the image is reversed. For example, flipping [0, 1, 1] horizontally results in [1, 1, 0].</span>
+<span class="sd">To invert an image means that each 0 is replaced by 1, and each 1 is replaced by 0. For example, inverting [1, 1, 0] results in [0, 0, 1].</span>
+<span class="sd">Example 1:</span>
+<span class="sd">Input: [</span>
+<span class="sd">  [1,0,1],</span>
+<span class="sd">  [1,1,1],</span>
+<span class="sd">  [0,1,1]</span>
+<span class="sd">]</span>
+<span class="sd">Output: [</span>
+<span class="sd">  [0,1,0],</span>
+<span class="sd">  [0,0,0],</span>
+<span class="sd">  [0,0,1]</span>
+<span class="sd">]</span>
+<span class="sd">Explanation: First reverse each row: [[1,0,1],[1,1,1],[1,1,0]]. Then, invert the image: [[0,1,0],[0,0,0],[0,0,1]]</span>
+<span class="sd">Example 2:</span>
+<span class="sd">Input: [</span>
+<span class="sd">  [1,1,0,0],</span>
+<span class="sd">  [1,0,0,1],</span>
+<span class="sd">  [0,1,1,1],</span>
+<span class="sd">  [1,0,1,0]</span>
+<span class="sd">]</span>
+<span class="sd">Output: [</span>
+<span class="sd">  [1,1,0,0],</span>
+<span class="sd">  [0,1,1,0],</span>
+<span class="sd">  [0,0,0,1],</span>
+<span class="sd">  [1,0,1,0]</span>
+<span class="sd">]</span>
+<span class="sd">Explanation: First reverse each row: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]]. Then invert the image: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># mycode</span>
+<span class="k">def</span> <span class="nf">flip_and_invert_image</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+    <span class="c1">#TODO: Write your code here.</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)):</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">:</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">end</span><span class="p">]</span> <span class="o">^</span> <span class="mi">1</span>
+            <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">end</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="o">^</span> <span class="mi">1</span>
+            <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+            <span class="n">end</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">matrix</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">flip_and_invert_image</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="n">flip_and_invert_image</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="c1"># answer</span>
+<span class="k">def</span> <span class="nf">flip_an_invert_image</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="n">C</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="n">C</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">C</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">matrix</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">flip_an_invert_image</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="n">flip_an_invert_image</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]))</span>
+
+
+<span class="n">main</span><span class="p">()</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Time Complexity</span>
+<span class="sd">The time complexity of this solution is O(n) as we iterate through all elements of the input.</span>
+<span class="sd">Space Complexity</span>
+<span class="sd">The space complexity of this solution is O(1).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../top_k_elements.html" class="btn btn-neutral float-right" title="13. Top ‘K’ Elements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../bitwise_xor.html" class="btn btn-neutral float-left" title="12. Bitwise XOR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, XiuFu Guo
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
