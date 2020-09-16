@@ -18,6 +18,17 @@ Maximum Sum Subarray of Size K (easy)
    '''
 
 
+   # mycode
+   def max_sub_array_of_size_k(k, arr):
+       if not arr or not k:
+           return 0
+       max_sum = 0
+       for start in range(len(arr) - k):
+           window_sum = sum(arr[start:start + k])
+           max_sum = max(max_sum, window_sum)
+       return max_sum
+
+
    # answer
    def max_sub_array_of_size_k(k, arr):
        max_sum, window_sum = 0, 0
@@ -143,26 +154,23 @@ Longest Substring with K Distinct Characters (medium)
 
    # mycode
    def longest_substring_with_k_distinct(str, k):
-       dict_arr = {}
-       max_len, win_start = 0, 0
+       from collections import defaultdict
+       lookup = defaultdict(int)
+       start, end = 0, 0
+       res = ""
 
-       for win_end in range(len(str)):
-           if str[win_end] not in dict_arr:
-               dict_arr[str[win_end]] = 1
-           else:
-               dict_arr[str[win_end]] += 1
+       while end < len(str):
+           while len(lookup) > k:
+               lookup[str[start]] -= 1
+               if lookup[str[start]] == 0:
+                   del lookup[str[start]]
+               start += 1
 
-           while len(dict_arr) > k:
-               if dict_arr[str[win_start]] == 1:
-                   del dict_arr[str[win_start]]
-               else:
-                   dict_arr[str[win_start]] -= 1
-               win_start += 1
+           res = str[start:end] if len(str[start:end]) > len(res) else res
 
-           if len(dict_arr) == k:
-               max_len = max(max_len, sum(dict_arr.values()))
-
-       return max_len
+           lookup[str[end]] += 1
+           end += 1
+       return len(res)
 
 
    # answer
