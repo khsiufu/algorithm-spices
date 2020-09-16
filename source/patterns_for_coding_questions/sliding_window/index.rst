@@ -86,6 +86,10 @@ Smallest Subarray with a given sum (easy)
    '''
 
 
+   # mycode
+   # mycode like bottom answer, so don't repeat write.
+
+
    # answer
    import math
 
@@ -157,20 +161,21 @@ Longest Substring with K Distinct Characters (medium)
        from collections import defaultdict
        lookup = defaultdict(int)
        start, end = 0, 0
-       res = ""
+       max_len = 0
 
        while end < len(str):
+           lookup[str[end]] += 1
+           end += 1
+
            while len(lookup) > k:
                lookup[str[start]] -= 1
                if lookup[str[start]] == 0:
                    del lookup[str[start]]
                start += 1
 
-           res = str[start:end] if len(str[start:end]) > len(res) else res
+           max_len = max(max_len, end - start)
 
-           lookup[str[end]] += 1
-           end += 1
-       return len(res)
+       return max_len
 
 
    # answer
@@ -243,24 +248,22 @@ Fruits into Baskets (medium)
 
    # mycode
    def fruits_into_baskets(fruits):
-       max_len, win_start = 0, 0
-       dict_fruits = {}
+       from collections import defaultdict
+       lookup = defaultdict(int)
+       start, end = 0, 0
+       max_len = 0
 
-       for win_end in range(len(fruits)):
-           if fruits[win_end] not in dict_fruits:
-               dict_fruits[fruits[win_end]] = 1
-           else:
-               dict_fruits[fruits[win_end]] += 1
+       while end < len(fruits):
+           lookup[fruits[end]] += 1
+           end += 1
 
-           while len(dict_fruits) > 2:
-               if dict_fruits[fruits[win_start]] == 1:
-                   del dict_fruits[fruits[win_start]]
-               else:
-                   dict_fruits[fruits[win_start]] -= 1
-               win_start += 1
+           while len(lookup) > 2:
+               lookup[fruits[start]] -= 1
+               if lookup[fruits[start]] == 0:
+                   del lookup[fruits[start]]
+               start += 1
 
-           if len(dict_fruits) == 2:
-               max_len = max(max_len, sum(dict_fruits.values()))
+           max_len = max(max_len, end - start)
 
        return max_len
 
