@@ -341,24 +341,23 @@ No-repeat Substring (hard)
 
    # mycode
    def non_repeat_substring(str):
-       max_len, win_start = 0, 0
-       dict_str = {}
+       from collections import defaultdict
+       lookup = defaultdict(int)
+       start, end = 0, 0
+       counter = 0
+       max_len = 0
 
-       for win_end in range(len(str)):
-           if str[win_end] not in dict_str:
-               dict_str[str[win_end]] = 1
-           else:
-               dict_str[str[win_end]] += 1
-
-           while len(dict_str) < sum(dict_str.values()):
-               if dict_str[str[win_start]] == 1:
-                   del dict_str[str[win_start]]
-               else:
-                   dict_str[str[win_start]] -= 1
-               win_start += 1
-
-           if len(dict_str) == sum(dict_str.values()):
-               max_len = max(max_len, len(dict_str))
+       while end < len(str):
+           if lookup[str[end]] > 0:  # 如果大于0，代表查找表里面已经有该数字，counter += 1
+               counter += 1
+           lookup[str[end]] += 1
+           end += 1
+           while counter > 0:  # counter > 0，表示查找表已经出现重复数字
+               if lookup[str[start]] > 1:  # 大于1就是多出来数字
+                   counter -= 1
+               lookup[str[start]] -= 1
+               start += 1
+           max_len = max(max_len, end - start)
        return max_len
 
 

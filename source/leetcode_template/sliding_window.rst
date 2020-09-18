@@ -33,7 +33,7 @@ Sliding Window
        def lengthOfLongestSubstring(self, s: str) -> int:
            from collections import defaultdict
            lookup = defaultdict(int)
-           res, start, end = 0, 0, 0
+           start, end = 0, 0, 0
            counter = 0
            max_len = 0
 
