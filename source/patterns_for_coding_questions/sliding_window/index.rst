@@ -431,23 +431,21 @@ Longest Substring with Same Letters after Replacement (hard)
 
    # mycode
    def length_of_longest_substring(str, k):
-       # TODO: Write your code here
-       win_start, max_len, cnt = 0, 0, 0
-       dict_str = {}
+       from collections import defaultdict
+       max_len, max_freq, lookup = 0, 0, defaultdict(int)
+       start, end = 0, 0
 
-       for win_end in range(len(str)):
-           if str[win_end] not in dict_str:
-               dict_str[str[win_end]] = 1
-           else:
-               dict_str[str[win_end]] += 1
-
-           cnt = max(dict_str.values())
-           while win_end - win_start + 1 - cnt > k:
-               dict_str[str[win_start]] -= 1
-               win_start += 1
-
-           max_len = max(max_len, win_end - win_start + 1)
-
+       while end < len(str):
+           lookup[str[end]] += 1
+           # 保存历史出现的最大频率
+           max_freq = max(max_freq, lookup[str[end]])
+           # 这边end先右移，下面计算距离就不用+1
+           end += 1
+           # 缩小滑动窗口
+           if end - start - max_freq > k:
+               lookup[str[start]] -= 1
+               start += 1
+           max_len = max(max_len, end - start)
        return max_len
 
 
@@ -517,21 +515,21 @@ Longest Subarray with Ones after Replacement (hard)
 
    # mycode
    def length_of_longest_substring(arr, k):
-       win_start, max_len, cnt = 0, 0, 0
-       zero_posi = [0] * (k + 1)
+       max_len, start, end = 0, 0, 0
+       max_ones_count = 0
 
-       for win_end in range(len(arr)):
-           if arr[win_end] == 0:
-               cnt += 1
-               zero_posi[cnt - 1] = win_end
+       while end < len(arr):
+           if arr[end] == 1:
+               max_ones_count += 1
 
-               if cnt > k:
-                   win_start = zero_posi[0] + 1
-                   zero_posi = zero_posi[1:] + [0]
-                   cnt -= 1
+           end += 1
 
-           max_len = max(max_len, win_end - win_start + 1)
+           if end - start - max_ones_count > k:
+               if arr[start] == 1:
+                   max_ones_count -= 1
+               start += 1
 
+           max_len = max(max_len, end - start)
        return max_len
 
 
