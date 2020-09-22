@@ -348,12 +348,12 @@ No-repeat Substring (hard)
        max_len = 0
 
        while end < len(str):
-           if lookup[str[end]] > 0:  # 如果大于0，代表查找表里面已经有该数字，counter += 1
+           if lookup[str[end]] > 0:
                counter += 1
            lookup[str[end]] += 1
            end += 1
-           while counter > 0:  # counter > 0，表示查找表已经出现重复数字
-               if lookup[str[start]] > 1:  # 大于1就是多出来数字
+           while counter > 0:
+               if lookup[str[start]] > 1:
                    counter -= 1
                lookup[str[start]] -= 1
                start += 1
@@ -437,11 +437,8 @@ Longest Substring with Same Letters after Replacement (hard)
 
        while end < len(str):
            lookup[str[end]] += 1
-           # 保存历史出现的最大频率
            max_freq = max(max_freq, lookup[str[end]])
-           # 这边end先右移，下面计算距离就不用+1
            end += 1
-           # 缩小滑动窗口
            if end - start - max_freq > k:
                lookup[str[start]] -= 1
                start += 1
@@ -609,38 +606,30 @@ Problem Challenge 1 - Permutation in a String (hard)
    Explanation: The string contains "acb" which is a permutation of the given pattern.
    '''
 
-
    # mycode
    def find_permutation(str, pattern):
-       # TODO: Write your code here
-       p_dict = {}
-       s_dict = {}
-       for p in pattern:
-           if p not in p_dict:
-               p_dict[p] = 1
-           else:
-               p_dict[p] += 1
+       from collections import Counter
+       lookup = Counter(pattern)
 
-       for s in range(len(str)):
-           if s < len(pattern):
-               if str[s] not in s_dict:
-                   s_dict[str[s]] = 1
-               else:
-                   s_dict[str[s]] += 1
+       window_start, matched = 0, 0
 
-           else:
-               if s_dict[str[s - len(pattern)]] == 1:
-                   del s_dict[str[s - len(pattern)]]
-               else:
-                   s_dict[str[s - len(pattern)]] -= 1
+       for window_end in range(len(str)):
+           right_char = str[window_end]
+           if right_char in lookup:
+               lookup[right_char] -= 1
+               if lookup[right_char] == 0:
+                   matched += 1
 
-               if str[s] not in s_dict:
-                   s_dict[str[s]] = 1
-               else:
-                   s_dict[str[s]] += 1
-
-           if s_dict == p_dict:
+           if matched == len(lookup):
                return True
+
+           if window_end >= len(pattern) - 1:
+               left_char = str[window_start]
+               window_start += 1
+               if left_char in lookup:
+                   if lookup[left_char] == 0:
+                       matched -= 1
+                   lookup[left_char] += 1
        return False
 
 
@@ -691,10 +680,10 @@ Problem Challenge 1 - Permutation in a String (hard)
 
 
    '''
-   Time Complexity #
+   Time Complexity
    The time complexity of the above algorithm will be O(N + M) where ‘N’ and ‘M’ are the number of characters in the input string and the pattern respectively.
 
-   Space Complexity #
+   Space Complexity
    The space complexity of the algorithm is O(M) since in the worst case,
    the whole pattern can have distinct characters which will go into the HashMap.
    '''
@@ -730,37 +719,30 @@ Problem Challenge 2 - String Anagrams (hard)
 
    # mycode
    def find_string_anagrams(str, pattern):
-       result_indexes = []
-       # TODO: Write your code here
-       p_dict = {}
-       s_dict = {}
-       for p in pattern:
-           if p not in p_dict:
-               p_dict[p] = 1
-           else:
-               p_dict[p] += 1
+       from collections import Counter
+       lookup = Counter(pattern)
+       window_start, matched = 0, 0
 
-       for s in range(len(str)):
-           if s < len(pattern):
-               if str[s] not in s_dict:
-                   s_dict[str[s]] = 1
-               else:
-                   s_dict[str[s]] += 1
+       res = []
 
-           else:
-               if s_dict[str[s - len(pattern)]] == 1:
-                   del s_dict[str[s - len(pattern)]]
-               else:
-                   s_dict[str[s - len(pattern)]] -= 1
+       for window_end in range(len(str)):
+           right_char = str[window_end]
+           if right_char in lookup:
+               lookup[right_char] -= 1
+               if lookup[right_char] == 0:
+                   matched += 1
 
-               if str[s] not in s_dict:
-                   s_dict[str[s]] = 1
-               else:
-                   s_dict[str[s]] += 1
+           if matched == len(lookup):
+               res.append(window_start)
 
-           if s_dict == p_dict:
-               result_indexes.append(s - len(pattern) + 1)
-       return result_indexes
+           if window_end >= len(lookup) - 1:
+               left_char = str[window_start]
+               window_start += 1
+               if left_char in lookup:
+                   if lookup[left_char] == 0:
+                       matched -= 1
+                   lookup[left_char] += 1
+       return res
 
 
    # answer
