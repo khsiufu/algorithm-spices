@@ -719,29 +719,19 @@ Problem Challenge 2 - String Anagrams (hard)
 
    # mycode
    def find_string_anagrams(str, pattern):
-       from collections import Counter
-       lookup = Counter(pattern)
-       window_start, matched = 0, 0
-
+       len_s, len_p = len(str), len(pattern)
+       vs, vp = [0] * 26, [0] * 26
        res = []
 
-       for window_end in range(len(str)):
-           right_char = str[window_end]
-           if right_char in lookup:
-               lookup[right_char] -= 1
-               if lookup[right_char] == 0:
-                   matched += 1
+       for chr in pattern:
+           vp[ord(chr) - ord('a')] += 1
 
-           if matched == len(lookup):
-               res.append(window_start)
-
-           if window_end >= len(lookup) - 1:
-               left_char = str[window_start]
-               window_start += 1
-               if left_char in lookup:
-                   if lookup[left_char] == 0:
-                       matched -= 1
-                   lookup[left_char] += 1
+       for i in range(len_s):
+           if i >= len_p:
+               vs[ord(str[i - len_p]) - ord('a')] -= 1
+           vs[ord(str[i]) - ord('a')] += 1
+           if vs == vp:
+               res.append(i + 1 - len_p)
        return res
 
 
