@@ -814,46 +814,35 @@ Problem Challenge 3 - Smallest Window containing Substring (hard)
 
 
    # mycode
-   import math
-
-
    def find_substring(str, pattern):
-       # TODO: Write your code here
-       p_dict = {}
-       s_dict = {}
-       result = ""
+       from collections import Counter
+       lookup = Counter(pattern)
 
-       win_start, min_len = 0, math.inf
+       window_start, matched, substr_start = 0, 0, 0
+       min_len = len(str) + 1
 
-       for p in pattern:
-           if p not in p_dict:
-               p_dict[p] = 1
-           else:
-               p_dict[p] += 1
+       for winow_end in range(len(str)):
+           right_char = str[winow_end]
+           if right_char in lookup:
+               lookup[right_char] -= 1
+               if lookup[right_char] == 0:
+                   matched += 1
 
-       for win_end in range(len(str)):
-           if str[win_end] not in s_dict:
-               s_dict[str[win_end]] = 1
-           else:
-               s_dict[str[win_end]] += 1
+           while matched == len(lookup):
+               if min_len > winow_end - window_start + 1:
+                   min_len = winow_end - window_start + 1
+                   substr_start = window_start
 
-           print(s_dict)
+               left_char = str[window_start]
+               window_start += 1
+               if left_char in lookup:
+                   if lookup[left_char] == 0:
+                       matched -= 1
+                   lookup[left_char] += 1
 
-           while set(p_dict.keys()).issubset(set(s_dict.keys())):
-               if win_end - win_start + 1 < min_len:
-                   min_len = win_end - win_start + 1
-                   if win_end == len(str) - 1:
-                       result = str[win_start:]
-                   else:
-                       result = str[win_start:win_end + 1]
-
-               if s_dict[str[win_start]] == 1:
-                   del s_dict[str[win_start]]
-               else:
-                   s_dict[str[win_start]] -= 1
-               win_start += 1
-
-       return result
+       if min_len > len(str):
+           return ""
+       return str[substr_start: substr_start + min_len]
 
 
    # answer
@@ -944,14 +933,14 @@ Problem Challenge 4 - Words Concatenation (hard)
            cnt = 0
            curr = str[i:i + word_count * word_len]
 
-       for j in range(word_count):
-           if words[j] not in curr:
-               break
-           else:
-               cnt += 1
+           for j in range(word_count):
+               if words[j] not in curr:
+                   break
+               else:
+                   cnt += 1
 
-       if cnt == word_count:
-           result_indices.append(i)
+           if cnt == word_count:
+               result_indices.append(i)
 
        return result_indices
 
@@ -981,17 +970,17 @@ Problem Challenge 4 - Words Concatenation (hard)
                if word not in word_frequency:  # Break if we don't need this word
                    break
 
-           # Add the word to the 'words_seen' map
-           if word not in words_seen:
-               words_seen[word] = 0
-           words_seen[word] += 1
+               # Add the word to the 'words_seen' map
+               if word not in words_seen:
+                   words_seen[word] = 0
+               words_seen[word] += 1
 
-           # No need to process further if the word has higher frequency than required
-           if words_seen[word] > word_frequency.get(word, 0):
-               break
+               # No need to process further if the word has higher frequency than required
+               if words_seen[word] > word_frequency.get(word, 0):
+                   break
 
-           if j + 1 == words_count:  # Store index if we have found all the words
-               result_indices.append(i)
+               if j + 1 == words_count:  # Store index if we have found all the words
+                   result_indices.append(i)
 
        return result_indices
 
