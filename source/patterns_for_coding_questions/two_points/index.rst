@@ -19,16 +19,16 @@ Pair with Target Sum (easy)
 
    # mycode
    def pair_with_targetsum(arr, target_sum):
-       # TODO: Write your code here
-       i, j = 0, len(arr) - 1
-       while i < j:
-           if arr[i] + arr[j] < target_sum:
-               i += 1
-           elif arr[i] + arr[j] > target_sum:
-               j -= 1
-           else:
-               return [i, j]
+       l, r = 0, len(arr) - 1
 
+       while l < r:
+           s = arr[l] + arr[r]
+           if s == target_sum:
+               return [l, r]
+           elif s < target_sum:
+               l += 1
+           else:
+               r -= 1
        return [-1, -1]
 
 
@@ -121,13 +121,12 @@ Remove Duplicates (easy)
 
    # mycode
    def remove_duplicates(arr):
-       # TODO: Write your code here
-       i, result = 1, 1
-       while i < len(arr):
+       s = 1
+       for i in range(1, len(arr)):
            if arr[i] != arr[i - 1]:
-               result += 1
-           i += 1
-       return result
+               arr[s] = arr[i]
+               s += 1
+       return s
 
 
    # answer
@@ -160,6 +159,8 @@ Remove Duplicates (easy)
    Space Complexity
    The algorithm runs in constant space O(1).
    '''
+
+
    '''
    Similar Questions #
    Problem 1: Given an unsorted array of numbers and a target ‘key’, remove all instances of ‘key’ in-place and return the new length of the array.
@@ -216,21 +217,19 @@ Squaring a Sorted Array (easy)
 
    # mycode
    def make_squares(arr):
-       squares = [0] * len(arr)
-       # TODO: Write your code here
-       i, j = 0, len(arr) - 1
+       res = [0] * len(arr)
+       l, r = 0, len(arr) - 1
        k = len(arr) - 1
-       while i <= j:
-           if arr[i]**2 >= arr[j]**2:
-               squares[k] = arr[i]**2
-               i += 1
+       while l <= r:
+           if arr[l] ** 2 >= arr[r] ** 2:
+               res[k] = arr[l] ** 2
+               l += 1
                k -= 1
            else:
-               squares[k] = arr[j]**2
-               j -= 1
+               res[k] = arr[r] ** 2
+               r -= 1
                k -= 1
-
-       return squares
+       return res
 
 
    # answer
