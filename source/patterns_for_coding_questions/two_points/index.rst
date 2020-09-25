@@ -288,34 +288,28 @@ Triplet Sum to Zero (medium)
 
    # mycode
    def search_triplets(arr):
-       triplets = []
+       res = []
+       if not arr:
+           return res
        arr.sort()
-       # TODO: Write your code here
-       for i in range(len(arr)):
+       for i in range(len(arr) - 2):
+           l, r = i + 1, len(arr) - 1
            if i > 0 and arr[i] == arr[i - 1]:
                continue
-           search_pair(arr, -arr[i], i + 1, triplets)
-
-       return triplets
-
-
-   def search_pair(arr, target_sum, left, triplets):
-       right = len(arr) - 1
-       while left < right:
-           if arr[left] + arr[right] == target_sum:
-               triplets.append([-target_sum, arr[left], arr[right]])
-               left += 1
-               right -= 1
-
-               while left < right and arr[left] == arr[left - 1]:
-                   left += 1
-               while left < right and arr[right] == arr[right + 1]:
-                   right -= 1
-
-           elif arr[left] + arr[right] > target_sum:
-               right -= 1
-           else:
-               left += 1
+           while l < r:
+               s = arr[i] + arr[l] + arr[r]
+               if s > 0:
+                   r -= 1
+               elif s < 0:
+                   l += 1
+               else:
+                   res.append([arr[i], arr[l], arr[r]])
+                   while l < r and arr[l] == arr[l + 1]:
+                       l += 1
+                   while l < r and arr[r] == arr[r - 1]:
+                       r -= 1
+                   l += 1; r -= 1
+       return res
 
 
    # answer
@@ -392,31 +386,30 @@ Triplet Sum Close to Target (medium)
 
 
    # mycode
-   import math
-
-
    def triplet_sum_close_to_target(arr, target_sum):
+       res = []
+       if not arr:
+           return res
 
-       # TODO: Write your code here
        arr.sort()
-       min_sum, err_min = 0, math.inf
+       d = float('inf')
+       res = 0
 
-       for i in range(len(arr)):
-           j, k = i + 1, len(arr) - 1
-           while j < k:
-               err = abs(arr[i] + arr[j] + arr[k] - target_sum)
-               if err < err_min:
-                   err_min = err
-                   min_sum = arr[i] + arr[j] + arr[k]
-               elif err == err_min:
-                   min_sum = min(min_sum, arr[i] + arr[j] + arr[k])
-
-               if arr[i] + arr[j] + arr[k] < target_sum:
-                   j += 1
-               elif arr[i] + arr[j] + arr[k] > target_sum:
-                   k -= 1
-
-       return min_sum
+       for i in range(len(arr) - 2):
+           l, r = i + 1, len(arr) - 1
+           while l < r:
+               s = arr[i] + arr[l] + arr[r]
+               if s == target_sum:
+                   return s
+               diff = abs(target_sum - s)
+               if d > diff:
+                   d = diff
+                   res = s
+               if s > target_sum:
+                   r -= 1
+               else:
+                   l += 1
+       return res
 
 
    # answer
@@ -459,7 +452,7 @@ Triplet Sum Close to Target (medium)
 
    '''
    Time complexity
-   Sorting the array will take O(N* logN)O(N∗logN). Overall searchTriplet() will take O(N * logN + N^2),
+   Sorting the array will take O(N * logN). Overall searchTriplet() will take O(N * logN + N^2),
    which is asymptotically equivalent to O(N^2).
    Space complexity
    The space complexity of the above algorithm will be O(N) which is required for sorting.
