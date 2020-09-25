@@ -479,20 +479,20 @@ Triplets with Smaller Sum (medium)
 
    # mycode
    def triplet_with_smaller_sum(arr, target):
-       count = 0
-       # TODO: Write your code here
+       cnt = 0
+       if not arr:
+           return cnt
        arr.sort()
-
-       for i in range(len(arr)):
-           j, k = i + 1, len(arr) - 1
-           while j < k:
-               if arr[i] + arr[j] + arr[k] < target:
-                   count += (k - j)
-                   j += 1
+       for i in range(len(arr) - 2):
+           l, r = i + 1, len(arr) - 1
+           while l < r:
+               s = arr[i] + arr[l] + arr[r]
+               if s < target:
+                   cnt += r - l
+                   l += 1
                else:
-                   k -= 1
-
-       return count
+                   r -= 1
+       return cnt
 
 
    # answer
