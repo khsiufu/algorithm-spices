@@ -556,26 +556,19 @@ Subarrays with Product Less than a Target (medium)
 
    # mycode
    def find_subarrays(arr, target):
+       from collections import deque
        result = []
        product = 1
-       win_start = 0
-
-       for win_end in range(len(arr)):
-
-           product *= arr[win_end]
-           print(product)
-
-           while product >= target and win_start < len(arr):
-               product /= arr[win_start]
-               win_start += 1
-
-           if product < target:
-               temp_i = []
-               for i in range(win_end, win_start - 1, -1):
-                   temp_i.append(arr[i])
-                   temp = temp_i.copy()
-                   result.append(temp)
-
+       left = 0
+       for right in range(len(arr)):
+           product *= arr[right]
+           while product >= target and left < len(arr):
+               product /= arr[left]
+               left += 1
+           temp_list = deque()
+           for i in range(right, left - 1, -1):
+               temp_list.appendleft(arr[i])
+               result.append(list(temp_list))
        return result
 
 
@@ -640,21 +633,17 @@ Dutch National Flag Problem (medium)
 
    # mycode
    def dutch_flag_sort(arr):
-       # TODO: Write your code here
-       left, i = 0, 0
-       right = len(arr) - 1
-
-       while i <= right:
-           if arr[i] == 0:
-               arr[i], arr[left] = arr[left], arr[i]
-               left += 1
-               i += 1
-           elif arr[i] == 2:
-               arr[i], arr[right] = arr[right], arr[i]
-               right -= 1
+       zero = 0
+       l, r = 0, len(arr) - 1
+       while l <= r:
+           if arr[l] == 0:
+               arr[l], arr[zero] = arr[zero], arr[l]
+               l += 1; zero += 1
+           elif arr[l] == 2:
+               arr[l], arr[r] = arr[r], arr[l]
+               r -= 1
            else:
-               i += 1
-
+               l += 1
        return
 
 
@@ -686,43 +675,39 @@ Problem Challenge 1 - Quadruple Sum to Target (medium)
 
    # mycode
    def search_quadruplets(arr, target):
-       quadruplets = []
-       # TODO: Write your code here
-
        arr.sort()
-
-       for i in range(len(arr) - 3):
-           if i > 0 and arr[i] == arr[i - 1]:
-               continue
-           for j in range(i + 1, len(arr) - 2):
-               if j > i and arr[j] == arr[j - 1]:
-                   continue
-               search_pair(arr, i, j, target, quadruplets)
-
-       return quadruplets
+       res = []
+       find_n_sum(arr, target, 4, [], res)
+       return res
 
 
-   def search_pair(arr, i, j, target, quadruplets):
-       left = j + 1
-       right = len(arr) - 1
+   def find_n_sum(nums, target, n, path, res):
+       if len(nums) < n or n < 2:
+           return
 
-       sub_target = target - arr[i] - arr[j]
-
-       while left < right:
-           if arr[left] + arr[right] == sub_target:
-               quadruplets.append([arr[i], arr[j], arr[left], arr[right]])
-               left += 1
-               right -= 1
-
-               while left < right and arr[left] == arr[left - 1]:
-                   left += 1
-
-               while left < right and arr[right] == arr[right + 1]:
-                   right -= 1
-           elif arr[left] + arr[right] < sub_target:
-               left += 1
-           else:
-               right -= 1
+       # solve 2-sum
+       if n == 2:
+           l, r = 0, len(nums) - 1
+           while l < r:
+               if nums[l] + nums[r] == target:
+                   res.append(path + [nums[l], nums[r]])
+                   l += 1
+                   r -= 1
+                   while l < r and nums[l] == nums[l - 1]:
+                       l += 1
+                   while r > l and nums[r] == nums[r + 1]:
+                       r -= 1
+               elif nums[l] + nums[r] < target:
+                   l += 1
+               else:
+                   r -= 1
+       else:
+           for i in range(0, len(nums) - n + 1):  # careful about range
+               if target < nums[i] * n or target > nums[-1] * n:  # take advantages of sorted list
+                   break
+               if i == 0 or i > 0 and nums[i - 1] != nums[i]:  # recursively reduce N
+                   find_n_sum(nums[i+1:], target - nums[i], n - 1, path + [nums[i]], res)
+           return
 
 
    # answer
