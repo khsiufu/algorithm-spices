@@ -791,7 +791,6 @@ Problem Challenge 2 - Comparing Strings containing Backspaces (medium)
 
    # mycode
    def backspace_compare(str1, str2):
-       # TODO: Write your code here
        if clean(str1) == clean(str2):
            return True
        return False
@@ -905,37 +904,20 @@ Problem Challenge 3 - Minimum Window Sort (medium)
    '''
 
    # mycode
-   import math
-
-
    def shortest_window_sort(arr):
-       # TODO: Write your code here
+       sorted_arr = sorted(arr)
+       start = end = 0
 
-       left, right = 1, len(arr) - 1
-       max_num, min_num = -math.inf, math.inf
+       for i in range(len(arr)):
+           if arr[i] != sorted_arr[i]:
+               start = i
+               break
 
-       while left < len(arr) - 1 and arr[left] < arr[left + 1]:
-           left += 1
-
-       while right > 0 and arr[right] > arr[right - 1]:
-           right -= 1
-
-       for i in range(left, right + 1):
-           max_num = max(max_num, arr[i])
-           min_num = min(min_num, arr[i])
-
-       for i in range(left, -1, -1):
-           if arr[i] >= min_num:
-               left = i
-
-       for i in range(right, len(arr)):
-           if arr[i] <= max_num:
-               right = i
-
-       if right == 0:
-           return 0
-
-       return right - left + 1
+       for i in range(len(arr) - 1, 0, -1):
+           if arr[i] != sorted_arr[i]:
+               end = i
+               break
+       return end - start + 1 if end - start else 0
 
 
    # answer
@@ -984,7 +966,7 @@ Problem Challenge 3 - Minimum Window Sort (medium)
 
    '''
    Time complexity
-   The time complexity of the above algorithm will be O(N)O(N).
+   The time complexity of the above algorithm will be O(N).
    Space complexity
-   The algorithm runs in constant space O(1)O(1).
+   The algorithm runs in constant space O(1).
    '''
