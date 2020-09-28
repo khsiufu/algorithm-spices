@@ -15,14 +15,12 @@ LinkedList Cycle (easy)
 
 
    def has_cycle(head):
-       # TODO: Write your code here
-       slow, fast = head, head
-       while fast is not None and fast.next is not None:
+       slow = fast = head
+       while fast and fast.next:
            fast = fast.next.next
            slow = slow.next
-           if slow == fast:
+           if fast == slow:
                return True
-
        return False
 
 
@@ -52,6 +50,8 @@ LinkedList Cycle (easy)
    Space Complexity #
    The algorithm runs in constant space O(1).
    '''
+
+
    '''
    Similar Problems
    Problem 1: Given the head of a LinkedList with a cycle, find the length of the cycle.
@@ -68,8 +68,8 @@ LinkedList Cycle (easy)
 
 
    def find_cycle_length(head):
-       slow, fast = head, head
-       while fast is not None and fast.next is not None:
+       slow = fast = head
+       while fast and fast.next:
            fast = fast.next.next
            slow = slow.next
            if slow == fast:  # found the cycle
@@ -121,20 +121,10 @@ Start of LinkedList Cycle (medium)
    '''
 
    # mycode
-   from __future__ import print_function
-
-
    class Node:
        def __init__(self, value, next=None):
            self.value = value
            self.next = next
-
-       def print_list(self):
-           temp = self
-           while temp is not None:
-               print(temp.value, end='')
-               temp = temp.next
-           print()
 
 
    def find_cycle_start(head):
