@@ -19,16 +19,16 @@ Pair with Target Sum (easy)
 
    # mycode
    def pair_with_targetsum(arr, target_sum):
-       # TODO: Write your code here
-       i, j = 0, len(arr) - 1
-       while i < j:
-           if arr[i] + arr[j] < target_sum:
-               i += 1
-           elif arr[i] + arr[j] > target_sum:
-               j -= 1
-           else:
-               return [i, j]
+       l, r = 0, len(arr) - 1
 
+       while l < r:
+           s = arr[l] + arr[r]
+           if s == target_sum:
+               return [l, r]
+           elif s < target_sum:
+               l += 1
+           else:
+               r -= 1
        return [-1, -1]
 
 
@@ -121,13 +121,12 @@ Remove Duplicates (easy)
 
    # mycode
    def remove_duplicates(arr):
-       # TODO: Write your code here
-       i, result = 1, 1
-       while i < len(arr):
+       s = 1
+       for i in range(1, len(arr)):
            if arr[i] != arr[i - 1]:
-               result += 1
-           i += 1
-       return result
+               arr[s] = arr[i]
+               s += 1
+       return s
 
 
    # answer
@@ -160,6 +159,8 @@ Remove Duplicates (easy)
    Space Complexity
    The algorithm runs in constant space O(1).
    '''
+
+
    '''
    Similar Questions #
    Problem 1: Given an unsorted array of numbers and a target ‘key’, remove all instances of ‘key’ in-place and return the new length of the array.
@@ -216,21 +217,19 @@ Squaring a Sorted Array (easy)
 
    # mycode
    def make_squares(arr):
-       squares = [0] * len(arr)
-       # TODO: Write your code here
-       i, j = 0, len(arr) - 1
+       res = [0] * len(arr)
+       l, r = 0, len(arr) - 1
        k = len(arr) - 1
-       while i <= j:
-           if arr[i]**2 >= arr[j]**2:
-               squares[k] = arr[i]**2
-               i += 1
+       while l <= r:
+           if arr[l] ** 2 >= arr[r] ** 2:
+               res[k] = arr[l] ** 2
+               l += 1
                k -= 1
            else:
-               squares[k] = arr[j]**2
-               j -= 1
+               res[k] = arr[r] ** 2
+               r -= 1
                k -= 1
-
-       return squares
+       return res
 
 
    # answer
@@ -289,34 +288,28 @@ Triplet Sum to Zero (medium)
 
    # mycode
    def search_triplets(arr):
-       triplets = []
+       res = []
+       if not arr:
+           return res
        arr.sort()
-       # TODO: Write your code here
-       for i in range(len(arr)):
+       for i in range(len(arr) - 2):
+           l, r = i + 1, len(arr) - 1
            if i > 0 and arr[i] == arr[i - 1]:
                continue
-           search_pair(arr, -arr[i], i + 1, triplets)
-
-       return triplets
-
-
-   def search_pair(arr, target_sum, left, triplets):
-       right = len(arr) - 1
-       while left < right:
-           if arr[left] + arr[right] == target_sum:
-               triplets.append([-target_sum, arr[left], arr[right]])
-               left += 1
-               right -= 1
-
-               while left < right and arr[left] == arr[left - 1]:
-                   left += 1
-               while left < right and arr[right] == arr[right + 1]:
-                   right -= 1
-
-           elif arr[left] + arr[right] > target_sum:
-               right -= 1
-           else:
-               left += 1
+           while l < r:
+               s = arr[i] + arr[l] + arr[r]
+               if s > 0:
+                   r -= 1
+               elif s < 0:
+                   l += 1
+               else:
+                   res.append([arr[i], arr[l], arr[r]])
+                   while l < r and arr[l] == arr[l + 1]:
+                       l += 1
+                   while l < r and arr[r] == arr[r - 1]:
+                       r -= 1
+                   l += 1; r -= 1
+       return res
 
 
    # answer
@@ -393,31 +386,30 @@ Triplet Sum Close to Target (medium)
 
 
    # mycode
-   import math
-
-
    def triplet_sum_close_to_target(arr, target_sum):
+       res = []
+       if not arr:
+           return res
 
-       # TODO: Write your code here
        arr.sort()
-       min_sum, err_min = 0, math.inf
+       d = float('inf')
+       res = 0
 
-       for i in range(len(arr)):
-           j, k = i + 1, len(arr) - 1
-           while j < k:
-               err = abs(arr[i] + arr[j] + arr[k] - target_sum)
-               if err < err_min:
-                   err_min = err
-                   min_sum = arr[i] + arr[j] + arr[k]
-               elif err == err_min:
-                   min_sum = min(min_sum, arr[i] + arr[j] + arr[k])
-
-               if arr[i] + arr[j] + arr[k] < target_sum:
-                   j += 1
-               elif arr[i] + arr[j] + arr[k] > target_sum:
-                   k -= 1
-
-       return min_sum
+       for i in range(len(arr) - 2):
+           l, r = i + 1, len(arr) - 1
+           while l < r:
+               s = arr[i] + arr[l] + arr[r]
+               if s == target_sum:
+                   return s
+               diff = abs(target_sum - s)
+               if d > diff:
+                   d = diff
+                   res = s
+               if s > target_sum:
+                   r -= 1
+               else:
+                   l += 1
+       return res
 
 
    # answer
@@ -460,7 +452,7 @@ Triplet Sum Close to Target (medium)
 
    '''
    Time complexity
-   Sorting the array will take O(N* logN)O(N∗logN). Overall searchTriplet() will take O(N * logN + N^2),
+   Sorting the array will take O(N * logN). Overall searchTriplet() will take O(N * logN + N^2),
    which is asymptotically equivalent to O(N^2).
    Space complexity
    The space complexity of the above algorithm will be O(N) which is required for sorting.
@@ -487,20 +479,20 @@ Triplets with Smaller Sum (medium)
 
    # mycode
    def triplet_with_smaller_sum(arr, target):
-       count = 0
-       # TODO: Write your code here
+       cnt = 0
+       if not arr:
+           return cnt
        arr.sort()
-
-       for i in range(len(arr)):
-           j, k = i + 1, len(arr) - 1
-           while j < k:
-               if arr[i] + arr[j] + arr[k] < target:
-                   count += (k - j)
-                   j += 1
+       for i in range(len(arr) - 2):
+           l, r = i + 1, len(arr) - 1
+           while l < r:
+               s = arr[i] + arr[l] + arr[r]
+               if s < target:
+                   cnt += r - l
+                   l += 1
                else:
-                   k -= 1
-
-       return count
+                   r -= 1
+       return cnt
 
 
    # answer
@@ -564,26 +556,19 @@ Subarrays with Product Less than a Target (medium)
 
    # mycode
    def find_subarrays(arr, target):
+       from collections import deque
        result = []
        product = 1
-       win_start = 0
-
-       for win_end in range(len(arr)):
-
-           product *= arr[win_end]
-           print(product)
-
-           while product >= target and win_start < len(arr):
-               product /= arr[win_start]
-               win_start += 1
-
-           if product < target:
-               temp_i = []
-               for i in range(win_end, win_start - 1, -1):
-                   temp_i.append(arr[i])
-                   temp = temp_i.copy()
-                   result.append(temp)
-
+       left = 0
+       for right in range(len(arr)):
+           product *= arr[right]
+           while product >= target and left < len(arr):
+               product /= arr[left]
+               left += 1
+           temp_list = deque()
+           for i in range(right, left - 1, -1):
+               temp_list.appendleft(arr[i])
+               result.append(list(temp_list))
        return result
 
 
@@ -648,21 +633,17 @@ Dutch National Flag Problem (medium)
 
    # mycode
    def dutch_flag_sort(arr):
-       # TODO: Write your code here
-       left, i = 0, 0
-       right = len(arr) - 1
-
-       while i <= right:
-           if arr[i] == 0:
-               arr[i], arr[left] = arr[left], arr[i]
-               left += 1
-               i += 1
-           elif arr[i] == 2:
-               arr[i], arr[right] = arr[right], arr[i]
-               right -= 1
+       zero = 0
+       l, r = 0, len(arr) - 1
+       while l <= r:
+           if arr[l] == 0:
+               arr[l], arr[zero] = arr[zero], arr[l]
+               l += 1; zero += 1
+           elif arr[l] == 2:
+               arr[l], arr[r] = arr[r], arr[l]
+               r -= 1
            else:
-               i += 1
-
+               l += 1
        return
 
 
@@ -694,43 +675,39 @@ Problem Challenge 1 - Quadruple Sum to Target (medium)
 
    # mycode
    def search_quadruplets(arr, target):
-       quadruplets = []
-       # TODO: Write your code here
-
        arr.sort()
-
-       for i in range(len(arr) - 3):
-           if i > 0 and arr[i] == arr[i - 1]:
-               continue
-           for j in range(i + 1, len(arr) - 2):
-               if j > i and arr[j] == arr[j - 1]:
-                   continue
-               search_pair(arr, i, j, target, quadruplets)
-
-       return quadruplets
+       res = []
+       find_n_sum(arr, target, 4, [], res)
+       return res
 
 
-   def search_pair(arr, i, j, target, quadruplets):
-       left = j + 1
-       right = len(arr) - 1
+   def find_n_sum(nums, target, n, path, res):
+       if len(nums) < n or n < 2:
+           return
 
-       sub_target = target - arr[i] - arr[j]
-
-       while left < right:
-           if arr[left] + arr[right] == sub_target:
-               quadruplets.append([arr[i], arr[j], arr[left], arr[right]])
-               left += 1
-               right -= 1
-
-               while left < right and arr[left] == arr[left - 1]:
-                   left += 1
-
-               while left < right and arr[right] == arr[right + 1]:
-                   right -= 1
-           elif arr[left] + arr[right] < sub_target:
-               left += 1
-           else:
-               right -= 1
+       # solve 2-sum
+       if n == 2:
+           l, r = 0, len(nums) - 1
+           while l < r:
+               if nums[l] + nums[r] == target:
+                   res.append(path + [nums[l], nums[r]])
+                   l += 1
+                   r -= 1
+                   while l < r and nums[l] == nums[l - 1]:
+                       l += 1
+                   while r > l and nums[r] == nums[r + 1]:
+                       r -= 1
+               elif nums[l] + nums[r] < target:
+                   l += 1
+               else:
+                   r -= 1
+       else:
+           for i in range(0, len(nums) - n + 1):  # careful about range
+               if target < nums[i] * n or target > nums[-1] * n:  # take advantages of sorted list
+                   break
+               if i == 0 or i > 0 and nums[i - 1] != nums[i]:  # recursively reduce N
+                   find_n_sum(nums[i+1:], target - nums[i], n - 1, path + [nums[i]], res)
+           return
 
 
    # answer
@@ -814,7 +791,6 @@ Problem Challenge 2 - Comparing Strings containing Backspaces (medium)
 
    # mycode
    def backspace_compare(str1, str2):
-       # TODO: Write your code here
        if clean(str1) == clean(str2):
            return True
        return False
@@ -928,37 +904,20 @@ Problem Challenge 3 - Minimum Window Sort (medium)
    '''
 
    # mycode
-   import math
-
-
    def shortest_window_sort(arr):
-       # TODO: Write your code here
+       sorted_arr = sorted(arr)
+       start = end = 0
 
-       left, right = 1, len(arr) - 1
-       max_num, min_num = -math.inf, math.inf
+       for i in range(len(arr)):
+           if arr[i] != sorted_arr[i]:
+               start = i
+               break
 
-       while left < len(arr) - 1 and arr[left] < arr[left + 1]:
-           left += 1
-
-       while right > 0 and arr[right] > arr[right - 1]:
-           right -= 1
-
-       for i in range(left, right + 1):
-           max_num = max(max_num, arr[i])
-           min_num = min(min_num, arr[i])
-
-       for i in range(left, -1, -1):
-           if arr[i] >= min_num:
-               left = i
-
-       for i in range(right, len(arr)):
-           if arr[i] <= max_num:
-               right = i
-
-       if right == 0:
-           return 0
-
-       return right - left + 1
+       for i in range(len(arr) - 1, 0, -1):
+           if arr[i] != sorted_arr[i]:
+               end = i
+               break
+       return end - start + 1 if end - start else 0
 
 
    # answer
@@ -1007,7 +966,7 @@ Problem Challenge 3 - Minimum Window Sort (medium)
 
    '''
    Time complexity
-   The time complexity of the above algorithm will be O(N)O(N).
+   The time complexity of the above algorithm will be O(N).
    Space complexity
-   The algorithm runs in constant space O(1)O(1).
+   The algorithm runs in constant space O(1).
    '''

@@ -186,6 +186,7 @@
             
   <div class="section" id="linkedlist-cycle-easy">
 <h1><span class="section-number">3.1. </span>LinkedList Cycle (easy)<a class="headerlink" href="#linkedlist-cycle-easy" title="Permalink to this headline">¶</a></h1>
+<p>LeetCode：<a class="reference external" href="https://leetcode.com/problems/linked-list-cycle/">141. Linked List Cycle</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Problem Statement</span>
 <span class="sd">Given the head of a Singly LinkedList, write a function to determine if the LinkedList has a cycle in it or not.</span>
@@ -199,14 +200,12 @@
 
 
 <span class="k">def</span> <span class="nf">has_cycle</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
-    <span class="c1"># TODO: Write your code here</span>
-    <span class="n">slow</span><span class="p">,</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="p">,</span> <span class="n">head</span>
-    <span class="k">while</span> <span class="n">fast</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">slow</span> <span class="o">=</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span>
+    <span class="k">while</span> <span class="n">fast</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
         <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
         <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span>
-        <span class="k">if</span> <span class="n">slow</span> <span class="o">==</span> <span class="n">fast</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fast</span> <span class="o">==</span> <span class="n">slow</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
-
     <span class="k">return</span> <span class="kc">False</span>
 
 
@@ -236,6 +235,8 @@
 <span class="sd">Space Complexity #</span>
 <span class="sd">The algorithm runs in constant space O(1).</span>
 <span class="sd">&#39;&#39;&#39;</span>
+
+
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Similar Problems</span>
 <span class="sd">Problem 1: Given the head of a LinkedList with a cycle, find the length of the cycle.</span>
@@ -252,8 +253,8 @@
 
 
 <span class="k">def</span> <span class="nf">find_cycle_length</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
-    <span class="n">slow</span><span class="p">,</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="p">,</span> <span class="n">head</span>
-    <span class="k">while</span> <span class="n">fast</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">slow</span> <span class="o">=</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span>
+    <span class="k">while</span> <span class="n">fast</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
         <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
         <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span>
         <span class="k">if</span> <span class="n">slow</span> <span class="o">==</span> <span class="n">fast</span><span class="p">:</span>  <span class="c1"># found the cycle</span>
@@ -299,61 +300,35 @@
 </div>
 <div class="section" id="start-of-linkedlist-cycle-medium">
 <h1><span class="section-number">3.2. </span>Start of LinkedList Cycle (medium)<a class="headerlink" href="#start-of-linkedlist-cycle-medium" title="Permalink to this headline">¶</a></h1>
+<p>LeetCode：<a class="reference external" href="https://leetcode.com/problems/linked-list-cycle-ii/">142. Linked List Cycle II</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Problem Statement</span>
 <span class="sd">Given the head of a Singly LinkedList that contains a cycle, write a function to find the starting node of the cycle.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 
 <span class="c1"># mycode</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-
-
 <span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">next</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
 
-    <span class="k">def</span> <span class="nf">print_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span>
-        <span class="k">while</span> <span class="n">temp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">next</span>
-        <span class="nb">print</span><span class="p">()</span>
-
 
 <span class="k">def</span> <span class="nf">find_cycle_start</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
-    <span class="c1"># TODO: Write your code here</span>
-    <span class="n">slow</span><span class="p">,</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="p">,</span> <span class="n">head</span>
-    <span class="k">while</span> <span class="n">fast</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">head</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">fast</span> <span class="o">=</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span>
+
+    <span class="k">while</span> <span class="n">fast</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
         <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
         <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span>
-        <span class="k">if</span> <span class="n">slow</span> <span class="o">==</span> <span class="n">fast</span><span class="p">:</span>
-            <span class="n">leng</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">slow</span><span class="p">)</span>
-            <span class="k">break</span>
-    <span class="k">return</span> <span class="n">search_start</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">leng</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-    <span class="n">current</span> <span class="o">=</span> <span class="n">node</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>
-        <span class="n">length</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">current</span> <span class="o">==</span> <span class="n">node</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">length</span>
-    <span class="k">return</span> <span class="mi">0</span>
-
-
-<span class="k">def</span> <span class="nf">search_start</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
-    <span class="n">slow</span><span class="p">,</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="p">,</span> <span class="n">head</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
-        <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span>
-
-    <span class="k">while</span> <span class="n">slow</span> <span class="o">!=</span> <span class="n">fast</span><span class="p">:</span>
-        <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span>
-        <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span>
-
-    <span class="k">return</span> <span class="n">slow</span>
+        <span class="k">if</span> <span class="n">fast</span> <span class="o">==</span> <span class="n">slow</span><span class="p">:</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span>
+            <span class="k">while</span> <span class="n">fast</span> <span class="ow">and</span> <span class="n">fast</span> <span class="o">!=</span> <span class="n">slow</span><span class="p">:</span>
+                <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span>
+                <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span>
+            <span class="k">return</span> <span class="n">fast</span>
+    <span class="k">return</span> <span class="kc">None</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -465,6 +440,7 @@
 </div>
 <div class="section" id="happy-number-medium">
 <h1><span class="section-number">3.3. </span>Happy Number (medium)<a class="headerlink" href="#happy-number-medium" title="Permalink to this headline">¶</a></h1>
+<p>LeetCode：<a class="reference external" href="https://leetcode.com/problems/happy-number/">202. Happy Number</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Problem Statement</span>
 <span class="sd">Any number will be called a happy number if,</span>
@@ -476,7 +452,6 @@
 
 <span class="c1"># mycode</span>
 <span class="k">def</span> <span class="nf">find_happy_number</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-    <span class="c1"># TODO: Write your code here</span>
     <span class="n">fast</span><span class="p">,</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">num</span><span class="p">,</span> <span class="n">num</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">fast</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="n">fast</span><span class="p">))</span>
@@ -505,11 +480,11 @@
 
 
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Time Complexity #</span>
+<span class="sd">Time Complexity</span>
 <span class="sd">The time complexity of the algorithm is difficult to determine.</span>
 <span class="sd">However we know the fact that all unhappy numbers eventually get stuck in the cycle: 4 -&gt; 16 -&gt; 37 -&gt; 58 -&gt; 89 -&gt; 145 -&gt; 42 -&gt; 20 -&gt; 4</span>
 <span class="sd">This sequence behavior tells us two things:</span>
-<span class="sd">1. If the number NN is less than or equal to 1000, then we reach the cycle or ‘1’ in at most 1001 steps.</span>
+<span class="sd">1. If the number N is less than or equal to 1000, then we reach the cycle or ‘1’ in at most 1001 steps.</span>
 <span class="sd">2. For N &gt; 1000, suppose the number has ‘M’ digits and the next number is ‘N1’.</span>
 <span class="sd">From the above Wikipedia link, we know that the sum of the squares of the digits of ‘N’ is at most 9^2 M, or 81M</span>
 <span class="sd">(this will happen when all digits of ‘N’ are ‘9’).</span>

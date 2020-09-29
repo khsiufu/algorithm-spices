@@ -1,5 +1,9 @@
 LinkedList Cycle (easy)
 ---------------------------------------
+LeetCode：\ `141. Linked List Cycle`_
+
+.. _141. Linked List Cycle: https://leetcode.com/problems/linked-list-cycle/
+
 .. code:: python
 
    '''
@@ -113,6 +117,10 @@ LinkedList Cycle (easy)
 
 Start of LinkedList Cycle (medium)
 ---------------------------------------
+LeetCode：\ `142. Linked List Cycle II`_
+
+.. _142. Linked List Cycle II: https://leetcode.com/problems/linked-list-cycle-ii/
+
 .. code:: python
 
    '''
@@ -128,38 +136,21 @@ Start of LinkedList Cycle (medium)
 
 
    def find_cycle_start(head):
-       # TODO: Write your code here
-       slow, fast = head, head
-       while fast is not None and fast.next is not None:
+       if not head:
+           return None
+
+       fast = slow = head
+
+       while fast and fast.next:
            fast = fast.next.next
            slow = slow.next
-           if slow == fast:
-               leng = length(slow)
-               break
-       return search_start(head, leng)
-
-
-   def length(node):
-       current = node
-       length = 0
-       while current is not None:
-           current = current.next
-           length += 1
-           if current == node:
-               return length
-       return 0
-
-
-   def search_start(head, length):
-       slow, fast = head, head
-       for i in range(length):
-           fast = fast.next
-
-       while slow != fast:
-           fast = fast.next
-           slow = slow.next
-
-       return slow
+           if fast == slow:
+               fast = head
+               while fast and fast != slow:
+                   fast = fast.next
+                   slow = slow.next
+               return fast
+       return None
 
 
    def main():
@@ -269,6 +260,10 @@ Start of LinkedList Cycle (medium)
 
 Happy Number (medium)
 ---------------------------------------
+LeetCode：\ `202. Happy Number`_
+
+.. _202. Happy Number: https://leetcode.com/problems/happy-number/
+
 .. code:: python
 
    '''
@@ -282,7 +277,6 @@ Happy Number (medium)
 
    # mycode
    def find_happy_number(num):
-       # TODO: Write your code here
        fast, slow = num, num
        while True:
            fast = square(square(fast))
@@ -311,11 +305,11 @@ Happy Number (medium)
 
 
    '''
-   Time Complexity #
+   Time Complexity
    The time complexity of the algorithm is difficult to determine.
    However we know the fact that all unhappy numbers eventually get stuck in the cycle: 4 -> 16 -> 37 -> 58 -> 89 -> 145 -> 42 -> 20 -> 4
    This sequence behavior tells us two things:
-   1. If the number NN is less than or equal to 1000, then we reach the cycle or ‘1’ in at most 1001 steps.
+   1. If the number N is less than or equal to 1000, then we reach the cycle or ‘1’ in at most 1001 steps.
    2. For N > 1000, suppose the number has ‘M’ digits and the next number is ‘N1’.
    From the above Wikipedia link, we know that the sum of the squares of the digits of ‘N’ is at most 9^2 M, or 81M
    (this will happen when all digits of ‘N’ are ‘9’).
