@@ -1,9 +1,5 @@
 LinkedList Cycle (easy)
 ---------------------------------------
-LeetCode：\ `141. Linked List Cycle`_
-
-.. _141. Linked List Cycle: https://leetcode.com/problems/linked-list-cycle/
-
 .. code:: python
 
    '''
@@ -117,10 +113,6 @@ LeetCode：\ `141. Linked List Cycle`_
 
 Start of LinkedList Cycle (medium)
 ---------------------------------------
-LeetCode：\ `142. Linked List Cycle II`_
-
-.. _142. Linked List Cycle II: https://leetcode.com/problems/linked-list-cycle-ii/
-
 .. code:: python
 
    '''
@@ -260,10 +252,6 @@ LeetCode：\ `142. Linked List Cycle II`_
 
 Happy Number (medium)
 ---------------------------------------
-LeetCode：\ `202. Happy Number`_
-
-.. _202. Happy Number: https://leetcode.com/problems/happy-number/
-
 .. code:: python
 
    '''
