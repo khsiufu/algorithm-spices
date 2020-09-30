@@ -398,38 +398,33 @@ Problem Challenge 1 - Palindrome LinkedList (medium)
 
 
    def is_palindromic_linked_list(head):
-       # TODO: Write your code here
-       slow, fast = head, head
-       while fast is not None and fast.next is not None:
-           slow = slow.next
+       if not head:
+           return True
+
+       fast = slow = head
+       while fast.next and fast.next.next:
            fast = fast.next.next
+           slow = slow.next
 
-       end = reverse(slow)
-       copy_end = end
+       cur = reverse(slow.next)
+       slow.next = None
 
-       while head is not None and end is not None:
-
-           if head.value != end.value:
-
+       while cur:
+           if cur.value != head.value:
                return False
+           cur = cur.next
            head = head.next
-           end = end.next
-
-       reverse(copy_end)
-
        return True
 
 
    def reverse(head):
-       former, latter = None, head
-       temp = None
-       while latter:
-           temp = latter
-           latter = latter.next
-           temp.next = former
-           former = temp
-
-       return temp
+       pre = None
+       while head:
+           nxt = head.next
+           head.next = pre
+           pre = head
+           head = nxt
+       return pre
 
 
    def main():
@@ -536,9 +531,6 @@ Problem Challenge 2 - Rearrange a LinkedList (medium)
    '''
 
    # mycode
-   from __future__ import print_function
-
-
    class Node:
        def __init__(self, value, next=None):
            self.value = value
@@ -553,39 +545,30 @@ Problem Challenge 2 - Rearrange a LinkedList (medium)
 
 
    def reorder(head):
-       # TODO: Write your code here
-       slow, fast = head, head
-       while fast is not None and fast.next is not None:
-           slow = slow.next
+       if not head:
+           return
+       fast = slow = head
+       while fast and fast.next:
            fast = fast.next.next
+           slow = slow.next
 
-       end = reverse(slow)
+       pre = reverse(slow)
 
-       head_temp = head
-
-       while end:
-
-           temp = end
-           end = end.next
-           temp.next = head_temp.next
-           head_temp.next = temp
-
-           head_temp = head_temp.next.next
-       head_temp.next = None
-
-       return head
+       first, second = head, pre
+       while second and second.next:
+           first.next, first = second, first.next
+           second.next, second = first, second.next
+       return
 
 
    def reverse(head):
-       former, latter = None, head
-
-       while latter:
-           temp = latter
-           latter = latter.next
-           temp.next = former
-           former = temp
-
-       return temp
+       pre = None
+       while head:
+           nxt = head.next
+           head.next = pre
+           pre = head
+           head = nxt
+       return pre
 
 
    def main():
