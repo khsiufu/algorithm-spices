@@ -337,9 +337,10 @@ Middle of the LinkedList (easy)
 
 
    def find_middle_of_linked_list(head):
-       # TODO: Write your code here
-       slow, fast = head, head
-       while fast is not None and fast.next is not None:
+       if not head:
+           return None
+       fast = slow = head
+       while fast and fast.next:
            fast = fast.next.next
            slow = slow.next
        return slow
@@ -379,7 +380,7 @@ Problem Challenge 1 - Palindrome LinkedList (medium)
    Problem Challenge 1
    Palindrome LinkedList (medium)
    Given the head of a Singly LinkedList, write a method to check if the LinkedList is a palindrome or not.
-   Your algorithm should use constant space and the input LinkedList should be in the original form once the algorithm is finished. The algorithm should have O(N)O(N) time complexity where ‘N’ is the number of nodes in the LinkedList.
+   Your algorithm should use constant space and the input LinkedList should be in the original form once the algorithm is finished. The algorithm should have O(N) time complexity where ‘N’ is the number of nodes in the LinkedList.
    Example 1:
    Input: 2 -> 4 -> 6 -> 4 -> 2 -> null
    Output: true
