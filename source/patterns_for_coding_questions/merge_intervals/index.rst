@@ -18,63 +18,31 @@ Merge Intervals (medium)
    '''
 
    # mycode
-   from __future__ import print_function
-
-
-   class interval:
-       def __init__(self, start, end):
-           self.start = start
-           self.end = end
-
-       def print_interval(self):
-           print("[" + str(self.start) + ", " + str(self.end) + "]", end='')
-
-
    def merge(intervals):
-       intervals.sort(key=lambda x: x.start)
-       merged = []
-       # TODO: Write your code here
-       merged.append(intervals[0])
-       for i in range(1, len(intervals)):
-           curr = intervals[i]
-           prev = merged.pop()
-           if prev.start <= curr.start and prev.end >= curr.end:
-               merged.append(prev)
-           elif prev.start >= curr.start and prev.end <= curr.end:
-               merged.append(curr)
-           elif prev.start <= curr.start and prev.end >= curr.start:
-               merged.append(interval(prev.start, curr.end))
-           elif prev.start >= curr.start and prev.end <= curr.start:
-               merged.append(interval(curr.start, prev.end))
+       if not intervals:
+           return []
+       # sort
+       intervals.sort()
+       res = []
+       for interval in intervals:
+           # 空 or 迭代的数组起点 > 答案最后一个数组尾巴，就进行插入
+           if not res or interval[0] > res[-1][1]:
+               res.append(interval)
+           # 否则，合并尾巴
            else:
-               merged.append(prev)
-               merged.append(curr)
-       return merged
+               res[-1][1] = max(res[-1][1], interval[1])
+       return res
 
 
    def main():
-       print("Merged intervals: ", end='')
-       for i in merge([interval(1, 4), interval(2, 5), interval(7, 9)]):
-           i.print_interval()
-       print()
-
-       print("Merged intervals: ", end='')
-       for i in merge([interval(6, 7), interval(2, 4), interval(5, 9)]):
-           i.print_interval()
-       print()
-
-       print("Merged intervals: ", end='')
-       for i in merge([interval(1, 4), interval(2, 6), interval(3, 5)]):
-           i.print_interval()
-       print()
+       print(merge([[1, 4], [2, 5], [7, 9]]))
+       print(merge([[6, 7], [2, 4], [5, 9]]))
+       print(merge([[1, 4], [2, 6], [3, 5]]))
 
 
    main()
 
    # answer
-   from __future__ import print_function
-
-
    class Interval:
        def __init__(self, start, end):
            self.start = start
@@ -164,28 +132,19 @@ Insert Interval (medium)
 
    # mycode
    def insert(intervals, new_interval):
-       merged = []
-       # TODO: Write your code here
-       index = 0
-       for i in range(len(intervals)):
+       i = 0
+       while i < len(intervals) and intervals[i][0] < new_interval[0]:
+           i += 1
 
-           if intervals[i][1] < new_interval[0]:
-               merged.append(intervals[i])
+       intervals.insert(i, new_interval)
 
-           if intervals[i][0] <= new_interval[1] and intervals[i][
-                   1] >= new_interval[0]:
-               new_interval[0] = min(new_interval[0], intervals[i][0])
-               new_interval[1] = max(new_interval[1], intervals[i][1])
-               index = i
-
-           if intervals[i][0] > new_interval[1]:
-               if i == index + 1:
-                   merged.append(new_interval)
-                   new_interval = [-1, -1]
-               merged.append(intervals[i])
-       if new_interval != [-1, -1]:
-           merged.append(new_interval)
-       return merged
+       res = []
+       for interval in intervals:
+           if not res or interval[0] > res[-1][1]:
+               res.append(interval)
+           else:
+               res[-1][1] = max(res[-1][1], interval[1])
+       return res
 
 
    def main():
@@ -240,7 +199,7 @@ Insert Interval (medium)
 
    '''
    Time complexity
-   As we are iterating through all the intervals only once, the time complexity of the above algorithm is O(N)O,
+   As we are iterating through all the intervals only once, the time complexity of the above algorithm is O(N),
    where ‘N’ is the total number of intervals.
    Space complexity
    The space complexity of the above algorithm will be O(N) as we need to return a list containing all the merged intervals.
@@ -266,26 +225,19 @@ Intervals Intersection (medium)
 
    # mycode
    def merge(intervals_a, intervals_b):
-       result = []
-
-       # TODO: Write your code here
-
        i, j = 0, 0
+       res = []
        while i < len(intervals_a) and j < len(intervals_b):
-           if intervals_a[i][1] < intervals_b[j][0]:
-               i += 1
-           elif intervals_b[j][1] < intervals_a[i][0]:
-               j += 1
-           else:
-               start = max(intervals_a[i][0], intervals_b[j][0])
-               end = min(intervals_a[i][1], intervals_b[j][1])
-               result.append([start, end])
-               if intervals_a[i][1] == end:
-                   i += 1
-               if intervals_b[j][1] == end:
-                   j += 1
+           a_start, a_end = intervals_a[i]
+           b_start, b_end = intervals_b[j]
+           if a_start <= b_end and b_start <= a_end:  # Criss-cross lock
+               res.append([max(a_start, b_start), min(a_end, b_end)])  # Squeezing
 
-       return result
+           if a_end <= b_end:  # Exhausted this range in A
+               i += 1  # Point to next range in A
+           else:  # Exhausted this range in B
+               j += 1  # Point to next range in B
+       return res
 
 
    def main():
