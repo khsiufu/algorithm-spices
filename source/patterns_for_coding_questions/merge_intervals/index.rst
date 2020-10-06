@@ -328,15 +328,10 @@ Conflicting Appointments (medium)
 
    # mycode
    def can_attend_all_appointments(intervals):
-       # TODO: Write your code here
-
        intervals.sort(key=lambda x: x[0])
-
        for i in range(1, len(intervals)):
-
            if intervals[i][0] < intervals[i - 1][1]:
                return False
-
        return True
 
 
@@ -385,7 +380,7 @@ Conflicting Appointments (medium)
    Though we are iterating the intervals only once, our algorithm will take O(N * logN) since we need to sort them in the beginning.
    Space complexity
    The space complexity of the above algorithm will be O(N), which we need for sorting.
-   For Java, Arrays.sort() uses Timsort, which needs O(N) space.
+   For Python, Arrays.sort() uses Timsort, which needs O(N) space.
    '''
 
 Problem Challenge 1 - Minimum Meeting Rooms (hard)
@@ -438,7 +433,6 @@ Problem Challenge 1 - Minimum Meeting Rooms (hard)
 
 
    def min_meeting_rooms(meetings):
-       # TODO: Write your code here
        meetings.sort(key=lambda x: x.start)
        conflict = []
        min_rooms = 0
@@ -592,7 +586,6 @@ Problem Challenge 2 - Maximum CPU Load (hard)
 
 
    def find_max_cpu_load(jobs):
-       # TODO: Write your code here
        jobs.sort(key=lambda x: x.start)
 
        sum_cpu_load, temp = 0, 0
@@ -711,55 +704,25 @@ Problem Challenge 3 - Employee Free Time (hard)
    '''
 
    # mycode
-   from __future__ import print_function
-
-
-   class Interval:
-       def __init__(self, start, end):
-           self.start = start
-           self.end = end
-
-       def print_interval(self):
-           print("[" + str(self.start) + ", " + str(self.end) + "]", end='')
-
-
    def find_employee_free_time(schedule):
-       result = []
-       # TODO: Write your code here
-       temp = []
+       temp, res = [], []
 
-       for i in schedule:
-           for j in i:
-               temp.append(j)
-       temp.sort(key=lambda x: x.start)
+       for intervals in schedule:
+           for i in intervals:
+               temp.append(i)
+
+       temp.sort(key=lambda x: x[0])
+
        for i in range(1, len(temp)):
-           if temp[i].start > temp[i - 1].end:
-               result.append(Interval(temp[i - 1].end, temp[i].start))
-       return result
+           if temp[i][0] > temp[i - 1][1]:
+               res.append([temp[i - 1][1], temp[i][0]])
+       return res
 
 
    def main():
-
-       input = [[Interval(1, 3), Interval(5, 6)],
-                [Interval(2, 3), Interval(6, 8)]]
-       print("Free intervals: ", end='')
-       for interval in find_employee_free_time(input):
-           interval.print_interval()
-       print()
-
-       input = [[Interval(1, 3), Interval(9, 12)], [Interval(2, 4)],
-                [Interval(6, 8)]]
-       print("Free intervals: ", end='')
-       for interval in find_employee_free_time(input):
-           interval.print_interval()
-       print()
-
-       input = [[Interval(1, 3)], [Interval(2, 4)],
-                [Interval(3, 5), Interval(7, 9)]]
-       print("Free intervals: ", end='')
-       for interval in find_employee_free_time(input):
-           interval.print_interval()
-       print()
+       print(find_employee_free_time([[[1, 3], [5, 6]], [[2, 3], [6, 8]]]))
+       print(find_employee_free_time([[[1, 3], [9, 12]], [[2, 4], [6, 8]]]))
+       print(find_employee_free_time([[[1, 3], [2, 4]], [[3, 5], [7, 9]]]))
 
 
    main()
