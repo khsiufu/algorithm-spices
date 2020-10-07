@@ -2,7 +2,7 @@
 Heap
 =========================
 
-.. code:: c
+.. code:: c++
 
     ypedef struct HNode *Heap; /* 堆的类型定义 */
     truct HNode {

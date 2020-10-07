@@ -7,7 +7,7 @@ Algorithm Spices
    :glob:
 
    preface
-   patterns_for_coding_questions/index
+   data_structure/index
    leetcode_tags/index
    leetcode_template/index
-   data_structure/index
+   patterns_for_coding_questions/index
