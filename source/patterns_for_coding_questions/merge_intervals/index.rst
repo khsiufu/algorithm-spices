@@ -420,55 +420,35 @@ Problem Challenge 1 - Minimum Meeting Rooms (hard)
    '''
 
    # mycode
-   from heapq import *
-
-
-   class Meeting:
-       def __init__(self, start, end):
-           self.start = start
-           self.end = end
-
-       def __lt__(self, other):
-           return self.end < other.end
-
-
    def min_meeting_rooms(meetings):
-       meetings.sort(key=lambda x: x.start)
-       conflict = []
-       min_rooms = 0
+       start_lst, end_lst = [], []
        for meeting in meetings:
-           while len(conflict) > 0 and meeting.start >= conflict[0].end:
-               heappop(conflict)
-           heappush(conflict, meeting)
-           min_rooms = max(len(conflict), min_rooms)
-       return min_rooms
+           start_lst.append(meeting[0])
+           end_lst.append(meeting[1])
+
+       start_lst.sort()
+       end_lst.sort()
+
+       i, j = 0, 0
+       res, min_rooms = 0, 0
+
+       while i < len(meetings):
+           if start_lst[i] < end_lst[j]:
+               min_rooms += 1
+               i += 1
+           else:
+               min_rooms -= 1
+               j += 1
+           res = max(res, min_rooms)
+       return res
 
 
    def main():
-       print("Minimum meeting rooms required: " + str(
-           min_meeting_rooms(
-               [Meeting(4, 5),
-                Meeting(2, 3),
-                Meeting(2, 4),
-                Meeting(3, 5)])))
-       print(
-           "Minimum meeting rooms required: " +
-           str(min_meeting_rooms([Meeting(
-               1, 4), Meeting(2, 5), Meeting(7, 9)])))
-       print(
-           "Minimum meeting rooms required: " +
-           str(min_meeting_rooms([Meeting(
-               6, 7), Meeting(2, 4), Meeting(8, 12)])))
-       print(
-           "Minimum meeting rooms required: " +
-           str(min_meeting_rooms([Meeting(
-               1, 4), Meeting(2, 3), Meeting(3, 6)])))
-       print("Minimum meeting rooms required: " + str(
-           min_meeting_rooms(
-               [Meeting(4, 5),
-                Meeting(2, 3),
-                Meeting(2, 4),
-                Meeting(3, 5)])))
+       print(min_meeting_rooms([[4, 5], [2, 3], [2, 4], [3, 5]]))
+       print(min_meeting_rooms([[1, 4], [2, 5], [7, 9]]))
+       print(min_meeting_rooms([[6, 7], [2, 4], [8, 12]]))
+       print(min_meeting_rooms([[1, 4], [2, 3], [3, 6]]))
+       print(min_meeting_rooms([[4, 5], [2, 3], [2, 4], [3, 5]]))
 
 
    main()
