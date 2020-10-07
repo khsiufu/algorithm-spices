@@ -2,9 +2,9 @@
 Heap
 =========================
 
-.. code:: c++
+.. code:: cpp
 
-    ypedef struct HNode *Heap; /* 堆的类型定义 */
+    typedef struct HNode *Heap; /* 堆的类型定义 */
     truct HNode {
        ElementType *Data; /* 存储元素的数组 */
        int Size;          /* 堆中当前元素个数 */
