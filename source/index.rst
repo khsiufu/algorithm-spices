@@ -10,3 +10,4 @@ Algorithm Spices
    patterns_for_coding_questions/index
    leetcode_tags/index
    leetcode_template/index
+   data_structure/index
