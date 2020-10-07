@@ -55,7 +55,9 @@ Stack
             return ( S->Data[(S->Top)--] );
     }
 
+
 使用链表实现堆栈
+
 .. code:: cpp
 
     typedef struct SNode *PtrToSNode;
