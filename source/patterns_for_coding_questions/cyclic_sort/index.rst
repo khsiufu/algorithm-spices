@@ -22,7 +22,6 @@ Cyclic Sort (easy)
 
    # mycode
    def cyclic_sort(nums):
-       # TODO: Write your code here
        i = 0
        while i < len(nums):
            j = nums[i] - 1
@@ -83,15 +82,12 @@ Find the Missing Number (easy)
 
    # mycode
    def find_missing_number(nums):
-       # TODO: Write your code here
-       for i in range(len(nums)):
-           if abs(nums[i]) < len(nums):
-               nums[abs(nums[i])] = -nums[abs(nums[i])]
-
-       for i in range(len(nums)):
-           if nums[i] > 0:
-               return i
-       return len(nums)
+       res = 0
+       for i in range(len(nums) + 1):
+           res ^= i
+       for num in nums:
+           res ^= num
+       return res
 
 
    # answer
@@ -156,51 +152,18 @@ Find all Missing Numbers (easy)
 
    # mycode
    def find_missing_numbers(nums):
-       missingNumbers = []
-       # TODO: Write your code here
        i = 0
+       res = []
        while i < len(nums):
            j = nums[i] - 1
-           if i != j and j != nums[j] - 1:
+           if nums[i] != nums[j]:
                nums[i], nums[j] = nums[j], nums[i]
            else:
                i += 1
        for i in range(len(nums)):
-           if i != nums[i] - 1:
-               missingNumbers.append(i + 1)
-       return missingNumbers
-
-
-   '''
-   Be careful about i != j and nums[i] != nums[j]
-   when there are duplicates in index i, then using i!=j as condition, while will keep looping
-   using nums[i] != nums[j] can avoid this problem, because duplicates means there exists nums[i] = nums[j]
-   2 4 1 2
-   i=0
-   4 2 1 2
-   2 2 1 4
-   i=1
-   2 2 1 4
-   i=2
-   1 2 2 4
-   i=3
-   1 2 2 4
-   '''
-
-
-   # mycode2
-   def find_missing_numbers(nums):
-       missingNumbers = []
-       # TODO: Write your code here
-       for i in range(len(nums)):
-           j = abs(nums[i]) - 1
-           if nums[j] >= 0:
-               nums[j] = -nums[j]
-
-       for i in range(len(nums)):
-           if nums[i] > 0:
-               missingNumbers.append(i + 1)
-       return missingNumbers
+           if nums[i] != i + 1:
+               res.append(i + 1)
+       return res
 
 
    # answer
@@ -261,30 +224,12 @@ Find the Duplicate Number (easy)
 
    # mycode
    def find_duplicate(nums):
-       # TODO: Write your code here
        for i in range(len(nums)):
            j = abs(nums[i]) - 1
            if nums[j] > 0:
                nums[j] = -nums[j]
            else:
                return j + 1
-       return -1
-
-
-   # mycode2
-   def find_duplicate(nums):
-       # TODO: Write your code here
-       i = 0
-       while i < len(nums):
-           j = nums[i] - 1
-
-           if nums[i] != nums[j]:
-               nums[i], nums[j] = nums[j], nums[i]
-           elif nums[i] == nums[j] and i != j:
-               return nums[i]
-           else:
-               i += 1
-
        return -1
 
 
@@ -389,7 +334,6 @@ Find all Duplicate Numbers (easy)
    # mycode
    def find_all_duplicates(nums):
        duplicateNumbers = []
-       # TODO: Write your code here
        for i in range(len(nums)):
            j = abs(nums[i]) - 1
            if nums[j] > 0:
@@ -452,26 +396,7 @@ Problem Challenge 1 - Find the Corrupt Pair (easy)
 
 
    # mycode
-   def find_corrupt_numbers(nums):
-       # TODO: Write your code here
-       duplicate, missing = 0, 0
-       i = 0
-
-       while i < len(nums):
-           j = nums[i] - 1
-           if i != j:
-               if nums[i] != nums[j]:
-                   nums[i], nums[j] = nums[j], nums[i]
-               else:
-                   duplicate = nums[i]
-                   i += 1
-           else:
-               i += 1
-
-       for i in range(len(nums)):
-           if nums[i] - 1 != i:
-               missing = i + 1
-       return [duplicate, missing]
+   # mycode like bottom answer, so don't repeat write.
 
 
    # answer
@@ -528,22 +453,7 @@ Problem Challenge 2 - Find the Smallest Missing Positive Number (medium)
 
 
    # mycode
-   def find_first_missing_positive(nums):
-       # TODO: Write your code here
-       i = 0
-       while i < len(nums):
-           j = nums[i] - 1
-           if j >= 0 and j < len(nums):
-               if nums[i] != nums[j]:
-                   nums[i], nums[j] = nums[j], nums[i]
-               else:
-                   i += 1
-           else:
-               i += 1
-
-       for i in range(len(nums)):
-           if nums[i] - 1 != i:
-               return i + 1
+   # mycode like bottom answer, so don't repeat write.
 
 
    # answer
@@ -604,35 +514,31 @@ Problem Challenge 3 - Find the First K Missing Positive Numbers (hard)
 
    # mycode
    def find_first_k_missing_positive(nums, k):
-       missingNumbers = []
-       # TODO: Write your code here
        i = 0
        while i < len(nums):
            j = nums[i] - 1
-           if j >= 0 and j < len(nums) and nums[i] != nums[j]:
+           if nums[i] > 0 and nums[i] <= len(nums) and nums[i] != nums[j]:
                nums[i], nums[j] = nums[j], nums[i]
            else:
                i += 1
 
-       i = 0
-       while i < len(nums):
-           if nums[i] - 1 != i:
-               missingNumbers.append(i + 1)
-           i += 1
+       missing_numbers = []
+       extra_numbers = set()
+
+       for i in range(len(nums)):
+           if len(missing_numbers) < k:
+               if nums[i] != i + 1:
+                   missing_numbers.append(i + 1)
+                   extra_numbers.add(nums[i])
 
        i = 1
-       if k <= len(missingNumbers):
-           missingNumbers = missingNumbers[:k]
-       else:
-           while len(missingNumbers) < k:
-               if max(missingNumbers) + 1 < max(
-                       nums) and max(missingNumbers) + 1 not in nums:
-                   missingNumbers.append(max(missingNumbers) + 1)
-               else:
-                   missingNumbers.append(max(nums) + i)
-                   i += 1
+       while len(missing_numbers) < k:
+           candidate_number = i + len(nums)
+           if candidate_number not in extra_numbers:
+               missing_numbers.append(candidate_number)
+           i += 1
 
-       return missingNumbers
+       return missing_numbers
 
 
    # answer
