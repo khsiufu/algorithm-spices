@@ -9,9 +9,6 @@ Reverse a LinkedList (easy)
    '''
 
    # mycode
-   from __future__ import print_function
-
-
    class Node:
        def __init__(self, value, next=None):
            self.value = value
@@ -26,14 +23,15 @@ Reverse a LinkedList (easy)
 
 
    def reverse(head):
-       # TODO: Write your code here
-       former, latter = None, head
-       while latter:
-           temp = latter
-           latter = latter.next
-           temp.next = former
-           former = temp
-       return temp
+       if not head:
+           return None
+       pre, cur = None, head
+       while cur:
+           nxt = cur.next
+           cur.next = pre
+           pre = cur
+           cur = nxt
+       return pre
 
 
    def main():
@@ -113,9 +111,6 @@ Reverse a Sub-list (medium)
    '''
 
    # mycode
-   from __future__ import print_function
-
-
    class Node:
        def __init__(self, value, next=None):
            self.value = value
@@ -130,28 +125,27 @@ Reverse a Sub-list (medium)
 
 
    def reverse_sub_list(head, p, q):
-       # TODO: Write your code here
-       before_slow, fast = head, head
+       if p == q:
+           return head
 
-       while p - 2 > 0:
-           before_slow = before_slow.next
-           p -= 1
-       while q - 1 > 0:
-           fast = fast.next
-           q -= 1
+       pre = dummy = Node(0)
+       dummy.next = head
 
-       after_fast = fast.next
-       former = after_fast
-       latter = before_slow.next
-       before_slow.next = fast
+       for _ in range(p - 1):
+           pre = pre.next
 
-       while latter != after_fast:
-           temp = latter
-           latter = latter.next
-           temp.next = former
-           former = temp
-
-       return head
+       cur = pre.next
+       # reverse the defined part
+       node = None
+       for _ in range(q - p + 1):
+           nxt = cur.next
+           cur.next = node
+           node = cur
+           cur = nxt
+       # connect three parts
+       pre.next.next = cur
+       pre.next = node
+       return dummy.next
 
 
    def main():
