@@ -268,9 +268,6 @@ Reverse every K-element Sub-list (medium)
    '''
 
    # mycode
-   from __future__ import print_function
-
-
    class Node:
        def __init__(self, value, next=None):
            self.value = value
@@ -285,33 +282,34 @@ Reverse every K-element Sub-list (medium)
 
 
    def reverse_every_k_elements(head, k):
-       # TODO: Write your code here
+       count, cur = 0, head
+       while cur:
+           cur = cur.next
+           count += 1
 
-       former, latter, last_last_node = None, head, head
-       i = 0
-       while i < k and latter is not None:
-           temp = latter
-           latter = latter.next
-           temp.next = former
-           former = temp
-           i += 1
+       # don't move
+       if k <= 1:
+           return head
 
-       head = temp
+       pre, cur = None, head
+       # check
+       if count < k:
+           while cur:
+               nxt = cur.next
+               cur.next = pre
+               pre = cur
+               cur = nxt
+           return pre
 
-       while latter is not None:
-           former, latter, begin = None, latter, latter
-           i = 0
-           while i < k and latter is not None:
-               temp = latter
-               latter = latter.next
-               temp.next = former
-               former = temp
-               i += 1
+       for _ in range(k):
+           nxt = cur.next
+           cur.next = pre
+           pre = cur
+           cur = nxt
 
-           last_last_node.next = temp
-           last_last_node = begin
+       head.next = reverse_every_k_elements(cur, k)
 
-       return head
+       return pre
 
 
    def main():
@@ -422,9 +420,6 @@ Problem Challenge 1 - Reverse alternating K-element Sub-list (medium)
    '''
 
    # mycode
-   from __future__ import print_function
-
-
    class Node:
        def __init__(self, value, next=None):
            self.value = value
@@ -442,39 +437,39 @@ Problem Challenge 1 - Reverse alternating K-element Sub-list (medium)
        if k <= 1 or head is None:
            return head
 
-       current, previous = head, None
-       while True:
-           last_node_of_previous_part = previous
-           last_node_of_sub_list = current
+       pre, cur = None, head
 
+       while True:
+           last_node_of_pre_part = pre
+           last_node_of_sub_list = cur
+
+           # reverse 'k' nodes
            i = 0
-           while current is not None and i < k:
-               temp = current
-               current = current.next
-               temp.next = previous
-               previous = temp
+           while cur is not None and i < k:
+               nxt = cur.next
+               cur.next = pre
+               pre = cur
+               cur = nxt
                i += 1
 
            # connect with the previous part
-           if last_node_of_previous_part is not None:
-               last_node_of_previous_part.next = previous
+           if last_node_of_pre_part is not None:
+               last_node_of_pre_part.next = pre
            else:
-               head = previous
+               head = pre
 
-           last_node_of_sub_list.next = current
+           # connect with the next part
+           last_node_of_sub_list.next = cur
 
-           if current is None:
-               break
-
+           # skip 'k' nodes
            i = 0
-           while current is not None and i < k:
-               previous = current
-               current = current.next
+           while cur is not None and i < k:
+               pre = cur
+               cur = cur.next
                i += 1
 
-           if current is None:
+           if cur is None:
                break
-
        return head
 
 
@@ -593,9 +588,6 @@ Problem Challenge 2 - Rotate a LinkedList (medium)
    '''
 
    # mycode
-   from __future__ import print_function
-
-
    class Node:
        def __init__(self, value, next=None):
            self.value = value
@@ -610,25 +602,31 @@ Problem Challenge 2 - Rotate a LinkedList (medium)
 
 
    def rotate(head, rotations):
-       # TODO: Write your code here
-       last = head
-       leng = 1
-       while last.next is not None:
-           last = last.next
-           leng += 1
+       if not head or not head.next or rotations == 0:
+           return head
 
-       index = rotations % leng
-       i = 0
-       before_begin, begin = None, head
-       while i < index:
-           before_begin = begin
-           begin = begin.next
-           i += 1
+       cur, count = head, 0
+       while cur is not None:
+           cur = cur.next
+           count += 1
 
-       last.next = head
-       before_begin.next = None
+       rotations %= count
 
-       return begin
+       if rotations == 0:
+           return head
+
+       fast = slow = head
+       for _ in range(rotations):
+           fast = fast.next
+
+       while fast and fast.next:
+           fast = fast.next
+           slow = slow.next
+
+       ret = slow.next
+       slow.next = None
+       fast.next = head
+       return ret
 
 
    def main():
