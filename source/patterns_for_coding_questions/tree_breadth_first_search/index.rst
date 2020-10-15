@@ -8,10 +8,7 @@ Binary Tree Level Order Traversal (easy)
    You should populate the values of all nodes of each level from left to right in separate sub-arrays.
    '''
 
-   # answer
-   from collections import deque
-
-
+   # mycode
    class TreeNode:
        def __init__(self, val):
            self.val = val
@@ -19,24 +16,18 @@ Binary Tree Level Order Traversal (easy)
 
 
    def traverse(root):
-       result = []
-       # TODO: Write your code here
-       if not root:
-           return result
-       stack = [root]
-       value = [[root.val]]
-       while stack:
-           current = []
-           current_val = []
-           for i in stack:
-               current_val.append(i.val)
-               if i.left:
-                   current.append(i.left)
-               if i.right:
-                   current.append(i.right)
-           result.append(current_val)
-           stack = current
-       return result
+       from collections import deque
+
+       queue, res = deque([(root, 0)]), []
+       while queue:
+           node, level = queue.popleft()
+           if node:
+               if len(res) < level + 1:
+                   res.append([])
+               res[level].append(node.val)
+               queue.append((node.left, level + 1))
+               queue.append((node.right, level + 1))
+       return res
 
 
    def main():
@@ -120,9 +111,6 @@ Reverse Level Order Traversal (easy)
    '''
 
    # mycode
-   from collections import deque
-
-
    class TreeNode:
        def __init__(self, val):
            self.val = val
@@ -130,26 +118,18 @@ Reverse Level Order Traversal (easy)
 
 
    def traverse(root):
-       result = deque()
-       # TODO: Write your code here
-       if not root:
-           return result
+       from collections import deque
 
-       queue = deque()
-       queue.append(root)
-
+       queue, res = deque([(root, 0)]), []
        while queue:
-           current = []
-           for i in range(len(queue)):
-               current_node = queue.popleft()
-               current.append(current_node.val)
-               if current_node.left:
-                   queue.append(current_node.left)
-               if current_node.right:
-                   queue.append(current_node.right)
-
-           result.appendleft(current)
-       return result
+           node, level = queue.popleft()
+           if node:
+               if len(res) < level + 1:
+                   res.append([])
+               res[level].append(node.val)
+               queue.append((node.left, level + 1))
+               queue.append((node.right, level + 1))
+       return res[::-1]
 
 
    def main():
@@ -234,9 +214,6 @@ Zigzag Traversal (medium)
    '''
 
    # mycode
-   from collections import deque
-
-
    class TreeNode:
        def __init__(self, val):
            self.val = val
@@ -244,46 +221,21 @@ Zigzag Traversal (medium)
 
 
    def traverse(root):
-       result = []
-       # TODO: Write your code here
-       if not root:
-           return result
+       from collections import deque
 
-       queue = deque()
-       queue.append(root)
-
-       flag = False
+       res, queue = [], deque([(root, 0)])
        while queue:
-           current = []
-
-           if flag:
-               temp = deque()
-               for i in range(len(queue)):
-                   current_node = queue.popleft()
-                   current.append(current_node.val)
-
-                   if current_node.right:
-                       temp.appendleft(current_node.right)
-                   if current_node.left:
-                       temp.appendleft(current_node.left)
-
-               queue.extend(temp)
-               flag = False
-
-           else:
-               for i in range(len(queue)):
-                   current_node = queue.popleft()
-                   current.append(current_node.val)
-
-                   if current_node.right:
-                       queue.append(current_node.right)
-                   if current_node.left:
-                       queue.append(current_node.left)
-               flag = True
-
-           result.append(current)
-
-       return result
+           node, level = queue.popleft()
+           if node:
+               if len(res) < level + 1:
+                   res.append([])
+               if level % 2 == 0:
+                   res[level].append(node.val)
+               else:
+                   res[level].insert(0, node.val)
+               queue.append((node.left, level + 1))
+               queue.append((node.right, level + 1))
+       return res
 
 
    def main():
