@@ -602,9 +602,6 @@ Level Order Successor (easy)
    '''
 
    # mycode
-   from collections import deque
-
-
    class TreeNode:
        def __init__(self, val):
            self.val = val
@@ -612,7 +609,8 @@ Level Order Successor (easy)
 
 
    def find_successor(root, key):
-       # TODO: Write your code here
+       from collections import deque
+
        if not root:
            return None
 
@@ -621,19 +619,17 @@ Level Order Successor (easy)
 
        flag = False
        while queue:
-
            for i in range(len(queue)):
-               current = queue.popleft()
+               node = queue.popleft()
                if flag:
-                   return current
-
-               if current.val == key:
+                   return node
+               if node.val == key:
                    flag = True
 
-               if current.left:
-                   queue.append(current.left)
-               if current.right:
-                   queue.append(current.right)
+               if node.left:
+                   queue.append(node.left)
+               if node.right:
+                   queue.append(node.right)
        return None
 
 
@@ -724,7 +720,6 @@ Connect Level Order Siblings (medium)
    '''
 
    # mycode
-   from __future__ import print_function
    from collections import deque
 
 
@@ -751,7 +746,6 @@ Connect Level Order Siblings (medium)
 
 
    def connect_level_order_siblings(root):
-       # TODO: Write your code here
        if not root:
            return None
 
@@ -795,7 +789,6 @@ Connect Level Order Siblings (medium)
    main()
 
    # answer
-   from __future__ import print_function
    from collections import deque
 
 
@@ -883,7 +876,6 @@ Problem Challenge 1 - Connect All Level Order Siblings (medium)
    '''
 
    # mycode
-   from __future__ import print_function
    from collections import deque
 
 
@@ -902,7 +894,6 @@ Problem Challenge 1 - Connect All Level Order Siblings (medium)
 
 
    def connect_all_siblings(root):
-       # TODO: Write your code here
        if not root:
            return None
 
@@ -911,18 +902,17 @@ Problem Challenge 1 - Connect All Level Order Siblings (medium)
 
        previous = None
        while queue:
-           for i in range(len(queue)):
+           for _ in range(len(queue)):
                current = queue.popleft()
 
-               if previous is None:
-                   previous = current
-               previous.next = current
+               if previous:
+                   previous.next = current
+               previous = current
 
                if current.left:
                    queue.append(current.left)
                if current.right:
                    queue.append(current.right)
-               previous = current
 
 
    def main():
@@ -939,7 +929,6 @@ Problem Challenge 1 - Connect All Level Order Siblings (medium)
    main()
 
    # answer
-   from __future__ import print_function
    from collections import deque
 
 
@@ -1013,7 +1002,6 @@ Problem Challenge 2 - Right View of a Binary Tree (easy)
    '''
 
    # mycode
-   from __future__ import print_function
    from collections import deque
 
 
@@ -1025,7 +1013,6 @@ Problem Challenge 2 - Right View of a Binary Tree (easy)
 
    def tree_right_view(root):
        result = []
-       # TODO: Write your code here
        if not root:
            return result
 
@@ -1064,7 +1051,6 @@ Problem Challenge 2 - Right View of a Binary Tree (easy)
    main()
 
    # answer
-   from __future__ import print_function
    from collections import deque
 
 
